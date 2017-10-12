@@ -20,12 +20,6 @@
             base.Dispose(disposing);
         }
 
-        #region Kod generowany przez Projektanta formularzy systemu Windows
-
-        /// <summary>
-        /// Wymagana metoda obsługi projektanta — nie należy modyfikować 
-        /// zawartość tej metody z edytorem kodu.
-        /// </summary>
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
@@ -33,7 +27,6 @@
             this.Text = "Form1";
         }
 
-        #endregion
     }
 }
 
