@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Reflection;
-namespace Szafiarka.Splashscreen
+namespace Splashscreen
 {
     partial class Splashscreen
     {
@@ -28,7 +28,7 @@ namespace Szafiarka.Splashscreen
         /// Required method for Designer support - do not modify
         /// the contents of this method with the code editor.
         /// </summary>
-        private void InitializeComponent(RetrievingAssemblyData retrivingAssemblyData)
+        private void InitializeComponent(Szafiarka.RetrievingAssemblyData retrivingAssemblyData)
         {
             this.SuspendLayout();
             // 
