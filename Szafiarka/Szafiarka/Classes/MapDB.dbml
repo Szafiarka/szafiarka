@@ -1,0 +1,60 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="database" Class="MapDBDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\database.mdf;Integrated Security=True" SettingsObjectName="Szafiarka.Properties.Settings" SettingsPropertyName="databaseConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.Category" Member="Category">
+    <Type Name="Category">
+      <Column Name="id_category" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="name" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="description" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
+      <Association Name="Category_item" Member="item" ThisKey="id_category" OtherKey="id_category" Type="item" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Wardrobe" Member="Wardrobe">
+    <Type Name="Wardrobe">
+      <Column Name="id_wardrobe" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="id_room" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="name" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Association Name="Wardrobe_Shelf" Member="Shelf" ThisKey="id_wardrobe" OtherKey="id_wardrobe" Type="Shelf" />
+      <Association Name="Room_Wardrobe" Member="Room" ThisKey="id_room" OtherKey="id_room" Type="Room" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.item" Member="item">
+    <Type Name="item">
+      <Column Name="id_item" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="id_shelf" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="id_status" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="id_category" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="name" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="description" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="size" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="image" Type="System.Data.Linq.Binary" DbType="Image" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="create_date" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Association Name="Category_item" Member="Category" ThisKey="id_category" OtherKey="id_category" Type="Category" IsForeignKey="true" />
+      <Association Name="Shelf_item" Member="Shelf" ThisKey="id_shelf" OtherKey="id_shelf" Type="Shelf" IsForeignKey="true" />
+      <Association Name="Status_item" Member="Status" ThisKey="id_status" OtherKey="id_status" Type="Status" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Room" Member="Room">
+    <Type Name="Room">
+      <Column Name="id_room" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="name" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Association Name="Room_Wardrobe" Member="Wardrobe" ThisKey="id_room" OtherKey="id_room" Type="Wardrobe" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Shelf" Member="Shelf">
+    <Type Name="Shelf">
+      <Column Name="id_shelf" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="id_wardrobe" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="location" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="capacity" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="Shelf_item" Member="item" ThisKey="id_shelf" OtherKey="id_shelf" Type="item" />
+      <Association Name="Wardrobe_Shelf" Member="Wardrobe" ThisKey="id_wardrobe" OtherKey="id_wardrobe" Type="Wardrobe" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Status" Member="Status">
+    <Type Name="Status">
+      <Column Name="id_status" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="name" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Association Name="Status_item" Member="item" ThisKey="id_status" OtherKey="id_status" Type="item" />
+    </Type>
+  </Table>
+</Database>
