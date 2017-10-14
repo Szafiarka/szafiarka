@@ -49,6 +49,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Data.Linq" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -60,6 +61,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Classes\MapDB.designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MapDB.dbml</DependentUpon>
+    </Compile>
     <Compile Include="Classes\RetrievingAssemblyData.cs" />
     <Compile Include="databaseDataSet.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -92,6 +98,14 @@
     <EmbeddedResource Include="Splashscreen\Splashscreen.resx">
       <DependentUpon>Splashscreen.cs</DependentUpon>
     </EmbeddedResource>
+    <None Include="Classes\MapDB.dbml">
+      <Generator>MSLinqToSQLGenerator</Generator>
+      <LastGenOutput>MapDB.designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Classes\MapDB.dbml.layout">
+      <DependentUpon>MapDB.dbml</DependentUpon>
+    </None>
     <None Include="databaseDataSet.xsc">
       <DependentUpon>databaseDataSet.xsd</DependentUpon>
     </None>
@@ -136,6 +150,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <DependentUpon>database.mdf</DependentUpon>
     </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
