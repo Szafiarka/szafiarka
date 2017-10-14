@@ -8,13 +8,13 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Szafiarka.Splashscreen
+namespace Splashscreen
 {
     public partial class Splashscreen : Form
     {
         public Splashscreen()
         {
-            RetrievingAssemblyData retrivingAssemblyData = new RetrievingAssemblyData();
+            Szafiarka.RetrievingAssemblyData retrivingAssemblyData = new Szafiarka.RetrievingAssemblyData();
             InitializeComponent(retrivingAssemblyData);
         }
     }
