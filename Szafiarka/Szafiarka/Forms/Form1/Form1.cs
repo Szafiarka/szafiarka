@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Szafiarka.Classes;
 
 namespace Szafiarka
 {
@@ -14,6 +15,7 @@ namespace Szafiarka
     {
         public Form1()
         {
+            MapDBDataContext bazaDC = new MapDBDataContext(); //polaczenie do bazy
             InitializeComponent();
         }
     }

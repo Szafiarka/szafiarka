@@ -2,75 +2,75 @@
 <ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11.25, 8.5" name="MapDB">
   <DataContextMoniker Name="/MapDBDataContext" />
   <nestedChildShapes>
-    <classShape Id="131aa86b-b3fa-4961-bcfc-a2a4b2ae266c" absoluteBounds="6.25, 6.125, 2, 1.3862939453125005">
+    <classShape Id="edeef5c4-e050-40df-bd35-53ff0c1eeb07" absoluteBounds="6.25, 6.125, 2, 1.3862939453125005">
       <DataClassMoniker Name="/MapDBDataContext/Category" />
       <nestedChildShapes>
-        <elementListCompartment Id="57d5461b-891b-4a99-86d0-33295b350d07" absoluteBounds="6.265, 6.585, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="6de0485e-57e4-4adc-87fa-3d4d57a477ed" absoluteBounds="6.265, 6.585, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="26ad7a3a-8965-4a76-867c-283914bab068" absoluteBounds="3.5, 1.5, 2, 1.3862939453125003">
+    <classShape Id="b17c7d33-e109-425f-8fd0-8dba91c2afba" absoluteBounds="3.5, 1.5, 2, 1.3862939453125003">
       <DataClassMoniker Name="/MapDBDataContext/Wardrobe" />
       <nestedChildShapes>
-        <elementListCompartment Id="0e133271-839d-4ea7-84df-f9c29e9aaba6" absoluteBounds="3.515, 1.96, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="04c76f38-3a00-4a47-8d73-367d28ec19a9" absoluteBounds="3.515, 1.96, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="a0cff169-912c-4c94-bafe-18434971a8d9" absoluteBounds="9, 1, 2, 2.5401025390625005">
-      <DataClassMoniker Name="/MapDBDataContext/item" />
+    <classShape Id="5519c081-a922-454e-89e3-1acb3ca491c0" absoluteBounds="9, 1, 2, 2.5401025390625005">
+      <DataClassMoniker Name="/MapDBDataContext/Item" />
       <nestedChildShapes>
-        <elementListCompartment Id="c2d01448-527b-498f-93a6-72b20f7512fa" absoluteBounds="9.015, 1.46, 1.9700000000000002, 1.9801025390625" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="8e461b17-bd96-4e52-8e1a-d907eceae015" absoluteBounds="9.015, 1.46, 1.9700000000000002, 1.9801025390625" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="03df49c0-297f-4049-9287-12f3ce6054e1" absoluteBounds="0.75, 1.625, 2, 1.1939925130208335">
+    <classShape Id="3fc49aa9-5a07-45ac-ba5b-c5f8a6907c45" absoluteBounds="0.75, 1.625, 2, 1.1939925130208335">
       <DataClassMoniker Name="/MapDBDataContext/Room" />
       <nestedChildShapes>
-        <elementListCompartment Id="d70fc9be-35d3-414d-bd55-904663b2bbfb" absoluteBounds="0.765, 2.085, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="dd9bc0d9-ca2e-476b-83fb-d77f1a9eccbf" absoluteBounds="0.765, 2.085, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="c5a6ea83-2664-49c1-94b1-bdf1f0892147" absoluteBounds="6.25, 1.375, 2, 1.5785953776041666">
+    <classShape Id="4d378610-2980-4357-b4cc-9a645ebd6902" absoluteBounds="6.25, 1.375, 2, 1.5785953776041666">
       <DataClassMoniker Name="/MapDBDataContext/Shelf" />
       <nestedChildShapes>
-        <elementListCompartment Id="4aabbf94-76f5-4662-8a41-4f0df02a3f17" absoluteBounds="6.265, 1.835, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="8dbf3356-5aaa-428f-94eb-7144eefb5cba" absoluteBounds="6.265, 1.835, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="541ab4d4-c543-429a-80d0-3821ab6c0427" absoluteBounds="6.25, 4.125, 2, 1.1939925130208344">
+    <classShape Id="d7d879c7-d117-4664-92d4-8bdfe7f4cb21" absoluteBounds="6.25, 4.125, 2, 1.1939925130208344">
       <DataClassMoniker Name="/MapDBDataContext/Status" />
       <nestedChildShapes>
-        <elementListCompartment Id="6bcdc3c5-88e3-45f1-991f-8e3d580ae522" absoluteBounds="6.265, 4.585, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="01dce502-c68d-449e-8961-1660044df423" absoluteBounds="6.265, 4.585, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
     <associationConnector edgePoints="[(8.25 : 6.81814697265625); (10 : 6.81814697265625); (10 : 3.5401025390625)]" fixedFrom="Algorithm" fixedTo="Algorithm">
-      <AssociationMoniker Name="/MapDBDataContext/Category/Category_item" />
+      <AssociationMoniker Name="/MapDBDataContext/Category/Category_Item" />
       <nodes>
-        <classShapeMoniker Id="131aa86b-b3fa-4961-bcfc-a2a4b2ae266c" />
-        <classShapeMoniker Id="a0cff169-912c-4c94-bafe-18434971a8d9" />
+        <classShapeMoniker Id="edeef5c4-e050-40df-bd35-53ff0c1eeb07" />
+        <classShapeMoniker Id="5519c081-a922-454e-89e3-1acb3ca491c0" />
       </nodes>
     </associationConnector>
     <associationConnector edgePoints="[(2.75 : 2.22199625651042); (3.5 : 2.22199625651042)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/MapDBDataContext/Room/Room_Wardrobe" />
       <nodes>
-        <classShapeMoniker Id="03df49c0-297f-4049-9287-12f3ce6054e1" />
-        <classShapeMoniker Id="26ad7a3a-8965-4a76-867c-283914bab068" />
+        <classShapeMoniker Id="3fc49aa9-5a07-45ac-ba5b-c5f8a6907c45" />
+        <classShapeMoniker Id="b17c7d33-e109-425f-8fd0-8dba91c2afba" />
       </nodes>
     </associationConnector>
     <associationConnector edgePoints="[(8.25 : 2.16429768880208); (9 : 2.16429768880208)]" fixedFrom="Algorithm" fixedTo="Algorithm">
-      <AssociationMoniker Name="/MapDBDataContext/Shelf/Shelf_item" />
+      <AssociationMoniker Name="/MapDBDataContext/Shelf/Shelf_Item" />
       <nodes>
-        <classShapeMoniker Id="c5a6ea83-2664-49c1-94b1-bdf1f0892147" />
-        <classShapeMoniker Id="a0cff169-912c-4c94-bafe-18434971a8d9" />
+        <classShapeMoniker Id="4d378610-2980-4357-b4cc-9a645ebd6902" />
+        <classShapeMoniker Id="5519c081-a922-454e-89e3-1acb3ca491c0" />
       </nodes>
     </associationConnector>
     <associationConnector edgePoints="[(5.5 : 2.19314697265625); (6.25 : 2.19314697265625)]" fixedFrom="Algorithm" fixedTo="Algorithm">
       <AssociationMoniker Name="/MapDBDataContext/Wardrobe/Wardrobe_Shelf" />
       <nodes>
-        <classShapeMoniker Id="26ad7a3a-8965-4a76-867c-283914bab068" />
-        <classShapeMoniker Id="c5a6ea83-2664-49c1-94b1-bdf1f0892147" />
+        <classShapeMoniker Id="b17c7d33-e109-425f-8fd0-8dba91c2afba" />
+        <classShapeMoniker Id="4d378610-2980-4357-b4cc-9a645ebd6902" />
       </nodes>
     </associationConnector>
     <associationConnector edgePoints="[(8.25 : 4.72199625651042); (9.4687475 : 4.72199625651042); (9.4687475 : 3.5401025390625)]" fixedFrom="Algorithm" fixedTo="Algorithm">
-      <AssociationMoniker Name="/MapDBDataContext/Status/Status_item" />
+      <AssociationMoniker Name="/MapDBDataContext/Status/Status_Item" />
       <nodes>
-        <classShapeMoniker Id="541ab4d4-c543-429a-80d0-3821ab6c0427" />
-        <classShapeMoniker Id="a0cff169-912c-4c94-bafe-18434971a8d9" />
+        <classShapeMoniker Id="d7d879c7-d117-4664-92d4-8bdfe7f4cb21" />
+        <classShapeMoniker Id="5519c081-a922-454e-89e3-1acb3ca491c0" />
       </nodes>
     </associationConnector>
   </nestedChildShapes>
