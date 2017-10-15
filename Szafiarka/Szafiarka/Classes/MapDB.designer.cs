@@ -36,9 +36,9 @@ namespace Szafiarka.Classes
     partial void InsertWardrobe(Wardrobe instance);
     partial void UpdateWardrobe(Wardrobe instance);
     partial void DeleteWardrobe(Wardrobe instance);
-    partial void Insertitem(item instance);
-    partial void Updateitem(item instance);
-    partial void Deleteitem(item instance);
+    partial void InsertItem(Item instance);
+    partial void UpdateItem(Item instance);
+    partial void DeleteItem(Item instance);
     partial void InsertRoom(Room instance);
     partial void UpdateRoom(Room instance);
     partial void DeleteRoom(Room instance);
@@ -51,7 +51,7 @@ namespace Szafiarka.Classes
     #endregion
 		
 		public MapDBDataContext() : 
-				base(global::Szafiarka.Properties.Settings.Default.databaseConnectionString, mappingSource)
+				base(global::Szafiarka.Properties.Settings.Default.databaseConnectionString1, mappingSource)
 		{
 			OnCreated();
 		}
@@ -96,11 +96,11 @@ namespace Szafiarka.Classes
 			}
 		}
 		
-		public System.Data.Linq.Table<item> item
+		public System.Data.Linq.Table<Item> Item
 		{
 			get
 			{
-				return this.GetTable<item>();
+				return this.GetTable<Item>();
 			}
 		}
 		
@@ -141,7 +141,7 @@ namespace Szafiarka.Classes
 		
 		private string _description;
 		
-		private EntitySet<item> _item;
+		private EntitySet<Item> _Item;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -157,7 +157,7 @@ namespace Szafiarka.Classes
 		
 		public Category()
 		{
-			this._item = new EntitySet<item>(new Action<item>(this.attach_item), new Action<item>(this.detach_item));
+			this._Item = new EntitySet<Item>(new Action<Item>(this.attach_Item), new Action<Item>(this.detach_Item));
 			OnCreated();
 		}
 		
@@ -221,16 +221,16 @@ namespace Szafiarka.Classes
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Category_item", Storage="_item", ThisKey="id_category", OtherKey="id_category")]
-		public EntitySet<item> item
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Category_Item", Storage="_Item", ThisKey="id_category", OtherKey="id_category")]
+		public EntitySet<Item> Item
 		{
 			get
 			{
-				return this._item;
+				return this._Item;
 			}
 			set
 			{
-				this._item.Assign(value);
+				this._Item.Assign(value);
 			}
 		}
 		
@@ -254,13 +254,13 @@ namespace Szafiarka.Classes
 			}
 		}
 		
-		private void attach_item(item entity)
+		private void attach_Item(Item entity)
 		{
 			this.SendPropertyChanging();
 			entity.Category = this;
 		}
 		
-		private void detach_item(item entity)
+		private void detach_Item(Item entity)
 		{
 			this.SendPropertyChanging();
 			entity.Category = null;
@@ -446,8 +446,8 @@ namespace Szafiarka.Classes
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.item")]
-	public partial class item : INotifyPropertyChanging, INotifyPropertyChanged
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Item")]
+	public partial class Item : INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
@@ -456,9 +456,9 @@ namespace Szafiarka.Classes
 		
 		private int _id_shelf;
 		
-		private int _id_status;
-		
 		private int _id_category;
+		
+		private int _id_status;
 		
 		private string _name;
 		
@@ -468,7 +468,7 @@ namespace Szafiarka.Classes
 		
 		private System.Data.Linq.Binary _image;
 		
-		private System.DateTime _create_date;
+		private System.DateTime _creation_date;
 		
 		private EntityRef<Category> _Category;
 		
@@ -484,10 +484,10 @@ namespace Szafiarka.Classes
     partial void Onid_itemChanged();
     partial void Onid_shelfChanging(int value);
     partial void Onid_shelfChanged();
-    partial void Onid_statusChanging(int value);
-    partial void Onid_statusChanged();
     partial void Onid_categoryChanging(int value);
     partial void Onid_categoryChanged();
+    partial void Onid_statusChanging(int value);
+    partial void Onid_statusChanged();
     partial void OnnameChanging(string value);
     partial void OnnameChanged();
     partial void OndescriptionChanging(string value);
@@ -496,11 +496,11 @@ namespace Szafiarka.Classes
     partial void OnsizeChanged();
     partial void OnimageChanging(System.Data.Linq.Binary value);
     partial void OnimageChanged();
-    partial void Oncreate_dateChanging(System.DateTime value);
-    partial void Oncreate_dateChanged();
+    partial void Oncreation_dateChanging(System.DateTime value);
+    partial void Oncreation_dateChanged();
     #endregion
 		
-		public item()
+		public Item()
 		{
 			this._Category = default(EntityRef<Category>);
 			this._Shelf = default(EntityRef<Shelf>);
@@ -552,30 +552,6 @@ namespace Szafiarka.Classes
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id_status", DbType="Int NOT NULL")]
-		public int id_status
-		{
-			get
-			{
-				return this._id_status;
-			}
-			set
-			{
-				if ((this._id_status != value))
-				{
-					if (this._Status.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.Onid_statusChanging(value);
-					this.SendPropertyChanging();
-					this._id_status = value;
-					this.SendPropertyChanged("id_status");
-					this.Onid_statusChanged();
-				}
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id_category", DbType="Int NOT NULL")]
 		public int id_category
 		{
@@ -596,6 +572,30 @@ namespace Szafiarka.Classes
 					this._id_category = value;
 					this.SendPropertyChanged("id_category");
 					this.Onid_categoryChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id_status", DbType="Int NOT NULL")]
+		public int id_status
+		{
+			get
+			{
+				return this._id_status;
+			}
+			set
+			{
+				if ((this._id_status != value))
+				{
+					if (this._Status.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.Onid_statusChanging(value);
+					this.SendPropertyChanging();
+					this._id_status = value;
+					this.SendPropertyChanged("id_status");
+					this.Onid_statusChanged();
 				}
 			}
 		}
@@ -660,7 +660,7 @@ namespace Szafiarka.Classes
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_image", DbType="Image", UpdateCheck=UpdateCheck.Never)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_image", DbType="Image NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.Never)]
 		public System.Data.Linq.Binary image
 		{
 			get
@@ -680,27 +680,27 @@ namespace Szafiarka.Classes
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_create_date", DbType="Date NOT NULL")]
-		public System.DateTime create_date
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_creation_date", DbType="Date NOT NULL")]
+		public System.DateTime creation_date
 		{
 			get
 			{
-				return this._create_date;
+				return this._creation_date;
 			}
 			set
 			{
-				if ((this._create_date != value))
+				if ((this._creation_date != value))
 				{
-					this.Oncreate_dateChanging(value);
+					this.Oncreation_dateChanging(value);
 					this.SendPropertyChanging();
-					this._create_date = value;
-					this.SendPropertyChanged("create_date");
-					this.Oncreate_dateChanged();
+					this._creation_date = value;
+					this.SendPropertyChanged("creation_date");
+					this.Oncreation_dateChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Category_item", Storage="_Category", ThisKey="id_category", OtherKey="id_category", IsForeignKey=true)]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Category_Item", Storage="_Category", ThisKey="id_category", OtherKey="id_category", IsForeignKey=true)]
 		public Category Category
 		{
 			get
@@ -717,12 +717,12 @@ namespace Szafiarka.Classes
 					if ((previousValue != null))
 					{
 						this._Category.Entity = null;
-						previousValue.item.Remove(this);
+						previousValue.Item.Remove(this);
 					}
 					this._Category.Entity = value;
 					if ((value != null))
 					{
-						value.item.Add(this);
+						value.Item.Add(this);
 						this._id_category = value.id_category;
 					}
 					else
@@ -734,7 +734,7 @@ namespace Szafiarka.Classes
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Shelf_item", Storage="_Shelf", ThisKey="id_shelf", OtherKey="id_shelf", IsForeignKey=true)]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Shelf_Item", Storage="_Shelf", ThisKey="id_shelf", OtherKey="id_shelf", IsForeignKey=true)]
 		public Shelf Shelf
 		{
 			get
@@ -751,12 +751,12 @@ namespace Szafiarka.Classes
 					if ((previousValue != null))
 					{
 						this._Shelf.Entity = null;
-						previousValue.item.Remove(this);
+						previousValue.Item.Remove(this);
 					}
 					this._Shelf.Entity = value;
 					if ((value != null))
 					{
-						value.item.Add(this);
+						value.Item.Add(this);
 						this._id_shelf = value.id_shelf;
 					}
 					else
@@ -768,7 +768,7 @@ namespace Szafiarka.Classes
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Status_item", Storage="_Status", ThisKey="id_status", OtherKey="id_status", IsForeignKey=true)]
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Status_Item", Storage="_Status", ThisKey="id_status", OtherKey="id_status", IsForeignKey=true)]
 		public Status Status
 		{
 			get
@@ -785,12 +785,12 @@ namespace Szafiarka.Classes
 					if ((previousValue != null))
 					{
 						this._Status.Entity = null;
-						previousValue.item.Remove(this);
+						previousValue.Item.Remove(this);
 					}
 					this._Status.Entity = value;
 					if ((value != null))
 					{
-						value.item.Add(this);
+						value.Item.Add(this);
 						this._id_status = value.id_status;
 					}
 					else
@@ -947,11 +947,11 @@ namespace Szafiarka.Classes
 		
 		private int _id_wardrobe;
 		
-		private int _location;
+		private string _location;
 		
 		private int _capacity;
 		
-		private EntitySet<item> _item;
+		private EntitySet<Item> _Item;
 		
 		private EntityRef<Wardrobe> _Wardrobe;
 		
@@ -963,7 +963,7 @@ namespace Szafiarka.Classes
     partial void Onid_shelfChanged();
     partial void Onid_wardrobeChanging(int value);
     partial void Onid_wardrobeChanged();
-    partial void OnlocationChanging(int value);
+    partial void OnlocationChanging(string value);
     partial void OnlocationChanged();
     partial void OncapacityChanging(int value);
     partial void OncapacityChanged();
@@ -971,7 +971,7 @@ namespace Szafiarka.Classes
 		
 		public Shelf()
 		{
-			this._item = new EntitySet<item>(new Action<item>(this.attach_item), new Action<item>(this.detach_item));
+			this._Item = new EntitySet<Item>(new Action<Item>(this.attach_Item), new Action<Item>(this.detach_Item));
 			this._Wardrobe = default(EntityRef<Wardrobe>);
 			OnCreated();
 		}
@@ -1020,8 +1020,8 @@ namespace Szafiarka.Classes
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_location", DbType="Int NOT NULL")]
-		public int location
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_location", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		public string location
 		{
 			get
 			{
@@ -1060,16 +1060,16 @@ namespace Szafiarka.Classes
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Shelf_item", Storage="_item", ThisKey="id_shelf", OtherKey="id_shelf")]
-		public EntitySet<item> item
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Shelf_Item", Storage="_Item", ThisKey="id_shelf", OtherKey="id_shelf")]
+		public EntitySet<Item> Item
 		{
 			get
 			{
-				return this._item;
+				return this._Item;
 			}
 			set
 			{
-				this._item.Assign(value);
+				this._Item.Assign(value);
 			}
 		}
 		
@@ -1127,13 +1127,13 @@ namespace Szafiarka.Classes
 			}
 		}
 		
-		private void attach_item(item entity)
+		private void attach_Item(Item entity)
 		{
 			this.SendPropertyChanging();
 			entity.Shelf = this;
 		}
 		
-		private void detach_item(item entity)
+		private void detach_Item(Item entity)
 		{
 			this.SendPropertyChanging();
 			entity.Shelf = null;
@@ -1148,9 +1148,9 @@ namespace Szafiarka.Classes
 		
 		private int _id_status;
 		
-		private string _name;
+		private System.Data.Linq.Binary _name;
 		
-		private EntitySet<item> _item;
+		private EntitySet<Item> _Item;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -1158,13 +1158,13 @@ namespace Szafiarka.Classes
     partial void OnCreated();
     partial void Onid_statusChanging(int value);
     partial void Onid_statusChanged();
-    partial void OnnameChanging(string value);
+    partial void OnnameChanging(System.Data.Linq.Binary value);
     partial void OnnameChanged();
     #endregion
 		
 		public Status()
 		{
-			this._item = new EntitySet<item>(new Action<item>(this.attach_item), new Action<item>(this.detach_item));
+			this._Item = new EntitySet<Item>(new Action<Item>(this.attach_Item), new Action<Item>(this.detach_Item));
 			OnCreated();
 		}
 		
@@ -1188,8 +1188,8 @@ namespace Szafiarka.Classes
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_name", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
-		public string name
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_name", DbType="VarBinary(50) NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.Never)]
+		public System.Data.Linq.Binary name
 		{
 			get
 			{
@@ -1208,16 +1208,16 @@ namespace Szafiarka.Classes
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Status_item", Storage="_item", ThisKey="id_status", OtherKey="id_status")]
-		public EntitySet<item> item
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Status_Item", Storage="_Item", ThisKey="id_status", OtherKey="id_status")]
+		public EntitySet<Item> Item
 		{
 			get
 			{
-				return this._item;
+				return this._Item;
 			}
 			set
 			{
-				this._item.Assign(value);
+				this._Item.Assign(value);
 			}
 		}
 		
@@ -1241,13 +1241,13 @@ namespace Szafiarka.Classes
 			}
 		}
 		
-		private void attach_item(item entity)
+		private void attach_Item(Item entity)
 		{
 			this.SendPropertyChanging();
 			entity.Status = this;
 		}
 		
-		private void detach_item(item entity)
+		private void detach_Item(Item entity)
 		{
 			this.SendPropertyChanging();
 			entity.Status = null;
