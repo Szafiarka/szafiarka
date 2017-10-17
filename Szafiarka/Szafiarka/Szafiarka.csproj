@@ -61,22 +61,21 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Classes\MapDB.designer.cs">
+    <Compile Include="Classes\DBconnection.cs" />
+    <Compile Include="Classes\MapDB\MapDB.designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>MapDB.dbml</DependentUpon>
     </Compile>
-    <Compile Include="Classes\RetrievingAssemblyData.cs" />
-    <Compile Include="databaseDataSet.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>databaseDataSet.xsd</DependentUpon>
+    <Compile Include="Classes\menuButton.cs">
+      <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Forms\Form1\Form1.cs">
+    <Compile Include="Classes\RetrievingAssemblyData.cs" />
+    <Compile Include="Forms\mainForm\mainForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\Form1\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="Forms\mainForm\mainForm.Designer.cs">
+      <DependentUpon>mainForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -86,6 +85,9 @@
     <Compile Include="Forms\Splashscreen\Splashscreen.Designer.cs">
       <DependentUpon>Splashscreen.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Forms\mainForm\mainForm.resx">
+      <DependentUpon>mainForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -98,24 +100,13 @@
     <EmbeddedResource Include="Forms\Splashscreen\Splashscreen.resx">
       <DependentUpon>Splashscreen.cs</DependentUpon>
     </EmbeddedResource>
-    <None Include="Classes\MapDB.dbml">
+    <None Include="Classes\MapDB\MapDB.dbml">
       <Generator>MSLinqToSQLGenerator</Generator>
       <LastGenOutput>MapDB.designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </None>
-    <None Include="Classes\MapDB.dbml.layout">
+    <None Include="Classes\MapDB\MapDB.dbml.layout">
       <DependentUpon>MapDB.dbml</DependentUpon>
-    </None>
-    <None Include="databaseDataSet.xsc">
-      <DependentUpon>databaseDataSet.xsd</DependentUpon>
-    </None>
-    <None Include="databaseDataSet.xsd">
-      <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>databaseDataSet.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="databaseDataSet.xss">
-      <DependentUpon>databaseDataSet.xsd</DependentUpon>
     </None>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -143,16 +134,16 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+    <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />
+  </ItemGroup>
+  <ItemGroup>
     <Content Include="database.mdf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="database_log.ldf">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <DependentUpon>database.mdf</DependentUpon>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -9,7 +9,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Szafiarka.Classes
+namespace Szafiarka.Classes.MapDB
 {
 	using System.Data.Linq;
 	using System.Data.Linq.Mapping;
@@ -51,7 +51,7 @@ namespace Szafiarka.Classes
     #endregion
 		
 		public MapDBDataContext() : 
-				base(global::Szafiarka.Properties.Settings.Default.databaseConnectionString1, mappingSource)
+				base(global::Szafiarka.Properties.Settings.Default.databaseConnectionString, mappingSource)
 		{
 			OnCreated();
 		}

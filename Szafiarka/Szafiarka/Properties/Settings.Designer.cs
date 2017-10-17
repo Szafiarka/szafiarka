@@ -23,18 +23,7 @@ namespace Szafiarka.Properties {
             }
         }
         
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
-        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=\"D:\\ONEDRIVE\\STUDIA\\INŻYNIERIA" +
-            " OPROGRAMOWANIA\\PROJEKT\\SZAFIARKA\\SZAFIARKA\\DATABASE.MDF\";Integrated Security=Tr" +
-            "ue;Connect Timeout=30;Encrypt=False;TrustServerCertificate=True")]
-        public string D__ONEDRIVE_STUDIA_INŻYNIERIA_OPROGRAMOWANIA_PROJEKT_SZAFIARKA_SZAFIARKA_DATABASE_MDFConnectionString {
-            get {
-                return ((string)(this["D__ONEDRIVE_STUDIA_INŻYNIERIA_OPROGRAMOWANIA_PROJEKT_SZAFIARKA_SZAFIARKA_DATABASE" +
-                    "_MDFConnectionString"]));
-            }
-        }
+
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -47,16 +36,6 @@ namespace Szafiarka.Properties {
             }
         }
         
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
-        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=\"D:\\OneDrive\\Studia\\Inżynieri" +
-            "a oprogramowania\\Projekt\\Szafiarka\\database.mdf\";Integrated Security=True;Connec" +
-            "t Timeout=30")]
-        public string databaseConnectionString1 {
-            get {
-                return ((string)(this["databaseConnectionString1"]));
-            }
-        }
+
     }
 }
