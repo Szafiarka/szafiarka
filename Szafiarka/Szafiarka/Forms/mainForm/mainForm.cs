@@ -8,7 +8,6 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Szafiarka.Classes;
-using Szafiarka.Classes.MapDB;
 
 namespace Szafiarka
 {
@@ -16,19 +15,21 @@ namespace Szafiarka
     {
         public mainForm()
         {
+            var assemblyData = new RetrievingAssemblyData();
             InitializeComponent();
+            //InitializeComponent(assemblyData);
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
             using (var db = DBconnection.DbConnection)
             {
-                var room = new Room();
-                room.name = "jadalnia";
-                db.Room.InsertOnSubmit(room);
-                db.SubmitChanges();
-                var rooms = db.Room.ToArray();
-                MessageBox.Show(rooms.ElementAt(1).name);
+                //var room = new Room();
+                //room.name = "jadalnia";
+                //db.Room.InsertOnSubmit(room);
+                //db.SubmitChanges();
+                var rooms = db.Wardrobe.ToArray();
+                MessageBox.Show(rooms.ElementAt(0).name);
                 
             }
         }
