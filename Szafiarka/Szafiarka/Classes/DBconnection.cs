@@ -9,6 +9,6 @@ namespace Szafiarka.Classes
 {
     class DBconnection
     {
-        public static MapDBDataContext DbConnection = new MapDBDataContext();
+        public static MapDBDataContext DBCONNECTION = new MapDBDataContext();
     }
 }

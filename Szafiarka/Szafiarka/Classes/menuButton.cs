@@ -4,9 +4,9 @@ using System.Drawing;
 
 namespace Szafiarka.Classes
 {
-    class menuButton : Button 
+    class MenuButton : Button
     {
-        public menuButton() : base()
+        public MenuButton() : base()
         {
             UseVisualStyleBackColor = false;
             Size = new Size(80, 80);

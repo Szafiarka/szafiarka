@@ -11,9 +11,9 @@ using Szafiarka.Classes;
 
 namespace Szafiarka
 {
-    public partial class mainForm : Form
+    public partial class MainForm : Form
     {
-        public mainForm()
+        public MainForm()
         {
             var assemblyData = new RetrievingAssemblyData();
             InitializeComponent();
@@ -22,7 +22,7 @@ namespace Szafiarka
 
         private void button1_Click(object sender, EventArgs e)
         {
-            using (var db = DBconnection.DbConnection)
+            using (var db = DBconnection.DBCONNECTION)
             {
                 //var room = new Room();
                 //room.name = "jadalnia";
