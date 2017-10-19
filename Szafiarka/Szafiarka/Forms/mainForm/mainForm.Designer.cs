@@ -1,6 +1,6 @@
 ﻿namespace Szafiarka
 {
-    partial class mainForm
+    partial class MainForm
     {
         /// <summary>
         /// Wymagana zmienna projektanta.
@@ -23,7 +23,7 @@
         private void InitializeComponent()
         //private void InitializeComponent(RetrievingAssemblyData assemblyData)
         {
-            this.button1 = new Szafiarka.Classes.menuButton();
+            this.button1 = new Szafiarka.Classes.MenuButton();
             this.SuspendLayout();
             // 
             // button1
@@ -52,7 +52,7 @@
 
         }
 
-        private Classes.menuButton button1;
+        private Classes.MenuButton button1;
     }
 }
 
