@@ -70,6 +70,10 @@
     <Compile Include="Classes\MenuButton.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Classes\OptionsButton.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Classes\PanelMenu.cs" />
     <Compile Include="Classes\RetrievingAssemblyData.cs" />
     <Compile Include="Forms\MainForm\MainForm.cs">
       <SubType>Form</SubType>
