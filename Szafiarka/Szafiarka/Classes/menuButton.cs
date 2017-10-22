@@ -11,7 +11,7 @@ namespace Szafiarka.Classes
         private static string PATHTOADD = "";
         private static string PATHTOEDIT = "";
         private static string PATHTODELETE = "";
-        private static string PATHTOEXIT = "..\\..\\images\\exit.png";
+        private static string PATHTOEXIT = "..\\..\\images\\menuButtons\\exit.png";
         private static string[,] MENUBUTTONSNAMES = {
             { "home", "Start", PATHTOSTART },
             { "search", "Wyszukaj", PATHTOSEARCH},
