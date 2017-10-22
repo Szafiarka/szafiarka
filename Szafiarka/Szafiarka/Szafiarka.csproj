@@ -70,10 +70,18 @@
     <Compile Include="Classes\MenuButton.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Classes\MenuButton\Exit.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Classes\MenuButton\Start.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Classes\OptionsButton.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Classes\PanelMenu.cs" />
+    <Compile Include="Classes\PanelMenu.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Classes\RetrievingAssemblyData.cs" />
     <Compile Include="Forms\MainForm\MainForm.cs">
       <SubType>Form</SubType>
@@ -148,9 +156,8 @@
       <DependentUpon>database.mdf</DependentUpon>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="images\exit.png" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="images\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

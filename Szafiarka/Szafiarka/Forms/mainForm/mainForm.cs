@@ -19,19 +19,5 @@ namespace Szafiarka
             InitializeComponent();
             //InitializeComponent(assemblyData);
         }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            using (var db = DBconnection.DBCONNECTION)
-            {
-                //var room = new Room();
-                //room.name = "jadalnia";
-                //db.Room.InsertOnSubmit(room);
-                //db.SubmitChanges();
-                var rooms = db.Wardrobe.ToArray();
-                MessageBox.Show(rooms.ElementAt(0).name);
-                
-            }
-        }
     }
 }
