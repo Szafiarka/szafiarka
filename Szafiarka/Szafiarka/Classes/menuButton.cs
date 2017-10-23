@@ -6,11 +6,11 @@ namespace Szafiarka.Classes
 {
     partial class MenuButton : Button
     {
-        private static string PATHTOSTART = "";
-        private static string PATHTOSEARCH = "";
-        private static string PATHTOADD = "";
-        private static string PATHTOEDIT = "";
-        private static string PATHTODELETE = "";
+        private static string PATHTOSTART = "..\\..\\images\\menuButtons\\home.png";
+        private static string PATHTOSEARCH = "..\\..\\images\\menuButtons\\search.png";
+        private static string PATHTOADD = "..\\..\\images\\menuButtons\\add.png";
+        private static string PATHTOEDIT = "..\\..\\images\\menuButtons\\edit.png";
+        private static string PATHTODELETE = "..\\..\\images\\menuButtons\\delete.png";
         private static string PATHTOEXIT = "..\\..\\images\\menuButtons\\exit.png";
         private static string[,] MENUBUTTONSNAMES = {
             { "home", "Start", PATHTOSTART },

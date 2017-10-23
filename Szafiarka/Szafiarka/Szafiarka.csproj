@@ -156,7 +156,12 @@
       <DependentUpon>database.mdf</DependentUpon>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="images\menuButtons\add.png" />
+    <Content Include="images\menuButtons\delete.png" />
+    <Content Include="images\menuButtons\edit.png" />
     <Content Include="images\menuButtons\exit.png" />
+    <Content Include="images\menuButtons\home.png" />
+    <Content Include="images\menuButtons\search.png" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
