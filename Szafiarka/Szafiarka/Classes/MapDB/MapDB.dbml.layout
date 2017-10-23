@@ -38,35 +38,35 @@
         <elementListCompartment Id="01dce502-c68d-449e-8961-1660044df423" absoluteBounds="6.265, 4.585, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <associationConnector edgePoints="[(8.25 : 6.81814697265625); (10 : 6.81814697265625); (10 : 3.5401025390625)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(8.25 : 6.81814697265625); (10 : 6.81814697265625); (10 : 3.5401025390625)]" fixedFrom="NotFixed" fixedTo="NotFixed">
       <AssociationMoniker Name="/MapDBDataContext/Category/Category_Item" />
       <nodes>
         <classShapeMoniker Id="edeef5c4-e050-40df-bd35-53ff0c1eeb07" />
         <classShapeMoniker Id="5519c081-a922-454e-89e3-1acb3ca491c0" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(2.75 : 2.22199625651042); (3.5 : 2.22199625651042)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(2.75 : 2.22199625651042); (3.5 : 2.22199625651042)]" fixedFrom="NotFixed" fixedTo="NotFixed">
       <AssociationMoniker Name="/MapDBDataContext/Room/Room_Wardrobe" />
       <nodes>
         <classShapeMoniker Id="3fc49aa9-5a07-45ac-ba5b-c5f8a6907c45" />
         <classShapeMoniker Id="b17c7d33-e109-425f-8fd0-8dba91c2afba" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(8.25 : 2.16429768880208); (9 : 2.16429768880208)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(8.25 : 2.16429768880208); (9 : 2.16429768880208)]" fixedFrom="NotFixed" fixedTo="NotFixed">
       <AssociationMoniker Name="/MapDBDataContext/Shelf/Shelf_Item" />
       <nodes>
         <classShapeMoniker Id="4d378610-2980-4357-b4cc-9a645ebd6902" />
         <classShapeMoniker Id="5519c081-a922-454e-89e3-1acb3ca491c0" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(5.5 : 2.19314697265625); (6.25 : 2.19314697265625)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(5.5 : 2.19314697265625); (6.25 : 2.19314697265625)]" fixedFrom="NotFixed" fixedTo="NotFixed">
       <AssociationMoniker Name="/MapDBDataContext/Wardrobe/Wardrobe_Shelf" />
       <nodes>
         <classShapeMoniker Id="b17c7d33-e109-425f-8fd0-8dba91c2afba" />
         <classShapeMoniker Id="4d378610-2980-4357-b4cc-9a645ebd6902" />
       </nodes>
     </associationConnector>
-    <associationConnector edgePoints="[(8.25 : 4.72199625651042); (9.4687475 : 4.72199625651042); (9.4687475 : 3.5401025390625)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(8.25 : 4.72199625651042); (9.4687475 : 4.72199625651042); (9.4687475 : 3.5401025390625)]" fixedFrom="NotFixed" fixedTo="NotFixed">
       <AssociationMoniker Name="/MapDBDataContext/Status/Status_Item" />
       <nodes>
         <classShapeMoniker Id="d7d879c7-d117-4664-92d4-8bdfe7f4cb21" />
