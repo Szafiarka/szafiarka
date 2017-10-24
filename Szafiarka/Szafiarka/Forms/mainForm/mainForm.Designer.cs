@@ -35,12 +35,15 @@
             menuButton.InitializeMenuButtons(this, this.pMenu);
             // 
             // pMain
-            // 
+            //
+            var panels = new Classes.Panels();  //B
+            panels.initializePanels(this); //B
             this.pMain.Location = new System.Drawing.Point(107, 68);
             this.pMain.Name = "pMain";
             this.pMain.Size = new System.Drawing.Size(1065, 686);
             this.pMain.TabIndex = 2;
-            // 
+            this.pMain.Visible = false;
+            //
             // button2
             // 
             this.button2.Location = new System.Drawing.Point(1097, 21);

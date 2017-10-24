@@ -73,6 +73,10 @@ namespace Szafiarka.Classes
             {
                 button.Click += new EventHandler(start_Click);
             }
+            if (button.Name is "add")
+            {
+                button.Click += new EventHandler(add_Click);
+            }
         }
     }
 }
