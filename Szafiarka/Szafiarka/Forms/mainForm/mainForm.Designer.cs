@@ -33,11 +33,14 @@
             // 
             var menuButton = new Classes.MenuButton();
             menuButton.InitializeMenuButtons(this, this.pMenu);
-            // 
-            // pMain
+            //
+            // InitializePanels
             //
             var panels = new Classes.Panels();  //B
             panels.initializePanels(this); //B
+            // 
+            // pMain
+            //
             this.pMain.Location = new System.Drawing.Point(107, 68);
             this.pMain.Name = "pMain";
             this.pMain.Size = new System.Drawing.Size(1065, 686);
