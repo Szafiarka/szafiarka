@@ -9,7 +9,6 @@ namespace Szafiarka.Classes
 {
     class PanelAdd : Panels
     {
-        public static string a = "aaa";
         public PanelAdd()
         {
             Name = "pAdd";
