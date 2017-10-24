@@ -10,8 +10,8 @@ namespace Szafiarka.Classes
     {
         private void add_Click(object sender, EventArgs e)
         {
-            var panel = (sender as MenuButton).FindForm().Controls.Find("pAdd", false);
-            panel[0].Visible = true;
+            Panels.changePanelsVisableToFalse();
+            Panels.changePanelVisableToTrue(Panels.PanelsName.PADD);
         }
     }
 }

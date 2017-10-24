@@ -9,10 +9,11 @@ namespace Szafiarka.Classes
 {
     class PanelAdd : Panels
     {
+        public static string a = "aaa";
         public PanelAdd()
         {
             Name = "pAdd";
-            BackColor = System.Drawing.Color.FromArgb(50, 168, 50);
+            BackColor = System.Drawing.Color.FromArgb(0, 168, 0);
         }
     }
 }
