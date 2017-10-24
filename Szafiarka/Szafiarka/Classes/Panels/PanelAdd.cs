@@ -12,7 +12,7 @@ namespace Szafiarka.Classes
         public PanelAdd()
         {
             Name = "pAdd";
-            BackColor = System.Drawing.Color.FromArgb(50, 168, 50);
+            BackColor = System.Drawing.Color.FromArgb(0, 168, 0);
         }
     }
 }
