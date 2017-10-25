@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Windows.Forms;
 using System.Drawing;
+using System.ComponentModel;
+using System.Reflection;
 
 namespace Szafiarka.Classes
 {
-    partial class MenuButton : Button
+    partial class MenuButton : FlattButton
     {
         private static string PATHTOSTART = "..\\..\\images\\menuButtons\\home.png";
         private static string PATHTOSEARCH = "..\\..\\images\\menuButtons\\search.png";
@@ -20,15 +22,18 @@ namespace Szafiarka.Classes
             { "delete", "Usuń", PATHTODELETE},
             { "exit", "Wyjście", PATHTOEXIT}
         };
+        private enum Messages {
+            [Description("Nie wybrałeś elementu do usunięcia")]
+            DELETE,
+            [Description("Nie wybrałeś elementu do edycji")]
+            EDIT,
+        }
 
         public MenuButton() : base()
         {
             UseVisualStyleBackColor = false;
             Size = new Size(100, 100);
-            FlatStyle = FlatStyle.Flat;
-            FlatAppearance.BorderSize = 0;
             TextAlign = ContentAlignment.BottomCenter;
-            Font = new Font(this.Font.Name, 10);
         }
 
         public void InitializeMenuButtons(Form form, Panel pMenu)
@@ -89,6 +94,19 @@ namespace Szafiarka.Classes
             {
                 button.Click += new EventHandler(delete_Click);
             }
+        }
+
+        private static string GetEnumDescription(Enum value)
+        {
+            FieldInfo fi = value.GetType().GetField(value.ToString());
+
+            DescriptionAttribute[] attributes =
+                (DescriptionAttribute[])fi.GetCustomAttributes(typeof(DescriptionAttribute), false);
+
+            if (attributes != null && attributes.Length > 0)
+                return attributes[0].Description;
+            else
+                return value.ToString();
         }
     }
 }
