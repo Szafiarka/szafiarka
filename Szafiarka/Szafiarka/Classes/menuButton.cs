@@ -77,6 +77,18 @@ namespace Szafiarka.Classes
             {
                 button.Click += new EventHandler(add_Click);
             }
+            if (button.Name is "search")
+            {
+                button.Click += new EventHandler(search_Click);
+            }
+            if (button.Name is "edit")
+            {
+                button.Click += new EventHandler(edit_Click);
+            }
+            if (button.Name is "delete")
+            {
+                button.Click += new EventHandler(delete_Click);
+            }
         }
     }
 }
