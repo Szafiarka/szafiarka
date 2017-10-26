@@ -28,8 +28,7 @@ namespace Szafiarka.Classes
             ObjectList = new List<Panels> {
                 new PanelStart(),
                 new PanelAdd(),
-                new PanelSearch(),
-                new PanelHelp()
+                new PanelSearch()
             };
 
             foreach (var panel in ObjectList)

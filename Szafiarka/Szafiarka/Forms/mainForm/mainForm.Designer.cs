@@ -24,8 +24,7 @@
         //private void InitializeComponent(RetrievingAssemblyData assemblyData)
         {
             this.pMenu = new Classes.PanelMenu();
-            this.bSettings = new Szafiarka.Classes.OptionsButton();
-            this.bHelp = new Szafiarka.Classes.HelpButton();
+            this.bTools = new Szafiarka.Classes.ToolsButton();
             this.pMenu.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -45,8 +44,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
             this.ClientSize = new System.Drawing.Size(1184, 766);
-            this.Controls.Add(this.bSettings);
-            this.Controls.Add(this.bHelp);
+            this.Controls.Add(this.bTools);
             this.Controls.Add(this.pMenu);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "MainForm";
@@ -57,8 +55,7 @@
         }
 
         private Classes.PanelMenu pMenu;
-        private Classes.OptionsButton bSettings;
-        private Classes.HelpButton bHelp;
+        private Classes.ToolsButton bTools;
     }
 }
 
