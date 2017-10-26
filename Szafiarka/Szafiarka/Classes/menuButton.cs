@@ -6,7 +6,7 @@ using System.Reflection;
 
 namespace Szafiarka.Classes
 {
-    partial class MenuButton : FlattButton
+    partial class MenuButton : FlatButton
     {
         private static string PATHTOSTART = "..\\..\\images\\menuButtons\\home.png";
         private static string PATHTOSEARCH = "..\\..\\images\\menuButtons\\search.png";
@@ -94,19 +94,6 @@ namespace Szafiarka.Classes
             {
                 button.Click += new EventHandler(delete_Click);
             }
-        }
-
-        private static string GetEnumDescription(Enum value)
-        {
-            FieldInfo fi = value.GetType().GetField(value.ToString());
-
-            DescriptionAttribute[] attributes =
-                (DescriptionAttribute[])fi.GetCustomAttributes(typeof(DescriptionAttribute), false);
-
-            if (attributes != null && attributes.Length > 0)
-                return attributes[0].Description;
-            else
-                return value.ToString();
         }
     }
 }
