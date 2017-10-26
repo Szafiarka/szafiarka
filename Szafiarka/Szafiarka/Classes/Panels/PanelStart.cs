@@ -9,7 +9,15 @@ namespace Szafiarka.Classes
 {
     class PanelStart : Panels
     {
-        private FlattButton button1;
+        private static string[,] OBJECTSBUTTONS =
+        {
+            { "rooms", "Pokoje" },
+            { "wardrobes", "Szafy" },
+            { "wardrobes", "Szafy" },
+            { "addStatus", "Dodaj Status" },
+            { "wardrobes", "Szafy" },
+            { "wardrobes", "Szafy" },
+        };
 
         public PanelStart()
         {
@@ -25,26 +33,30 @@ namespace Szafiarka.Classes
             MessageBox.Show(result.First().name);
         }
 
-            private void InitializeComponent()
+        private void InitializeComponent()
         {
-            button1 = new FlattButton();
             SuspendLayout();
-            // 
-            // button1
-            // 
-            button1.Location = new System.Drawing.Point(0, 0);
-            button1.Name = "button1";
-            button1.Size = new System.Drawing.Size(75, 25);
-            button1.TabIndex = 0;
-            button1.Text = "button1";
-            button1.UseVisualStyleBackColor = true;
-            button1.Click += new EventHandler(start_Click);
-            // 
-            // PanelStart
-            // 
-            Controls.Add(button1);
+            InitializeObjectsButtons();
             ResumeLayout(false);
 
+        }
+
+        private void InitializeObjectsButtons()
+        {
+            var buttonLenght = 100;
+            for (int i = 0; i < OBJECTSBUTTONS.Length / 2; i++)
+            {
+                var button = new FlattButton()
+                {
+                    Location = new System.Drawing.Point((buttonLenght + 10) * i, 0),
+                    Name = OBJECTSBUTTONS[i,0],
+                    Size = new System.Drawing.Size(buttonLenght, 30),
+                    Text = OBJECTSBUTTONS[i, 1],
+
+                };
+                button.Click += new EventHandler(start_Click);
+                Controls.Add(button);
+            }
         }
     }
 }
