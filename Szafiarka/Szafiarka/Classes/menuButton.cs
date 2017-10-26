@@ -14,13 +14,17 @@ namespace Szafiarka.Classes
         private static string PATHTOEDIT = "..\\..\\images\\menuButtons\\edit.png";
         private static string PATHTODELETE = "..\\..\\images\\menuButtons\\delete.png";
         private static string PATHTOEXIT = "..\\..\\images\\menuButtons\\exit.png";
+        private enum buttonsNames
+        {
+            home, search, add, edit, delete, exit
+        }
         private static string[,] MENUBUTTONSNAMES = {
-            { "home", "Start", PATHTOSTART },
-            { "search", "Wyszukaj", PATHTOSEARCH},
-            { "add", "Dodaj", PATHTOADD},
-            { "edit", "Edytuj",  PATHTOEDIT},
-            { "delete", "Usuń", PATHTODELETE},
-            { "exit", "Wyjście", PATHTOEXIT}
+            { buttonsNames.home.ToString(), "Start", PATHTOSTART },
+            { buttonsNames.search.ToString(), "Wyszukaj", PATHTOSEARCH},
+            { buttonsNames.add.ToString(), "Dodaj", PATHTOADD},
+            { buttonsNames.edit.ToString(), "Edytuj",  PATHTOEDIT},
+            { buttonsNames.delete.ToString(), "Usuń", PATHTODELETE},
+            { buttonsNames.edit.ToString(), "Wyjście", PATHTOEXIT}
         };
         private enum Messages {
             [Description("Nie wybrałeś elementu do usunięcia")]
@@ -70,27 +74,27 @@ namespace Szafiarka.Classes
 
         private void selectAndAddEvent(ref MenuButton button)
         {
-            if (button.Name is "exit")
+            if (button.Name == buttonsNames.exit.ToString())
             {
                 button.Click += new EventHandler(exit_Click);
             }
-            if (button.Name is "home")
+            if (button.Name == buttonsNames.home.ToString())
             {
                 button.Click += new EventHandler(start_Click);
             }
-            if (button.Name is "add")
+            if (button.Name == buttonsNames.add.ToString())
             {
                 button.Click += new EventHandler(add_Click);
             }
-            if (button.Name is "search")
+            if (button.Name == buttonsNames.search.ToString())
             {
                 button.Click += new EventHandler(search_Click);
             }
-            if (button.Name is "edit")
+            if (button.Name == buttonsNames.edit.ToString())
             {
                 button.Click += new EventHandler(edit_Click);
             }
-            if (button.Name is "delete")
+            if (button.Name == buttonsNames.delete.ToString())
             {
                 button.Click += new EventHandler(delete_Click);
             }
