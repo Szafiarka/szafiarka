@@ -11,7 +11,7 @@ namespace Szafiarka.Classes
     class Panels : Panel
     {
         public enum PanelsName {
-            PSTART, PADD, PSEARCH
+            PSTART, PADD, PSEARCH, PHELP
         };
 
         private static List<Panels> ObjectList;

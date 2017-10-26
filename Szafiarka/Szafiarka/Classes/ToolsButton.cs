@@ -8,25 +8,19 @@ using System.Windows.Forms;
 
 namespace Szafiarka.Classes
 {
-    class OptionsButton : FlattButton
+    class ToolsButton : FlattButton
     {
         ContextMenuStrip contextMenuStrip1 = new ContextMenuStrip();
         private bool contextMenuStrip1Clicked = false;
-        private static string PATHTOIMAGE = "..\\..\\images\\settings.png";
+        private static string PATHTOIMAGE = "";
 
-        public OptionsButton()
+        public ToolsButton()
         {
             Location = new Point(1097, 21);
-            Size = new Size(75, 25);
+            Size = new Size(80, 25);
             UseVisualStyleBackColor = true;
-            Name = "bSettings";
-
-            Text = "Opcje";
-            TextAlign = ContentAlignment.MiddleRight;
-
-            Image = Image.FromFile(@PATHTOIMAGE);
-            ImageAlign = ContentAlignment.MiddleLeft;
-
+            Text = "Narzędzia";
+            Name = "bTools";
             InitializecontextMenuStrip1();
             Click += new EventHandler(button1_Click);
         }
@@ -34,8 +28,8 @@ namespace Szafiarka.Classes
         private void InitializecontextMenuStrip1()
         {
             contextMenuStrip1.Items.Clear();
-            contextMenuStrip1.Items.Add("pomoc");
-            contextMenuStrip1.Items.Add("o programie");
+            contextMenuStrip1.Items.Add("Pomoc");
+            contextMenuStrip1.Items.Add("Opcje");
             contextMenuStrip1.ItemClicked += new ToolStripItemClickedEventHandler(
                                                  contextMenuStrip1_ItemClicked);
         }
@@ -50,7 +44,6 @@ namespace Szafiarka.Classes
             else
                 contextMenuStrip1Clicked = false;
         }
-
         private void contextMenuStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
         {
             contextMenuStrip1Clicked = false;
