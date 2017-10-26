@@ -195,6 +195,7 @@
     <Content Include="images\menuButtons\exit.png" />
     <Content Include="images\menuButtons\home.png" />
     <Content Include="images\menuButtons\search.png" />
+    <Content Include="images\settings.png" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
