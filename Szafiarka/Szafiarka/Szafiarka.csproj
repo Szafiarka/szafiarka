@@ -62,7 +62,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Classes\DBconnection.cs" />
-    <Compile Include="Classes\FlattButton.cs">
+    <Compile Include="Classes\FlatButton.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Classes\MapDB\MapDB.designer.cs">
