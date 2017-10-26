@@ -10,6 +10,7 @@ namespace Szafiarka.Classes
         {
             Panels.changePanelsVisableToFalse();
             Panels.changePanelVisableToTrue(Panels.PanelsName.PSTART);
+            PanelStart.changePanelsVisableToFalse();
         }
     }
 }
