@@ -1,18 +1,28 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Szafiarka.Forms.ToolsForm;
 
 namespace Szafiarka.Classes
 {
-    class ToolsButton : FlattButton
+    class ToolsButton : FlatButton
     {
         ContextMenuStrip contextMenuStrip1 = new ContextMenuStrip();
         private bool contextMenuStrip1Clicked = false;
-        private static string PATHTOIMAGE = "";
+        private static string PATHTOIMAGE = "..\\..\\images\\settings.png";
+
+        private enum ToolName
+        {
+            [Description("Pomoc")]
+            HELP,
+            [Description("Opcje")]
+            OPTIONS,
+        }
 
         public ToolsButton()
         {
@@ -22,19 +32,19 @@ namespace Szafiarka.Classes
             Text = "Narzędzia";
             Name = "bTools";
             InitializecontextMenuStrip1();
-            Click += new EventHandler(button1_Click);
+            Click += new EventHandler(tools_Click);
         }
 
         private void InitializecontextMenuStrip1()
         {
             contextMenuStrip1.Items.Clear();
-            contextMenuStrip1.Items.Add("Pomoc");
-            contextMenuStrip1.Items.Add("Opcje");
+            contextMenuStrip1.Items.Add(GetEnumDescription(ToolName.HELP));
+            contextMenuStrip1.Items.Add(GetEnumDescription(ToolName.OPTIONS));
             contextMenuStrip1.ItemClicked += new ToolStripItemClickedEventHandler(
                                                  contextMenuStrip1_ItemClicked);
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void tools_Click(object sender, EventArgs e)
         {
             if (!contextMenuStrip1Clicked)
             {
@@ -47,6 +57,19 @@ namespace Szafiarka.Classes
         private void contextMenuStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
         {
             contextMenuStrip1Clicked = false;
+
+            if (e.ClickedItem.Text == GetEnumDescription(ToolName.HELP))
+            {
+                Form helpForm = new ToolsForm();
+                helpForm.Show();
+                helpForm.Text = "Pomoc";
+            }
+            if (e.ClickedItem.Text == GetEnumDescription(ToolName.OPTIONS))
+            {
+                Form optionForm = new ToolsForm();
+                optionForm.Show();
+                optionForm.Text = "Opcje";
+            }
         }
 
     }
