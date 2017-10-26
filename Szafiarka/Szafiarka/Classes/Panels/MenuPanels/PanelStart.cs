@@ -66,7 +66,7 @@ namespace Szafiarka.Classes
             var buttonLenght = 100;
             for (int i = 0; i < OBJECTSBUTTONS.Length / 2; i++)
             {
-                var button = new FlattButton()
+                var button = new FlatButton()
                 {
                     Location = new System.Drawing.Point((buttonLenght + 10) * i, 0),
                     Name = OBJECTSBUTTONS[i,0],

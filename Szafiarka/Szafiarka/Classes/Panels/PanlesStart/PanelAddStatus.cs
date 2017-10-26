@@ -11,7 +11,7 @@ namespace Szafiarka.Classes
     class PanelAddStatus : Panel
     {
         private Label label1;
-        private FlattButton button1;
+        private FlatButton button1;
         private TextBox textBox1;
 
         public PanelAddStatus()
@@ -28,7 +28,7 @@ namespace Szafiarka.Classes
         {
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.button1 = new FlattButton();
+            this.button1 = new FlatButton();
             this.SuspendLayout();
             // 
             // textBox1

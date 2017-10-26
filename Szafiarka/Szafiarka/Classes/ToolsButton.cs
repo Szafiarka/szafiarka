@@ -14,7 +14,6 @@ namespace Szafiarka.Classes
     {
         ContextMenuStrip contextMenuStrip1 = new ContextMenuStrip();
         private bool contextMenuStrip1Clicked = false;
-        private static string PATHTOIMAGE = "..\\..\\images\\settings.png";
 
         private enum ToolName
         {
