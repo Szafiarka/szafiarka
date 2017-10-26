@@ -19,7 +19,7 @@ namespace Szafiarka.Classes
             Location = new Point(1097, 21);
             Size = new Size(75, 25);
             UseVisualStyleBackColor = true;
-            Text = "opcje";
+            Text = "Opcje";
             Name = "bSettings";
             InitializecontextMenuStrip1();
             Click += new EventHandler(button1_Click);
