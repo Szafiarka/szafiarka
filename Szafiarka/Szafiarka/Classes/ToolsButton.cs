@@ -12,7 +12,7 @@ namespace Szafiarka.Classes
 {
     class ToolsButton : FlatButton
     {
-        ContextMenuStrip contextMenuStrip1 = new ContextMenuStrip();
+        private ContextMenuStrip contextMenuStrip1 = new ContextMenuStrip();
         private bool contextMenuStrip1Clicked = false;
 
         private enum ToolName
@@ -30,15 +30,17 @@ namespace Szafiarka.Classes
             UseVisualStyleBackColor = true;
             Text = "Narzędzia";
             Name = "bTools";
-            InitializecontextMenuStrip1();
+            InitializeContextMenuStrip1();
             Click += new EventHandler(tools_Click);
         }
 
-        private void InitializecontextMenuStrip1()
+        private void InitializeContextMenuStrip1()
         {
             contextMenuStrip1.Items.Clear();
-            contextMenuStrip1.Items.Add(GetEnumDescription(ToolName.HELP));
-            contextMenuStrip1.Items.Add(GetEnumDescription(ToolName.OPTIONS));
+            foreach (ToolName item in Enum.GetValues(typeof(ToolName)))
+            {
+                contextMenuStrip1.Items.Add(GetEnumDescription(item));
+            }
             contextMenuStrip1.ItemClicked += new ToolStripItemClickedEventHandler(
                                                  contextMenuStrip1_ItemClicked);
         }
@@ -59,15 +61,15 @@ namespace Szafiarka.Classes
 
             if (e.ClickedItem.Text == GetEnumDescription(ToolName.HELP))
             {
-                Form helpForm = new ToolsForm();
+                var helpForm = new ToolsForm();
                 helpForm.Show();
-                helpForm.Text = "Pomoc";
+                helpForm.Text = GetEnumDescription(ToolName.HELP);
             }
             if (e.ClickedItem.Text == GetEnumDescription(ToolName.OPTIONS))
             {
-                Form optionForm = new ToolsForm();
+                var optionForm = new ToolsForm();
                 optionForm.Show();
-                optionForm.Text = "Opcje";
+                optionForm.Text = GetEnumDescription(ToolName.OPTIONS);
             }
         }
 

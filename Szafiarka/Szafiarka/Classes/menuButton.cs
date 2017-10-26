@@ -24,7 +24,7 @@ namespace Szafiarka.Classes
             { buttonsNames.add.ToString(), "Dodaj", PATHTOADD},
             { buttonsNames.edit.ToString(), "Edytuj",  PATHTOEDIT},
             { buttonsNames.delete.ToString(), "Usuń", PATHTODELETE},
-            { buttonsNames.edit.ToString(), "Wyjście", PATHTOEXIT}
+            { buttonsNames.exit.ToString(), "Wyjście", PATHTOEXIT}
         };
         private enum Messages {
             [Description("Nie wybrałeś elementu do usunięcia")]

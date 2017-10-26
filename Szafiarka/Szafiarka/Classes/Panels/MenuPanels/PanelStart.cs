@@ -10,10 +10,6 @@ namespace Szafiarka.Classes
     class PanelStart : Panels
     {
         private static List<Panel> ObjectList;
-        new public enum PanelsName
-        {
-            PADDSTATUS
-        };
 
         private enum buttonsNames
         {
@@ -43,12 +39,6 @@ namespace Szafiarka.Classes
             var rooms = DBconnection.DBCONNECTION.Room.ToArray();
             var result = from room in rooms where room.id_room == 16 select room;
             MessageBox.Show(result.First().name);
-        }
-
-        private void addStatus_Click(object sender, EventArgs e)
-        {
-            changePanelsVisableToFalse();
-            changePanelVisableToTrue(PanelsName.PADDSTATUS);
         }
         #endregion
 
@@ -82,7 +72,7 @@ namespace Szafiarka.Classes
         private void InitializePanels()
         {
             ObjectList = new List<Panel> {
-                new PanelAddStatus(),
+
             };
 
             foreach (var panel in ObjectList)
@@ -93,10 +83,7 @@ namespace Szafiarka.Classes
 
         private void addEventToButton(Button button)
         {
-            if (button.Name == buttonsNames.addStatus.ToString())
-            {
-                button.Click += new EventHandler(addStatus_Click);
-            }
+
         }
 
         new public static void changePanelsVisableToFalse()

@@ -91,13 +91,10 @@
     <Compile Include="Classes\MenuButton\Start.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Classes\Panels\PanlesStart\PanelAddStatus.cs">
+    <Compile Include="Classes\Panels\MenuPanels\PanelsAdd\PanelAddStatus.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Classes\ToolsButton.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Classes\Panels\MenuPanels\PanelAdd.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Classes\Panels\MenuPanels\PanelMenu.cs">
@@ -133,7 +130,7 @@
     <Compile Include="Forms\Splashscreen\Splashscreen.Designer.cs">
       <DependentUpon>Splashscreen.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="Classes\Panels\PanlesStart\PanelAddStatus.resx">
+    <EmbeddedResource Include="Classes\Panels\MenuPanels\PanelsAdd\PanelAddStatus.resx">
       <DependentUpon>PanelAddStatus.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\MainForm\MainForm.resx">
