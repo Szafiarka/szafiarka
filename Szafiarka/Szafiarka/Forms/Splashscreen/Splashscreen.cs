@@ -19,8 +19,8 @@ namespace Szafiarka.Forms.Splashscreen
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            SplashscreenPrograssBar.Increment(5);
-            if (SplashscreenPrograssBar.Value == 100)
+            SplashscreenProgressBar.Increment(5);
+            if (SplashscreenProgressBar.Value == 100)
             {
                 splashTimer.Stop();
             }

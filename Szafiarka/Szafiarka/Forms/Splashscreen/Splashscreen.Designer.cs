@@ -29,17 +29,17 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.SplashscreenPrograssBar = new System.Windows.Forms.ProgressBar();
+            this.SplashscreenProgressBar = new System.Windows.Forms.ProgressBar();
             this.splashTimer = new System.Windows.Forms.Timer(this.components);
             this.SplashLabel = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
-            // SplashscreenPrograssBar
+            // SplashscreenProgressBar
             // 
-            this.SplashscreenPrograssBar.Location = new System.Drawing.Point(12, 219);
-            this.SplashscreenPrograssBar.Name = "SplashscreenPrograssBar";
-            this.SplashscreenPrograssBar.Size = new System.Drawing.Size(625, 23);
-            this.SplashscreenPrograssBar.TabIndex = 0;
+            this.SplashscreenProgressBar.Location = new System.Drawing.Point(12, 219);
+            this.SplashscreenProgressBar.Name = "SplashscreenProgressBar";
+            this.SplashscreenProgressBar.Size = new System.Drawing.Size(625, 23);
+            this.SplashscreenProgressBar.TabIndex = 0;
             // 
             // splashTimer
             // 
@@ -64,7 +64,7 @@
             this.BackColor = System.Drawing.SystemColors.ButtonShadow;
             this.ClientSize = new System.Drawing.Size(649, 271);
             this.Controls.Add(this.SplashLabel);
-            this.Controls.Add(this.SplashscreenPrograssBar);
+            this.Controls.Add(this.SplashscreenProgressBar);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "Splashscreen";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -75,7 +75,7 @@
 
         #endregion
 
-        private System.Windows.Forms.ProgressBar SplashscreenPrograssBar;
+        private System.Windows.Forms.ProgressBar SplashscreenProgressBar;
         private System.Windows.Forms.Timer splashTimer;
         private System.Windows.Forms.Label SplashLabel;
 

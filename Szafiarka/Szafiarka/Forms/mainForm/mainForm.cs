@@ -17,18 +17,20 @@ namespace Szafiarka
     {
         public MainForm()
         {
+            InitializeComponent();
             Thread splashThread = new Thread(new ThreadStart(SplashscreenStart));
             splashThread.Start();
             Thread.Sleep(3000);
             var assemblyData = new RetrievingAssemblyData();
-            InitializeComponent();
             splashThread.Abort();
             //InitializeComponent(assemblyData);
         }
 
-        public void SplashscreenStart()
+        private void SplashscreenStart()
         {
-            Application.Run(new Splashscreen());
+            var splashForm = new Splashscreen();
+            splashForm.BackColor = BackColor;
+            Application.Run(splashForm);
         }
 
         private void pMain_Paint(object sender, PaintEventArgs e)
