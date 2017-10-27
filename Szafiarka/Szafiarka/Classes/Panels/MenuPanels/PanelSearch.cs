@@ -7,11 +7,12 @@ using System.Windows.Forms;
 
 namespace Szafiarka.Classes
 {
-    class OptionsButton : Button
+    class PanelSearch : Panels
     {
-        public OptionsButton()
+        public PanelSearch()
         {
-            Text = "opcje";
+            Name = "pSearch";
+            BackColor = System.Drawing.Color.FromArgb(0, 50, 0);
         }
     }
 }

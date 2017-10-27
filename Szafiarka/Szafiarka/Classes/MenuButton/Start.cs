@@ -8,9 +8,9 @@ namespace Szafiarka.Classes
     {
         private void start_Click(object sender, EventArgs e)
         {
-            var rooms = DBconnection.DBCONNECTION.Room.ToArray();
-            var result = from room in rooms where room.id_room == 1 select room;
-            MessageBox.Show(result.First().name);
+            Panels.changePanelsVisableToFalse();
+            Panels.changePanelVisableToTrue(Panels.PanelsName.PSTART);
+            PanelStart.changePanelsVisableToFalse();
         }
     }
 }

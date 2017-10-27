@@ -660,7 +660,7 @@ namespace Szafiarka.Classes.MapDB
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_image", DbType="Image NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.Never)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_image", DbType="Image", UpdateCheck=UpdateCheck.Never)]
 		public System.Data.Linq.Binary image
 		{
 			get
@@ -1148,7 +1148,7 @@ namespace Szafiarka.Classes.MapDB
 		
 		private int _id_status;
 		
-		private System.Data.Linq.Binary _name;
+		private string _name;
 		
 		private EntitySet<Item> _Item;
 		
@@ -1158,7 +1158,7 @@ namespace Szafiarka.Classes.MapDB
     partial void OnCreated();
     partial void Onid_statusChanging(int value);
     partial void Onid_statusChanged();
-    partial void OnnameChanging(System.Data.Linq.Binary value);
+    partial void OnnameChanging(string value);
     partial void OnnameChanged();
     #endregion
 		
@@ -1188,8 +1188,8 @@ namespace Szafiarka.Classes.MapDB
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_name", DbType="VarBinary(50) NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.Never)]
-		public System.Data.Linq.Binary name
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_name", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		public string name
 		{
 			get
 			{

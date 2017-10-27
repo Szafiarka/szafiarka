@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Windows.Forms;
 using System.Drawing;
+using System.ComponentModel;
+using System.Reflection;
 
 namespace Szafiarka.Classes
 {
-    partial class MenuButton : Button
+    partial class MenuButton : FlatButton
     {
         private static string PATHTOSTART = "..\\..\\images\\menuButtons\\home.png";
         private static string PATHTOSEARCH = "..\\..\\images\\menuButtons\\search.png";
@@ -12,23 +14,30 @@ namespace Szafiarka.Classes
         private static string PATHTOEDIT = "..\\..\\images\\menuButtons\\edit.png";
         private static string PATHTODELETE = "..\\..\\images\\menuButtons\\delete.png";
         private static string PATHTOEXIT = "..\\..\\images\\menuButtons\\exit.png";
+        private enum buttonsNames
+        {
+            home, search, add, edit, delete, exit
+        }
         private static string[,] MENUBUTTONSNAMES = {
-            { "home", "Start", PATHTOSTART },
-            { "search", "Wyszukaj", PATHTOSEARCH},
-            { "add", "Dodaj", PATHTOADD},
-            { "edit", "Edytuj",  PATHTOEDIT},
-            { "delete", "Usuń", PATHTODELETE},
-            { "exit", "Wyjście", PATHTOEXIT}
+            { buttonsNames.home.ToString(), "Start", PATHTOSTART },
+            { buttonsNames.search.ToString(), "Wyszukaj", PATHTOSEARCH},
+            { buttonsNames.add.ToString(), "Dodaj", PATHTOADD},
+            { buttonsNames.edit.ToString(), "Edytuj",  PATHTOEDIT},
+            { buttonsNames.delete.ToString(), "Usuń", PATHTODELETE},
+            { buttonsNames.exit.ToString(), "Wyjście", PATHTOEXIT}
         };
+        private enum Messages {
+            [Description("Nie wybrałeś elementu do usunięcia")]
+            DELETE,
+            [Description("Nie wybrałeś elementu do edycji")]
+            EDIT,
+        }
 
         public MenuButton() : base()
         {
             UseVisualStyleBackColor = false;
             Size = new Size(100, 100);
-            FlatStyle = FlatStyle.Flat;
-            FlatAppearance.BorderSize = 0;
             TextAlign = ContentAlignment.BottomCenter;
-            Font = new Font(this.Font.Name, 10);
         }
 
         public void InitializeMenuButtons(Form form, Panel pMenu)
@@ -65,13 +74,29 @@ namespace Szafiarka.Classes
 
         private void selectAndAddEvent(ref MenuButton button)
         {
-            if (button.Name == "exit")
+            if (button.Name == buttonsNames.exit.ToString())
             {
                 button.Click += new EventHandler(exit_Click);
             }
-            if (button.Name == "home")
+            if (button.Name == buttonsNames.home.ToString())
             {
                 button.Click += new EventHandler(start_Click);
+            }
+            if (button.Name == buttonsNames.add.ToString())
+            {
+                button.Click += new EventHandler(add_Click);
+            }
+            if (button.Name == buttonsNames.search.ToString())
+            {
+                button.Click += new EventHandler(search_Click);
+            }
+            if (button.Name == buttonsNames.edit.ToString())
+            {
+                button.Click += new EventHandler(edit_Click);
+            }
+            if (button.Name == buttonsNames.delete.ToString())
+            {
+                button.Click += new EventHandler(delete_Click);
             }
         }
     }
