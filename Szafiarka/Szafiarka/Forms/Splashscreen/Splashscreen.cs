@@ -22,13 +22,8 @@ namespace Szafiarka.Forms.Splashscreen
             SplashscreenPrograssBar.Increment(5);
             if (SplashscreenPrograssBar.Value == 100)
             {
-                timer1.Stop();
+                splashTimer.Stop();
             }
-        }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-
         }
     }
 }

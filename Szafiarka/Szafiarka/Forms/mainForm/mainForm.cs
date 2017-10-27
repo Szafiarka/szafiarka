@@ -17,12 +17,12 @@ namespace Szafiarka
     {
         public MainForm()
         {
-            Thread t = new Thread(new ThreadStart(SplashscreenStart));
-            t.Start();
+            Thread splashThread = new Thread(new ThreadStart(SplashscreenStart));
+            splashThread.Start();
             Thread.Sleep(3000);
             var assemblyData = new RetrievingAssemblyData();
             InitializeComponent();
-            t.Abort();
+            splashThread.Abort();
             //InitializeComponent(assemblyData);
         }
 
