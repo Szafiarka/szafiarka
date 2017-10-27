@@ -89,16 +89,19 @@
     <Compile Include="Forms\MainForm\MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Program.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Forms\Splashscreen\Splashscreen.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\Splashscreen\Splashscreen.Designer.cs">
       <DependentUpon>Splashscreen.cs</DependentUpon>
     </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Forms\MainForm\MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Splashscreen\Splashscreen.resx">
+      <DependentUpon>Splashscreen.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -109,9 +112,6 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="Forms\Splashscreen\Splashscreen.resx">
-      <DependentUpon>Splashscreen.cs</DependentUpon>
-    </EmbeddedResource>
     <None Include="Classes\MapDB\MapDB.dbml">
       <Generator>MSLinqToSQLGenerator</Generator>
       <LastGenOutput>MapDB.designer.cs</LastGenOutput>
@@ -131,12 +131,14 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.5.2">
       <Visible>False</Visible>
-      <ProductName>Microsoft .NET Framework 4.5.2 %28x86 i x64%29</ProductName>
+      <ProductName>Microsoft .NET Framework 4.5.2 %28x86 and x64%29</ProductName>
       <Install>true</Install>
     </BootstrapperPackage>
     <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
@@ -153,8 +155,8 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="database_log.ldf">
-      <DependentUpon>database.mdf</DependentUpon>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <DependentUpon>database.mdf</DependentUpon>
     </Content>
     <Content Include="images\menuButtons\add.png" />
     <Content Include="images\menuButtons\delete.png" />

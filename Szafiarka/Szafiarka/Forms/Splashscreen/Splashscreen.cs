@@ -8,14 +8,27 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Splashscreen
+namespace Szafiarka.Forms.Splashscreen
 {
     public partial class Splashscreen : Form
     {
         public Splashscreen()
         {
-            Szafiarka.RetrievingAssemblyData retrivingAssemblyData = new Szafiarka.RetrievingAssemblyData();
-            InitializeComponent(retrivingAssemblyData);
+            InitializeComponent();
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            SplashscreenPrograssBar.Increment(5);
+            if (SplashscreenPrograssBar.Value == 100)
+            {
+                timer1.Stop();
+            }
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

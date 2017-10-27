@@ -65,11 +65,11 @@ namespace Szafiarka.Classes
 
         private void selectAndAddEvent(ref MenuButton button)
         {
-            if (button.Name is "exit")
+            if (button.Name == "exit")
             {
                 button.Click += new EventHandler(exit_Click);
             }
-            if (button.Name is "home")
+            if (button.Name == "home")
             {
                 button.Click += new EventHandler(start_Click);
             }
