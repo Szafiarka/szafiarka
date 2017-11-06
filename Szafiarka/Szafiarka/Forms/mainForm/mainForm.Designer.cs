@@ -20,8 +20,7 @@
             base.Dispose(disposing);
         }
 
-        private void InitializeComponent()
-        //private void InitializeComponent(RetrievingAssemblyData assemblyData)
+        private void InitializeComponent(RetrievingAssemblyData assemblyData)
         {
             this.pMenu = new Classes.PanelMenu();
             this.bTools = new Szafiarka.Classes.ToolsButton();
@@ -35,8 +34,8 @@
             //
             // InitializePanels
             //
-            var panels = new Classes.Panels();  //B
-            panels.initializePanels(this); //B
+            var panels = new Classes.Panels();
+            panels.initializePanels(this);
             // 
             // MainForm
             // 
@@ -48,7 +47,7 @@
             this.Controls.Add(this.pMenu);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "MainForm";
-            this.Text = "mainForm";
+            this.Text = assemblyData.AssemblyTitle;
             this.pMenu.ResumeLayout(false);
             this.ResumeLayout(false);
 

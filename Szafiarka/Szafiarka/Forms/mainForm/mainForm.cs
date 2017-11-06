@@ -21,9 +21,8 @@ namespace Szafiarka
             splashThread.Start();
             Thread.Sleep(3000);
             var assemblyData = new RetrievingAssemblyData();
-            InitializeComponent();
+            InitializeComponent(assemblyData);
             splashThread.Abort();
-            //InitializeComponent(assemblyData);
         }
 
         public void SplashscreenStart()
