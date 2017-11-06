@@ -34,6 +34,7 @@ namespace Szafiarka.Classes
 
         private void InitializeContextMenuStripAdd()
         {
+            contextMenuStripAdd.BackColor = this.BackColor;
             contextMenuStripAdd.Items.Clear();
             foreach (menuStripOptions item in Enum.GetValues(typeof(menuStripOptions)))
             {

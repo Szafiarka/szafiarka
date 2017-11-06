@@ -40,7 +40,7 @@ namespace Szafiarka.Classes
             TextAlign = ContentAlignment.BottomCenter;
         }
 
-        public void InitializeMenuButtons(Form form, Panel pMenu)
+        public void InitializeMenuButtons(Form form, PanelMenu pMenu)
         {
             for (int i = 0; i < MENUBUTTONSNAMES.Length / 3; i++)
             {
