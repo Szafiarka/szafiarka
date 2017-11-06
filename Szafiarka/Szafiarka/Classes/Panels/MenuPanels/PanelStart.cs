@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -7,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Szafiarka.Forms.ItemForm;
 
 namespace Szafiarka.Classes
 {
@@ -17,6 +19,7 @@ namespace Szafiarka.Classes
         private static int DGVHeight = 600;
         private static int LocationHeightStart = 50;
         private static int DGVMainWidth = 720;
+        private MapDB.Queries queries;
 
         private enum buttonsNames
         {
@@ -42,6 +45,7 @@ namespace Szafiarka.Classes
         {
             Name = "pStart";
             Visible = true;
+            queries = new MapDB.Queries();
             InitializeComponent();
         }
 
@@ -143,19 +147,11 @@ namespace Szafiarka.Classes
 
         private void DTVLastItemsFillColumns(DataGridView gridView)
         {
-            var query = from i in DBconnection.DBCONNECTION.Item
-                        join c in DBconnection.DBCONNECTION.Category on i.id_category equals c.id_category
-                        select new
-                        {
-                            id = i.id_item,
-                            name = i.name,
-                            category_name = c.name,
-                            creation_date = i.creation_date
-                        };
+            var query = queries.getGridViewLastItems();
 
             foreach (var item in query.OrderByDescending(X => X.creation_date))
             {
-                gridView.Rows.Add(item.id, item.name, item.category_name);
+                gridView.Rows.Add(item.id, item.name, item.category);
             }
         }
 
@@ -169,11 +165,9 @@ namespace Szafiarka.Classes
 
         private void DTVLastItems_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            var cos = DGVLastItems.Rows[e.RowIndex].Cells[0].Value;
-            var name = from items in DBconnection.DBCONNECTION.Item
-                       where items.id_item.ToString() == cos.ToString()
-                       select new { Name = items.name} ;
-            MessageBox.Show(name.ToList().First().Name);
+            var itemId = Int32.Parse(DGVMainData.Rows[e.RowIndex].Cells[0].Value.ToString());
+            var itemForm = new ItemForm(itemId);
+            itemForm.Show(); 
         }
 
         private void addEventToButton(Button button)
@@ -224,29 +218,16 @@ namespace Szafiarka.Classes
                 DGVMainData.Columns.Add(Columns[i, 0], Columns[i, 1]);
             }
 
-            var query = from item in DBconnection.DBCONNECTION.Item
-                        join category in DBconnection.DBCONNECTION.Category on item.id_category equals category.id_category
-                        join status in DBconnection.DBCONNECTION.Status on item.id_status equals status.id_status
-                        join shelf in DBconnection.DBCONNECTION.Shelf on item.id_shelf equals shelf.id_shelf
-                        join wardorobe in DBconnection.DBCONNECTION.Wardrobe on shelf.id_wardrobe equals wardorobe.id_wardrobe
-                        join room in DBconnection.DBCONNECTION.Room on wardorobe.id_room equals room.id_room
-                        select new
-                        {
-                            id = item.id_item,
-                            name = item.name,
-                            category_name = category.name,
-                            status = status.name,
-                            room = room.name,
-                            wardorobe = wardorobe.name,
-                            shelf = shelf.location
-                        };
+            var query = queries.getGridViewItem();
+
             foreach (var item in query)
             {
-                DGVMainData.Rows.Add(item.id, item.name, item.category_name, item.status,
+                DGVMainData.Rows.Add(item.id, item.name, item.category, item.status,
                     item.room, item.wardorobe, Int32.Parse(item.shelf)+1);
             }
 
             DGVMainData.Columns[0].Visible = false;
+
         }
 
         private void DGVRoomsView(object sender, EventArgs e)
@@ -262,12 +243,7 @@ namespace Szafiarka.Classes
                 DGVMainData.Columns.Add(Columns[i, 0], Columns[i, 1]);
             }
 
-            var query = from room in DBconnection.DBCONNECTION.Room
-                        select new
-                        {
-                            id = room.id_room,
-                            name = room.name,
-                        };
+            var query = queries.getGridViewRoom();
             foreach (var item in query)
             {
                 DGVMainData.Rows.Add(item.id, item.name);
@@ -285,18 +261,13 @@ namespace Szafiarka.Classes
                 { "name", "Nazwa" },
                 { "itemsCount", "Ilość rzeczy" }
             };
+
             for (int i = 0; i < Columns.Length / 2; i++)
             {
                 DGVMainData.Columns.Add(Columns[i, 0], Columns[i, 1]);
             }
 
-            var query = from status in DBconnection.DBCONNECTION.Status
-                        select new
-                        {
-                            id = status.id_status,
-                            name = status.name,
-                            itemsCount = DBconnection.DBCONNECTION.Item.Where(x => x.id_status == status.id_status).Count()
-                        };
+            var query = queries.getGridViewStatus();
             foreach (var item in query)
             {
                 DGVMainData.Rows.Add(item.id, item.name, item.itemsCount);
@@ -319,13 +290,7 @@ namespace Szafiarka.Classes
                 DGVMainData.Columns.Add(Columns[i, 0], Columns[i, 1]);
             }
 
-            var query = from category in DBconnection.DBCONNECTION.Category
-                        select new
-                        {
-                            id = category.id_category,
-                            name = category.name,
-                            itemsCount = DBconnection.DBCONNECTION.Item.Where(x => x.id_category == category.id_category).Count()
-                        };
+            var query = queries.getGridViewCategory(); 
 
             foreach (var item in query)
             {
@@ -350,15 +315,7 @@ namespace Szafiarka.Classes
                 DGVMainData.Columns.Add(Columns[i, 0], Columns[i, 1]);
             }
 
-            var query = from wardrobe in DBconnection.DBCONNECTION.Wardrobe
-                        join room in DBconnection.DBCONNECTION.Room on wardrobe.id_room equals room.id_room
-                        select new
-                        {
-                            id = wardrobe.id_wardrobe,
-                            name = wardrobe.name,
-                            room = room.name,
-                            shelfCount = DBconnection.DBCONNECTION.Shelf.Where(x => x.id_wardrobe == wardrobe.id_wardrobe).Count()
-                        };
+            var query = queries.getGridViewWardrobe(); 
 
             foreach (var item in query)
             {
