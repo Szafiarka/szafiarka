@@ -14,12 +14,14 @@ namespace Szafiarka.Classes
 {
     class PanelStart : Panels
     {
-        private DataGridView DGVLastItems;
-        private DataGridView DGVMainData;
+        private DataGridViewStartPanel DGVLastItems;
+        private DataGridViewStartPanel DGVMainData;
         private static int DGVHeight = 600;
         private static int LocationHeightStart = 50;
         private static int DGVMainWidth = 720;
         private MapDB.Queries queries;
+
+        private FlatButton oldButton;
 
         private enum buttonsNames
         {
@@ -48,15 +50,6 @@ namespace Szafiarka.Classes
             queries = new MapDB.Queries();
             InitializeComponent();
         }
-
-        #region Events
-        private void start_Click(object sender, EventArgs e)
-        {
-            var rooms = DBconnection.DBCONNECTION.Room.ToArray();
-            var result = from room in rooms where room.id_room == 16 select room;
-            MessageBox.Show(result.First().name);
-        }
-        #endregion
 
         private void InitializeComponent()
         {
@@ -87,25 +80,13 @@ namespace Szafiarka.Classes
 
         private void InitializeMainData()
         {
-            DGVMainData = new DataGridView();
+            DGVMainData = new DataGridViewStartPanel();
             DGVMainData.Location = new Point(0, LocationHeightStart);
             DGVMainData.Size = new Size(DGVMainWidth, DGVHeight);
             DGVMainData.Name = "aaa";
             DGVMainData.BackgroundColor = BackColor;
 
-            DGVMainData.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-
-            DGVMainData.RowHeadersVisible = false;
-            DGVMainData.AutoSizeColumnsMode =
-            DataGridViewAutoSizeColumnsMode.Fill;
-            DGVMainData.AllowUserToAddRows = false;
-            DGVMainData.AllowUserToDeleteRows = false;
-            DGVMainData.AllowUserToResizeRows = false;
-            DGVMainData.ReadOnly = true;
-            DGVMainData.RowHeadersWidthSizeMode =
-                DataGridViewRowHeadersWidthSizeMode.DisableResizing;
-            DGVMainData.ColumnHeadersHeightSizeMode =
-                DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+            
             DGVMainData.CellDoubleClick += DTVLastItems_CellDoubleClick;
 
             DGVMainData.Visible = false;
@@ -116,29 +97,13 @@ namespace Szafiarka.Classes
         private void InitializeLastItems()
         {
             var sizeWidth = 300;
-            DGVLastItems = new DataGridView();
+            DGVLastItems = new DataGridViewStartPanel();
             DGVLastItems.Location = new Point(Width - sizeWidth, LocationHeightStart);
             DGVLastItems.BackgroundColor = BackColor;
             DGVLastItems.Name = "DTVLastItems";
             DGVLastItems.Size = new Size(sizeWidth, DGVHeight);
-            DGVLastItems.Font = new Font(Font.Name, 12);
 
-            DGVLastItems.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-
-            DGVLastItems.RowHeadersVisible = false;
-            DGVLastItems.AutoSizeColumnsMode =
-            DataGridViewAutoSizeColumnsMode.Fill;
-            DGVLastItems.AllowUserToAddRows = false;
-            DGVLastItems.AllowUserToDeleteRows = false;
-            DGVLastItems.AllowUserToResizeRows = false;
-            DGVLastItems.ReadOnly = true;
-            DGVLastItems.RowHeadersWidthSizeMode =
-                DataGridViewRowHeadersWidthSizeMode.DisableResizing;
-            DGVLastItems.ColumnHeadersHeightSizeMode =
-                DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
-            DGVLastItems.CellDoubleClick += DTVLastItems_CellDoubleClick;
-
-            DTVLastItemsAddColumns(DGVLastItems);
+            AddColumnsToDGV(DGVLastItems, LASTITEMSCOLUMNS);
             DTVLastItemsFillColumns(DGVLastItems);
             DGVLastItems.Columns[0].Visible = false;
 
@@ -152,14 +117,6 @@ namespace Szafiarka.Classes
             foreach (var item in query.OrderByDescending(X => X.creation_date))
             {
                 gridView.Rows.Add(item.id, item.name, item.category);
-            }
-        }
-
-        private void DTVLastItemsAddColumns(DataGridView gridView)
-        {
-            for (int i = 0; i < LASTITEMSCOLUMNS.Length / 2; i++)
-            {
-                gridView.Columns.Add(LASTITEMSCOLUMNS[i, 0], LASTITEMSCOLUMNS[i, 1]);
             }
         }
 
@@ -193,6 +150,7 @@ namespace Szafiarka.Classes
                 button.Click += new EventHandler(DGVWardrobesView);
             }
             button.Click += new EventHandler(DGVMainDataChangeVisable);
+            button.Click += new EventHandler(ChangeButtonSelection);
         }
 
         private void DGVMainDataChangeVisable(object sender, EventArgs e)
@@ -200,11 +158,30 @@ namespace Szafiarka.Classes
             DGVMainData.Visible = true;
         }
 
+        private void ChangeButtonSelection(object sender, EventArgs e)
+        {
+            var button = sender as FlatButton;
+            if (oldButton != null)
+            {
+                oldButton.BackColor = PanelMenu.defaultColor;
+            }
+            if(oldButton == button)
+            {
+                button.BackColor = PanelMenu.defaultColor;
+                oldButton = null;
+                DGVMainData.Visible = false;
+            }
+            else
+            {
+                oldButton = button;
+                button.BackColor = Color.White;
+            }
+        }
+
         private void DGVItemsView(object sender, EventArgs e)
         {
-            DGVMainData.Rows.Clear();
-            DGVMainData.Columns.Clear();
-            string[,] Columns = {
+            GridViewClearRowsAndColumns(DGVMainData);
+            string[,] columns = {
                 { "id", "ID" },
                 { "name", "Nazwa" },
                 { "category", "Kategoria" },
@@ -213,10 +190,7 @@ namespace Szafiarka.Classes
                 { "wardrobe", "Szafa" },
                 { "shelf", "Szuflada" },
             };
-            for (int i = 0; i < Columns.Length / 2; i++)
-            {
-                DGVMainData.Columns.Add(Columns[i, 0], Columns[i, 1]);
-            }
+            AddColumnsToDGV(DGVMainData, columns);
 
             var query = queries.getGridViewItem();
 
@@ -232,16 +206,12 @@ namespace Szafiarka.Classes
 
         private void DGVRoomsView(object sender, EventArgs e)
         {
-            DGVMainData.Rows.Clear();
-            DGVMainData.Columns.Clear();
-            string[,] Columns = {
+            GridViewClearRowsAndColumns(DGVMainData);
+            string[,] columns = {
                 { "id", "ID" },
                 { "name", "Nazwa" }
             };
-            for (int i = 0; i < Columns.Length / 2; i++)
-            {
-                DGVMainData.Columns.Add(Columns[i, 0], Columns[i, 1]);
-            }
+            AddColumnsToDGV(DGVMainData, columns);
 
             var query = queries.getGridViewRoom();
             foreach (var item in query)
@@ -254,18 +224,13 @@ namespace Szafiarka.Classes
 
         private void DGVStatusView(object sender, EventArgs e)
         {
-            DGVMainData.Rows.Clear();
-            DGVMainData.Columns.Clear();
-            string[,] Columns = {
+            GridViewClearRowsAndColumns(DGVMainData);
+            string[,] columns = {
                 { "id", "ID" },
                 { "name", "Nazwa" },
                 { "itemsCount", "Ilość rzeczy" }
             };
-
-            for (int i = 0; i < Columns.Length / 2; i++)
-            {
-                DGVMainData.Columns.Add(Columns[i, 0], Columns[i, 1]);
-            }
+            AddColumnsToDGV(DGVMainData, columns);
 
             var query = queries.getGridViewStatus();
             foreach (var item in query)
@@ -278,19 +243,15 @@ namespace Szafiarka.Classes
 
         private void DGVCategoriesView(object sender, EventArgs e)
         {
-            DGVMainData.Rows.Clear();
-            DGVMainData.Columns.Clear();
-            string[,] Columns = {
+            GridViewClearRowsAndColumns(DGVMainData);
+            string[,] columns = {
                 { "id", "ID" },
                 { "name", "Nazwa" },
                 { "itemsCount", "Ilość rzeczy" }
             };
-            for (int i = 0; i < Columns.Length / 2; i++)
-            {
-                DGVMainData.Columns.Add(Columns[i, 0], Columns[i, 1]);
-            }
+            AddColumnsToDGV(DGVMainData, columns);
 
-            var query = queries.getGridViewCategory(); 
+            var query = queries.getGridViewCategory();
 
             foreach (var item in query)
             {
@@ -302,20 +263,16 @@ namespace Szafiarka.Classes
 
         private void DGVWardrobesView(object sender, EventArgs e)
         {
-            DGVMainData.Rows.Clear();
-            DGVMainData.Columns.Clear();
-            string[,] Columns = {
+            GridViewClearRowsAndColumns(DGVMainData);
+            string[,] columns = {
                 { "id", "ID" },
                 { "name", "Nazwa" },
                 { "room", "Pokój" },
                 { "shelfCount", "Ilość półek" }
             };
-            for (int i = 0; i < Columns.Length / 2; i++)
-            {
-                DGVMainData.Columns.Add(Columns[i, 0], Columns[i, 1]);
-            }
+            AddColumnsToDGV(DGVMainData, columns);
 
-            var query = queries.getGridViewWardrobe(); 
+            var query = queries.getGridViewWardrobe();
 
             foreach (var item in query)
             {
@@ -323,6 +280,20 @@ namespace Szafiarka.Classes
             }
 
             DGVMainData.Columns[0].Visible = false;
+        }
+
+        private void GridViewClearRowsAndColumns(DataGridView gridView)
+        {
+            gridView.Rows.Clear();
+            gridView.Columns.Clear();
+        }
+
+        private void AddColumnsToDGV(DataGridView gridView, string[,] columns)
+        {
+            for (int i = 0; i < columns.Length / 2; i++)
+            {
+                gridView.Columns.Add(columns[i, 0], columns[i, 1]);
+            }
         }
     }
 }

@@ -164,8 +164,6 @@ namespace Szafiarka.Forms.ItemForm
 
         private void InitializeComponent(int itemId)
         {
-            var item = queries.getItemById(itemId);
-
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -176,6 +174,8 @@ namespace Szafiarka.Forms.ItemForm
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.comboBox2 = new System.Windows.Forms.ComboBox();
             this.textBox4 = new System.Windows.Forms.TextBox();
+            this.flatButton1 = new Szafiarka.Classes.FlatButton();
+            this.flatButton2 = new Szafiarka.Classes.FlatButton();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -183,7 +183,6 @@ namespace Szafiarka.Forms.ItemForm
             // 
             this.textBox1.Location = new System.Drawing.Point(25, 149);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Text = item.name;
             this.textBox1.Size = new System.Drawing.Size(166, 20);
             this.textBox1.TabIndex = 0;
             // 
@@ -194,7 +193,7 @@ namespace Szafiarka.Forms.ItemForm
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(35, 13);
             this.label1.TabIndex = 1;
-            this.label1.Text = "Nazwa";
+            this.label1.Text = "label1";
             // 
             // label2
             // 
@@ -208,7 +207,6 @@ namespace Szafiarka.Forms.ItemForm
             // textBox2
             // 
             this.textBox2.Location = new System.Drawing.Point(25, 205);
-            this.textBox2.Text = item.name;
             this.textBox2.Name = "textBox2";
             this.textBox2.Size = new System.Drawing.Size(166, 20);
             this.textBox2.TabIndex = 2;
@@ -243,10 +241,6 @@ namespace Szafiarka.Forms.ItemForm
             this.comboBox1.Location = new System.Drawing.Point(266, 149);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(195, 21);
-            var categoryList = DBconnection.DBCONNECTION.Category.ToArray();
-            this.comboBox1.Items.AddRange(categoryList);
-            this.comboBox1.SelectedItem = item.Category;
-
             this.comboBox1.TabIndex = 7;
             // 
             // comboBox2
@@ -255,9 +249,6 @@ namespace Szafiarka.Forms.ItemForm
             this.comboBox2.Location = new System.Drawing.Point(266, 204);
             this.comboBox2.Name = "comboBox2";
             this.comboBox2.Size = new System.Drawing.Size(195, 21);
-            var StatusList = DBconnection.DBCONNECTION.Status.ToArray();
-            this.comboBox2.Items.AddRange(StatusList);
-            this.comboBox2.SelectedItem = item.Status;
             this.comboBox2.TabIndex = 8;
             // 
             // textBox4
@@ -265,12 +256,35 @@ namespace Szafiarka.Forms.ItemForm
             this.textBox4.Location = new System.Drawing.Point(25, 311);
             this.textBox4.Multiline = true;
             this.textBox4.Name = "textBox4";
-            if (item.description != null)
-                this.textBox4.Text = item.description;
-            else
-                this.textBox4.Text = "brak opisu";
             this.textBox4.Size = new System.Drawing.Size(436, 84);
             this.textBox4.TabIndex = 9;
+            // 
+            // flatButton1
+            // 
+            this.flatButton1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(1)))), ((int)(((byte)(168)))), ((int)(((byte)(204)))));
+            this.flatButton1.FlatAppearance.BorderSize = 0;
+            this.flatButton1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.flatButton1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.flatButton1.Location = new System.Drawing.Point(480, 431);
+            this.flatButton1.Name = "flatButton1";
+            this.flatButton1.Size = new System.Drawing.Size(75, 23);
+            this.flatButton1.TabIndex = 10;
+            this.flatButton1.Text = "flatButton1";
+            this.flatButton1.UseVisualStyleBackColor = false;
+            // 
+            // flatButton2
+            // 
+            this.flatButton2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(1)))), ((int)(((byte)(168)))), ((int)(((byte)(204)))));
+            this.flatButton2.FlatAppearance.BorderSize = 0;
+            this.flatButton2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.flatButton2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.flatButton2.Location = new System.Drawing.Point(479, 93);
+            this.flatButton2.Name = "flatButton2";
+            this.flatButton2.Size = new System.Drawing.Size(75, 23);
+            this.flatButton2.TabIndex = 11;
+            this.flatButton2.Text = "flatButton2";
+            this.flatButton2.UseVisualStyleBackColor = false;
+            this.flatButton2.Click += new System.EventHandler(this.flatButton2_Click);
             // 
             // ItemForm
             // 
@@ -278,6 +292,8 @@ namespace Szafiarka.Forms.ItemForm
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.ClientSize = new System.Drawing.Size(584, 466);
+            this.Controls.Add(this.flatButton2);
+            this.Controls.Add(this.flatButton1);
             this.Controls.Add(this.textBox4);
             this.Controls.Add(this.comboBox2);
             this.Controls.Add(this.comboBox1);
@@ -291,7 +307,7 @@ namespace Szafiarka.Forms.ItemForm
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "ItemForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = item.name;
+            this.Text = "ItemForm";
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -308,5 +324,7 @@ namespace Szafiarka.Forms.ItemForm
         private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.ComboBox comboBox2;
         private System.Windows.Forms.TextBox textBox4;
+        private FlatButton flatButton1;
+        private FlatButton flatButton2;
     }
 }
