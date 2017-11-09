@@ -54,20 +54,22 @@ namespace Szafiarka.Classes
         private void InitializeComponent()
         {
             SuspendLayout();
-            InitializeMainData();
+            InitalizeDataGrids();
             InitializeObjectsButtons();
-            InitializeLastItems();
+            InitializeLabelLastItems();
+            IntializeProgressBars();
             ResumeLayout(false);
         }
 
         private void InitializeObjectsButtons()
         {
-            var buttonLenght = 100;
-            for (int i = 0; i < OBJECTSBUTTONS.Length / 2; i++)
+            var buttonCount = OBJECTSBUTTONS.Length / 2;
+            var buttonLenght = (DGVMainWidth / buttonCount);
+            for (int i = 0; i < buttonCount; i++)
             {
                 var button = new FlatButton()
                 {
-                    Location = new Point((buttonLenght + 10) * i, 0),
+                    Location = new Point((buttonLenght) * i, 0),
                     Name = OBJECTSBUTTONS[i,0],
                     Size = new Size(buttonLenght, 30),
                     Text = OBJECTSBUTTONS[i, 1],
@@ -78,36 +80,41 @@ namespace Szafiarka.Classes
             }
         }
 
-        private void InitializeMainData()
+        private void InitializeLabelLastItems()
         {
-            DGVMainData = new DataGridViewStartPanel();
-            DGVMainData.Location = new Point(0, LocationHeightStart);
-            DGVMainData.Size = new Size(DGVMainWidth, DGVHeight);
-            DGVMainData.Name = "aaa";
-            DGVMainData.BackgroundColor = BackColor;
+            var label = new Label();
+            label.Location = new Point(Width - 300, 0);
+            label.Size = new Size(300, 30);
+            label.Text = "Ostatnio zmodyfikowane";
+            label.ForeColor = Color.White;
+            label.BackColor = Color.Tomato;
+            Controls.Add(label);
 
-            
-            DGVMainData.CellDoubleClick += DTVLastItems_CellDoubleClick;
-
-            DGVMainData.Visible = false;
-            
-            Controls.Add(DGVMainData);
         }
 
-        private void InitializeLastItems()
+        private void InitalizeDataGrids()
         {
             var sizeWidth = 300;
             DGVLastItems = new DataGridViewStartPanel();
             DGVLastItems.Location = new Point(Width - sizeWidth, LocationHeightStart);
             DGVLastItems.BackgroundColor = BackColor;
             DGVLastItems.Name = "DTVLastItems";
-            DGVLastItems.Size = new Size(sizeWidth, DGVHeight);
-
+            DGVLastItems.Size = new Size(sizeWidth, DGVHeight-(DGVHeight/2));
             AddColumnsToDGV(DGVLastItems, LASTITEMSCOLUMNS);
             DTVLastItemsFillColumns(DGVLastItems);
             DGVLastItems.Columns[0].Visible = false;
 
             Controls.Add(DGVLastItems);
+
+            DGVMainData = new DataGridViewStartPanel();
+            DGVMainData.Location = new Point(0, LocationHeightStart);
+            DGVMainData.Size = new Size(DGVMainWidth, DGVHeight);
+            DGVMainData.Name = "aaa";
+            DGVMainData.BackgroundColor = BackColor;
+            DGVMainData.CellDoubleClick += DTVLastItems_CellDoubleClick;
+            DGVMainData.Visible = false;
+
+            Controls.Add(DGVMainData);
         }
 
         private void DTVLastItemsFillColumns(DataGridView gridView)
@@ -294,6 +301,39 @@ namespace Szafiarka.Classes
             {
                 gridView.Columns.Add(columns[i, 0], columns[i, 1]);
             }
+        }
+
+        private void IntializeProgressBars()
+        {
+            var query = queries.getWardrobesOccupancy();
+            var k = 0;
+            foreach (var item in query.OrderByDescending(x => x.capacity))
+            {
+                addProgressBar(item, k);
+                Console.WriteLine(String.Format("{0} {1}",item.capacity, item.wardrobe.name));
+                k++;
+            }
+        }
+
+        private void addProgressBar(MapDB.ResulWardrobesOccupancy item, int k)
+        {
+            var label = new Label();
+            var progressBar = new ProgressBar();
+
+            label.Location = new Point(Width - 300, 380 + k * 60);
+            label.Text = String.Format("{0} {1}",item.wardrobe.Room.name, item.wardrobe.name);
+            label.ForeColor = Color.White;
+
+            progressBar.Location = new Point(Width - 300, 405 + k * 60);
+            progressBar.Size = new Size(300, 20);
+            if (item.capacity >= 0 )
+                progressBar.Value = (int)((item.capacity / item.capacity_wardrobe) * 100);
+            else
+                progressBar.Value = 0;
+            progressBar.ForeColor = Color.Azure;
+
+            Controls.Add(label);
+            Controls.Add(progressBar);
         }
     }
 }

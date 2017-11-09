@@ -63,4 +63,11 @@ namespace Szafiarka.Classes.MapDB
         public virtual string category { get; set; }
         public virtual DateTime creation_date { get; set; }
     }
+
+    public class ResulWardrobesOccupancy
+    {
+        public virtual double capacity { get; set; }
+        public virtual Wardrobe wardrobe { get; set; }
+        public virtual double capacity_wardrobe { get; set; }
+    }
 }
