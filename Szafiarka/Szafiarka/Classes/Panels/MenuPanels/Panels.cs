@@ -11,7 +11,7 @@ namespace Szafiarka.Classes
     class Panels : Panel
     {
         public enum PanelsName {
-            PSTART, PSEARCH, PADDSTATUS
+            PSTART, PSEARCH
         };
 
         private static List<Panels> PanelsList;
@@ -28,7 +28,6 @@ namespace Szafiarka.Classes
             PanelsList = new List<Panels> {
                 new PanelStart(),
                 new PanelSearch(),
-                new PanelAddStatus()
             };
 
             foreach (var panel in PanelsList)

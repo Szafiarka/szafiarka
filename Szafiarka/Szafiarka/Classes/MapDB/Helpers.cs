@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace Szafiarka.Classes.MapDB
 {
@@ -37,11 +38,12 @@ namespace Szafiarka.Classes.MapDB
     {
         public virtual string room { get; set; }
         public virtual int shelfCount { get; set; }
+        public virtual string mostCategory { get; set; }
     }
 
     public class ResultDataGridRoom : ResultDataGrid
     {
-
+        public virtual int wardrobesCount { get; set; }
     }
 
     public class ResultDataGridStatus : ResultDataGrid
@@ -66,8 +68,8 @@ namespace Szafiarka.Classes.MapDB
 
     public class ResulWardrobesOccupancy
     {
-        public virtual double capacity { get; set; }
         public virtual Wardrobe wardrobe { get; set; }
         public virtual double capacity_wardrobe { get; set; }
+        public virtual double capacity { get; set; }
     }
 }

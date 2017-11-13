@@ -34,17 +34,19 @@ namespace Szafiarka.Classes.MapDB
                        id = wardrobe.id_wardrobe,
                        name = wardrobe.name,
                        room = room.name,
-                       shelfCount = connection.Shelf.Where(x => x.id_wardrobe == wardrobe.id_wardrobe).Count()
+                       shelfCount = connection.Shelf.Where(x => x.id_wardrobe == wardrobe.id_wardrobe).Count(),
+                       mostCategory = getMostVategoryInWardrobeByWardrobeId(wardrobe.id_wardrobe)
                    };
         }
 
         public IEnumerable<ResultDataGridRoom> getGridViewRoom()
         {
-            return from room in connection.Room
+            return from room in connection.Room                
                    select new ResultDataGridRoom
                    {
                        id = room.id_room,
                        name = room.name,
+                       wardrobesCount = connection.Wardrobe.Where(x => x.id_room == room.id_room).Count()
                    };
         }
 
@@ -92,17 +94,53 @@ namespace Szafiarka.Classes.MapDB
                    };
         }
 
-        public IEnumerable<ResulWardrobesOccupancy> getWardrobesOccupancy()
+        public IEnumerable<ResulWardrobesOccupancy> getWardrobesCapacity()
         {
             return from shelfs in connection.Shelf
-                   join items in connection.Item on shelfs.id_shelf equals items.id_shelf
-                   group new { shelfs, items } by new { shelfs.id_wardrobe, items.id_shelf } into shelfsGB
-                   select new ResulWardrobesOccupancy
-                   {
-                       wardrobe = shelfsGB.FirstOrDefault().shelfs.Wardrobe,
-                       capacity = shelfsGB.Sum(x => x.shelfs.capacity) - shelfsGB.Sum(x => x.items.size),
-                       capacity_wardrobe = shelfsGB.Sum(x => x.shelfs.capacity)
-                   };
+                    group shelfs by shelfs.id_wardrobe into shelfsGB
+                    select new ResulWardrobesOccupancy
+                    {
+                        wardrobe = shelfsGB.FirstOrDefault().Wardrobe,
+                        capacity_wardrobe = shelfsGB.Sum(x => x.capacity),
+                        capacity = getWardrobeOccupancyByWardrobeId(shelfsGB.FirstOrDefault().id_wardrobe)
+                    };
+        }
+
+        public double getWardrobeOccupancyByWardrobeId(int id)
+        {
+            return (from items in connection.Item
+                    where items.Shelf.id_wardrobe == id
+                    select items.size).Sum(x => x);
+        }
+
+        public string getMostVategoryInWardrobeByWardrobeId(int id)
+        {
+            var query = (from items in connection.Item
+                         where items.Shelf.id_wardrobe == id
+                         group items by items.Category into i
+                         let g = i.Select(i2 => new { name = i2.Category.name, count = i.Count() }).OrderByDescending(c => c.count)
+                         select g.FirstOrDefault());
+            if (query.FirstOrDefault() != null)
+            {
+                return query.FirstOrDefault().name;
+            }
+            else
+                return "brak kategorii";
+
+        }
+
+        public string getCategoryDescriptionById(int id)
+        {
+            return (from category in connection.Category
+                    where category.id_category == id
+                    select category.description).FirstOrDefault();
+        }
+
+        public string getItemDescriptionById( int id)
+        {
+            return (from item in connection.Item
+                    where item.id_item == id
+                    select item.description).FirstOrDefault();
         }
 
         public Item getItemById(int id)

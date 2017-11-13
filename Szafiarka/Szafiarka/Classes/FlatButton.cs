@@ -20,7 +20,7 @@ namespace Szafiarka.Classes
             BackColor = Color.FromArgb(1, 168, 204);
         }
 
-        protected static string GetEnumDescription(Enum value)
+        public static string GetEnumDescription(Enum value)
         {
             FieldInfo fi = value.GetType().GetField(value.ToString());
 
