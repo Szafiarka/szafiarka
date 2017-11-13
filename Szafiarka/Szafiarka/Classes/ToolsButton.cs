@@ -6,7 +6,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Szafiarka.Forms.ToolsForm;
+using Szafiarka.Forms.OptionsForm;
+using Szafiarka.Forms.HelpForm;
 
 namespace Szafiarka.Classes
 {
@@ -61,13 +62,13 @@ namespace Szafiarka.Classes
 
             if (e.ClickedItem.Text == GetEnumDescription(ToolName.HELP))
             {
-                var helpForm = new ToolsForm();
+                var helpForm = new HelpForm();
                 helpForm.Show();
                 helpForm.Text = GetEnumDescription(ToolName.HELP);
             }
             if (e.ClickedItem.Text == GetEnumDescription(ToolName.OPTIONS))
             {
-                var optionForm = new ToolsForm();
+                var optionForm = new OptionsForm();
                 optionForm.Show();
                 optionForm.Text = GetEnumDescription(ToolName.OPTIONS);
             }
