@@ -102,9 +102,6 @@
     <Compile Include="Classes\MenuButton\Start.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Classes\Panels\PanelsAdd\PanelAddStatus.cs">
-      <SubType>Component</SubType>
-    </Compile>
     <Compile Include="Classes\TabControls\OptionsTabControl\OptionsTabControl.cs">
       <SubType>Component</SubType>
     </Compile>
