@@ -162,7 +162,7 @@ namespace Szafiarka.Forms.ItemForm
 
         #endregion
 
-        private void InitializeComponent(int itemId)
+        private void InitializeComponent(Classes.MapDB.Item item)
         {
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
