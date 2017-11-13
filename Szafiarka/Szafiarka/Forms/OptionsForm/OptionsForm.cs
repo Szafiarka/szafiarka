@@ -8,11 +8,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Szafiarka.Forms.ToolsForm
+namespace Szafiarka.Forms.OptionsForm
 {
-    public partial class ToolsForm : Form
+    public partial class OptionsForm : Form
     {
-        public ToolsForm()
+        public OptionsForm()
         {
             InitializeComponent();
         }
