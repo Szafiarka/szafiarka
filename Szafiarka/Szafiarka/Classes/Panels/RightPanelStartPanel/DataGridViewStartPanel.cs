@@ -20,6 +20,8 @@ namespace Szafiarka.Classes
             ReadOnly = true;
             RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+            BackgroundColor = System.Drawing.Color.FromArgb(0, 0, 64);
+            BorderStyle = BorderStyle.None;
         }
     }
 }

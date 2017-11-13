@@ -17,6 +17,9 @@ namespace Szafiarka.Forms.ItemForm
         private static double maxX = 400;
         private static double maxY = 600;
         private Queries queries;
+        private Bitmap oryginalImage;
+        private Item item;
+
         public ItemForm()
         {
             InitializeComponent();
@@ -26,18 +29,22 @@ namespace Szafiarka.Forms.ItemForm
         public ItemForm(int itemID)
         {
             queries = new Queries();
-            InitializeComponent(itemID);
+            item = queries.getItemById(itemID);
+            InitializeComponent(item);
         }
 
         private void flatButton2_Click(object sender, EventArgs e)
         {
             OpenFileDialog dialog = new OpenFileDialog();
+            dialog.Filter = "Image files| *.jpg; *.jpeg; *.png";
             if (dialog.ShowDialog() == DialogResult.OK)
             {
                 pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
                 var image = new Bitmap(dialog.FileName);
                 image = chnageImageSize(image);
                 pictureBox1.Image = image;
+                oryginalImage = image;
+                pictureBox1.DoubleClick += new EventHandler(image_DoubleClick);
             }
         }
 
@@ -62,6 +69,25 @@ namespace Szafiarka.Forms.ItemForm
             var size = new Size((int)newX, (int)newY);
 
             return new Bitmap(image as Image, size);
+        }
+
+        private void image_DoubleClick(object sender, EventArgs e)
+        {
+            var image = sender as PictureBox;
+            if(image.Image != null)
+            {
+                var form = new Form();
+                form.ClientSize = oryginalImage.Size;
+                form.BackgroundImage = oryginalImage;
+                form.FormBorderStyle = FormBorderStyle.FixedToolWindow;
+                try
+                {
+                    form.Text = string.Format("{0} zdjęcie", item.name);
+                }
+                catch { }
+                
+                form.ShowDialog();
+            }
         }
     }
 }

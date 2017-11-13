@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -26,6 +27,19 @@ namespace Szafiarka.Classes
         private enum buttonsNames
         {
             rooms, wardrobes, items, status, categories
+        }
+
+        private enum DGVMainDataNames
+        {
+            categories, items, nameCleared
+        }
+
+        private enum rightLabelsNames
+        {
+            [Description("Ostatnio zmodyfikowane")]
+            lastItems,
+            [Description("Najbardziej zajęte")]
+            mostOccupancy,
         }
 
         private static string[,] OBJECTSBUTTONS =
@@ -54,20 +68,32 @@ namespace Szafiarka.Classes
         private void InitializeComponent()
         {
             SuspendLayout();
-            InitializeMainData();
-            InitializeObjectsButtons();
-            InitializeLastItems();
+            InitializeMainPanel();
+            InitializeRightPanel();
             ResumeLayout(false);
+        }
+
+        private void InitializeRightPanel()
+        {
+            InitializeRightPanelLabels();
+            IntializeProgressBars();
+        }
+
+        private void InitializeMainPanel()
+        {
+            InitalizeDataGrids();
+            InitializeObjectsButtons();
         }
 
         private void InitializeObjectsButtons()
         {
-            var buttonLenght = 100;
-            for (int i = 0; i < OBJECTSBUTTONS.Length / 2; i++)
+            var buttonCount = OBJECTSBUTTONS.Length / 2;
+            var buttonLenght = (DGVMainWidth / buttonCount);
+            for (int i = 0; i < buttonCount; i++)
             {
                 var button = new FlatButton()
                 {
-                    Location = new Point((buttonLenght + 10) * i, 0),
+                    Location = new Point((buttonLenght) * i, 0),
                     Name = OBJECTSBUTTONS[i,0],
                     Size = new Size(buttonLenght, 30),
                     Text = OBJECTSBUTTONS[i, 1],
@@ -78,36 +104,45 @@ namespace Szafiarka.Classes
             }
         }
 
-        private void InitializeMainData()
+        private void InitializeRightPanelLabels()
         {
-            DGVMainData = new DataGridViewStartPanel();
-            DGVMainData.Location = new Point(0, LocationHeightStart);
-            DGVMainData.Size = new Size(DGVMainWidth, DGVHeight);
-            DGVMainData.Name = "aaa";
-            DGVMainData.BackgroundColor = BackColor;
+            var label = new LabelRightPanelStartPanel
+            {
+                Location = new Point(Width - 300, 0),
+                Text = GetEnumDescription(rightLabelsNames.lastItems)
+            };
 
-            
-            DGVMainData.CellDoubleClick += DTVLastItems_CellDoubleClick;
+            var label2 = new LabelRightPanelStartPanel
+            {
+                Location = new Point(Width - 300, 360),
+                Text = GetEnumDescription(rightLabelsNames.mostOccupancy)
+            };
 
-            DGVMainData.Visible = false;
-            
-            Controls.Add(DGVMainData);
+            Controls.Add(label);
+            Controls.Add(label2);
         }
 
-        private void InitializeLastItems()
+        private void InitalizeDataGrids()
         {
             var sizeWidth = 300;
             DGVLastItems = new DataGridViewStartPanel();
             DGVLastItems.Location = new Point(Width - sizeWidth, LocationHeightStart);
-            DGVLastItems.BackgroundColor = BackColor;
             DGVLastItems.Name = "DTVLastItems";
-            DGVLastItems.Size = new Size(sizeWidth, DGVHeight);
-
+            DGVLastItems.Size = new Size(sizeWidth, DGVHeight-(DGVHeight/2));
             AddColumnsToDGV(DGVLastItems, LASTITEMSCOLUMNS);
             DTVLastItemsFillColumns(DGVLastItems);
             DGVLastItems.Columns[0].Visible = false;
 
             Controls.Add(DGVLastItems);
+
+            DGVMainData = new DataGridViewStartPanel();
+            DGVMainData.Location = new Point(0, LocationHeightStart);
+            DGVMainData.Size = new Size(DGVMainWidth, DGVHeight);
+            DGVMainData.CellDoubleClick += DTVLastItems_CellDoubleClick;
+            DGVMainData.Visible = false;
+            DGVMainData.CellFormatting += new DataGridViewCellFormattingEventHandler(getDescription_CellFormatting);
+
+            Controls.Add(DGVMainData);
         }
 
         private void DTVLastItemsFillColumns(DataGridView gridView)
@@ -181,6 +216,7 @@ namespace Szafiarka.Classes
         private void DGVItemsView(object sender, EventArgs e)
         {
             GridViewClearRowsAndColumns(DGVMainData);
+            DGVMainData.Name = DGVMainDataNames.items.ToString();
             string[,] columns = {
                 { "id", "ID" },
                 { "name", "Nazwa" },
@@ -209,14 +245,15 @@ namespace Szafiarka.Classes
             GridViewClearRowsAndColumns(DGVMainData);
             string[,] columns = {
                 { "id", "ID" },
-                { "name", "Nazwa" }
+                { "name", "Nazwa" },
+                { "wardrobesCount", "Ilość szaf" },
             };
             AddColumnsToDGV(DGVMainData, columns);
 
             var query = queries.getGridViewRoom();
             foreach (var item in query)
             {
-                DGVMainData.Rows.Add(item.id, item.name);
+                DGVMainData.Rows.Add(item.id, item.name, item.wardrobesCount);
             }
 
             DGVMainData.Columns[0].Visible = false;
@@ -244,6 +281,7 @@ namespace Szafiarka.Classes
         private void DGVCategoriesView(object sender, EventArgs e)
         {
             GridViewClearRowsAndColumns(DGVMainData);
+            DGVMainData.Name = DGVMainDataNames.categories.ToString();
             string[,] columns = {
                 { "id", "ID" },
                 { "name", "Nazwa" },
@@ -257,7 +295,6 @@ namespace Szafiarka.Classes
             {
                 DGVMainData.Rows.Add(item.id, item.name, item.itemsCount);
             }
-
             DGVMainData.Columns[0].Visible = false;
         }
 
@@ -268,7 +305,8 @@ namespace Szafiarka.Classes
                 { "id", "ID" },
                 { "name", "Nazwa" },
                 { "room", "Pokój" },
-                { "shelfCount", "Ilość półek" }
+                { "shelfCount", "Ilość półek" },
+                { "mostCategory", "Najpopularniejsza kategoria" }
             };
             AddColumnsToDGV(DGVMainData, columns);
 
@@ -276,7 +314,7 @@ namespace Szafiarka.Classes
 
             foreach (var item in query)
             {
-                DGVMainData.Rows.Add(item.id, item.name, item.room, item.shelfCount);
+                DGVMainData.Rows.Add(item.id, item.name, item.room, item.shelfCount, item.mostCategory);
             }
 
             DGVMainData.Columns[0].Visible = false;
@@ -284,6 +322,7 @@ namespace Szafiarka.Classes
 
         private void GridViewClearRowsAndColumns(DataGridView gridView)
         {
+            gridView.Name = DGVMainDataNames.nameCleared.ToString();
             gridView.Rows.Clear();
             gridView.Columns.Clear();
         }
@@ -293,6 +332,66 @@ namespace Szafiarka.Classes
             for (int i = 0; i < columns.Length / 2; i++)
             {
                 gridView.Columns.Add(columns[i, 0], columns[i, 1]);
+            }
+        }
+
+        private void IntializeProgressBars()
+        {
+            var query = queries.getWardrobesCapacity();
+            var space = 0;
+            foreach (var item in query.OrderByDescending(x => (x.capacity / x.capacity_wardrobe) * 100).Take(4))
+            {
+                addProgressBar(item, space);
+                space++;
+            }
+        }
+
+        private void addProgressBar(MapDB.ResulWardrobesOccupancy item, int space)
+        {
+            var label = new Label();;
+            var progressBar = new ColoredProgressBar(new SolidBrush(Color.FromArgb(127, 195, 28)));
+
+            label.Location = new Point(Width - 300, 400 + space * 60);
+            label.Text = String.Format("{0} {1}",item.wardrobe.Room.name, item.wardrobe.name);
+            label.ForeColor = Color.White;
+
+            progressBar.Location = new Point(Width - 300, 425 + space * 60);
+            progressBar.Size = new Size(300, 20);
+            if (item.capacity > 0 )
+                progressBar.Value = (int)((item.capacity / item.capacity_wardrobe) * 100);
+            
+            else
+                progressBar.Value = 0;
+
+            Controls.Add(label);
+            Controls.Add(progressBar);
+        }
+
+        private string GetEnumDescription(Enum value)
+        {
+            FieldInfo fi = value.GetType().GetField(value.ToString());
+
+            DescriptionAttribute[] attributes =
+                (DescriptionAttribute[])fi.GetCustomAttributes(typeof(DescriptionAttribute), false);
+
+            if (attributes != null && attributes.Length > 0)
+                return attributes[0].Description;
+            else
+                return value.ToString();
+        }
+
+        private void getDescription_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            var grid = (DataGridView)sender;
+            var row = grid.Rows[e.RowIndex];
+            var cell = row.Cells[e.ColumnIndex];
+            if (grid.Name == DGVMainDataNames.categories.ToString())
+            {
+                cell.ToolTipText = queries.getCategoryDescriptionById(Int32.Parse(row.Cells[0].Value.ToString()));
+            }
+            else if (grid.Name == DGVMainDataNames.items.ToString())
+            {
+                cell.ToolTipText = queries.getItemDescriptionById(Int32.Parse(row.Cells[0].Value.ToString()));
             }
         }
     }

@@ -13,18 +13,33 @@ namespace Szafiarka.Classes
         private static string PATHTOADD = "..\\..\\images\\menuButtons\\add.png";
         private static string PATHTOEDIT = "..\\..\\images\\menuButtons\\edit.png";
         private static string PATHTODELETE = "..\\..\\images\\menuButtons\\delete.png";
+        private static string PATHTOBIN = "..\\..\\images\\menuButtons\\bin.png";
         private static string PATHTOEXIT = "..\\..\\images\\menuButtons\\exit.png";
         private enum buttonsNames
         {
-            home, search, add, edit, delete, exit
+            [Description("Start")]
+            home,
+            [Description("Wyszukaj")]
+            search,
+            [Description("Dodaj")]
+            add,
+            [Description("Edytuj")]
+            edit,
+            [Description("Usuń")]
+            delete,
+            [Description("Kosz")]
+            bin,
+            [Description("Wyjście")]
+            exit
         }
         private static string[,] MENUBUTTONSNAMES = {
-            { buttonsNames.home.ToString(), "Start", PATHTOSTART },
-            { buttonsNames.search.ToString(), "Wyszukaj", PATHTOSEARCH},
-            { buttonsNames.add.ToString(), "Dodaj", PATHTOADD},
-            { buttonsNames.edit.ToString(), "Edytuj",  PATHTOEDIT},
-            { buttonsNames.delete.ToString(), "Usuń", PATHTODELETE},
-            { buttonsNames.exit.ToString(), "Wyjście", PATHTOEXIT}
+            { buttonsNames.home.ToString(), GetEnumDescription(buttonsNames.home), PATHTOSTART },
+            { buttonsNames.search.ToString(), GetEnumDescription(buttonsNames.search), PATHTOSEARCH},
+            { buttonsNames.add.ToString(), GetEnumDescription(buttonsNames.add), PATHTOADD},
+            { buttonsNames.edit.ToString(), GetEnumDescription(buttonsNames.edit),  PATHTOEDIT},
+            { buttonsNames.delete.ToString(), GetEnumDescription(buttonsNames.delete), PATHTODELETE},
+            { buttonsNames.bin.ToString(), GetEnumDescription(buttonsNames.bin), PATHTOBIN},
+            { buttonsNames.exit.ToString(), GetEnumDescription(buttonsNames.exit), PATHTOEXIT}
         };
         private enum Messages {
             [Description("Nie wybrałeś elementu do usunięcia")]
