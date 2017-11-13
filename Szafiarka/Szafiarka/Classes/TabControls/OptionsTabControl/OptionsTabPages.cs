@@ -35,7 +35,7 @@ namespace Szafiarka.Classes
 
         public OptionsTabPages()
         {
-            //kolory
+            //ustawienia kolorów itd.
         }
     }
 }
