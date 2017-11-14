@@ -54,7 +54,8 @@ namespace Szafiarka.Classes
         private static string[,] LASTITEMSCOLUMNS = {
             { "id", "ID" },
             { "name", "Nazwa" },
-            { "category", "Kategoria" }
+            { "category", "Kategoria" },
+            { "date", "Data" }
         };
 
         public PanelStart()
@@ -149,9 +150,9 @@ namespace Szafiarka.Classes
         {
             var query = queries.getGridViewLastItems();
 
-            foreach (var item in query.OrderByDescending(X => X.creation_date))
+            foreach (var item in query.OrderByDescending(X => X.modify_date))
             {
-                gridView.Rows.Add(item.id, item.name, item.category);
+                gridView.Rows.Add(item.id, item.name, item.category, item.modify_date);
             }
         }
 

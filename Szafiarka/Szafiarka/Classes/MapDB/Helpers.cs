@@ -64,6 +64,7 @@ namespace Szafiarka.Classes.MapDB
     {
         public virtual string category { get; set; }
         public virtual DateTime creation_date { get; set; }
+        public virtual DateTime? modify_date { get; set; }
     }
 
     public class ResulWardrobesOccupancy
