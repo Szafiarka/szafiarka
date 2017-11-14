@@ -21,7 +21,7 @@ namespace Szafiarka.Classes.MapDB
                    {
                        id = category.id_category,
                        name = category.name,
-                       itemsCount = connection.Item.Where(x => x.id_category == category.id_category).Count()
+                       itemsCount = connection.Item.Where(x => x.id_category == category.id_category && x.deleted != false).Count()
                    };
         }
 
@@ -57,13 +57,14 @@ namespace Szafiarka.Classes.MapDB
                    {
                        id = status.id_status,
                        name = status.name,
-                       itemsCount = connection.Item.Where(x => x.id_status == status.id_status).Count()
+                       itemsCount = connection.Item.Where(x => x.id_status == status.id_status && x.deleted == false).Count()
                    };
         }
 
         public IEnumerable<ResultDataGridItem> getGridViewItem()
         {
             return from item in connection.Item
+                   where item.deleted == false
                    join category in connection.Category on item.id_category equals category.id_category
                    join status in connection.Status on item.id_status equals status.id_status
                    join shelf in connection.Shelf on item.id_shelf equals shelf.id_shelf
@@ -84,13 +85,15 @@ namespace Szafiarka.Classes.MapDB
         public IEnumerable<ResultDataGridLastItems> getGridViewLastItems()
         {
             return from i in connection.Item
+                   where i.deleted == false
                    join c in connection.Category on i.id_category equals c.id_category
                    select new ResultDataGridLastItems
                    {
                        id = i.id_item,
                        name = i.name,
                        category = c.name,
-                       creation_date = i.creation_date
+                       creation_date = i.creation_date,
+                       modify_date = (i.modify_date != null) ? i.modify_date : i.creation_date
                    };
         }
 
@@ -109,7 +112,7 @@ namespace Szafiarka.Classes.MapDB
         public double getWardrobeOccupancyByWardrobeId(int id)
         {
             return (from items in connection.Item
-                    where items.Shelf.id_wardrobe == id
+                    where items.Shelf.id_wardrobe == id && items.deleted == false
                     select items.size).Sum(x => x);
         }
 
@@ -157,6 +160,5 @@ namespace Szafiarka.Classes.MapDB
                 return null;
             }
         }
-
     }
 }

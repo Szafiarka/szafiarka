@@ -801,7 +801,7 @@ namespace Szafiarka.Classes.MapDB
 		
 		private System.DateTime _creation_date;
 		
-		private System.DateTime _modify_date;
+		private System.Nullable<System.DateTime> _modify_date;
 		
 		private bool _deleted;
 		
@@ -835,7 +835,7 @@ namespace Szafiarka.Classes.MapDB
     partial void OnimageChanged();
     partial void Oncreation_dateChanging(System.DateTime value);
     partial void Oncreation_dateChanged();
-    partial void Onmodify_dateChanging(System.DateTime value);
+    partial void Onmodify_dateChanging(System.Nullable<System.DateTime> value);
     partial void Onmodify_dateChanged();
     partial void OndeletedChanging(bool value);
     partial void OndeletedChanged();
@@ -1042,8 +1042,8 @@ namespace Szafiarka.Classes.MapDB
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_modify_date", DbType="DateTime NOT NULL")]
-		public System.DateTime modify_date
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_modify_date", DbType="DateTime", UpdateCheck=UpdateCheck.Never)]
+		public System.Nullable<System.DateTime> modify_date
 		{
 			get
 			{
