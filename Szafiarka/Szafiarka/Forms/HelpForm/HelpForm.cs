@@ -1,22 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Szafiarka.Forms.ItemForm;
 
-namespace Szafiarka.Classes
+namespace Szafiarka.Forms.HelpForm
 {
-    partial class MenuButton
+    public partial class HelpForm : Form
     {
-        private void add_Click(object sender, EventArgs e)
+        public HelpForm()
         {
-            var form = new ItemForm();
-            form.ShowDialog();
+            InitializeComponent();
         }
     }
 }
-

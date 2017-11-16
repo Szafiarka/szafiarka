@@ -30,12 +30,18 @@ namespace Szafiarka.Classes.MapDB
 		
     #region Extensibility Method Definitions
     partial void OnCreated();
-    partial void InsertCategory(Category instance);
-    partial void UpdateCategory(Category instance);
-    partial void DeleteCategory(Category instance);
+    partial void InsertApp_settings(App_settings instance);
+    partial void UpdateApp_settings(App_settings instance);
+    partial void DeleteApp_settings(App_settings instance);
     partial void InsertWardrobe(Wardrobe instance);
     partial void UpdateWardrobe(Wardrobe instance);
     partial void DeleteWardrobe(Wardrobe instance);
+    partial void InsertCategory(Category instance);
+    partial void UpdateCategory(Category instance);
+    partial void DeleteCategory(Category instance);
+    partial void InsertHistory(History instance);
+    partial void UpdateHistory(History instance);
+    partial void DeleteHistory(History instance);
     partial void InsertItem(Item instance);
     partial void UpdateItem(Item instance);
     partial void DeleteItem(Item instance);
@@ -80,11 +86,11 @@ namespace Szafiarka.Classes.MapDB
 			OnCreated();
 		}
 		
-		public System.Data.Linq.Table<Category> Category
+		public System.Data.Linq.Table<App_settings> App_settings
 		{
 			get
 			{
-				return this.GetTable<Category>();
+				return this.GetTable<App_settings>();
 			}
 		}
 		
@@ -93,6 +99,22 @@ namespace Szafiarka.Classes.MapDB
 			get
 			{
 				return this.GetTable<Wardrobe>();
+			}
+		}
+		
+		public System.Data.Linq.Table<Category> Category
+		{
+			get
+			{
+				return this.GetTable<Category>();
+			}
+		}
+		
+		public System.Data.Linq.Table<History> History
+		{
+			get
+			{
+				return this.GetTable<History>();
 			}
 		}
 		
@@ -129,108 +151,92 @@ namespace Szafiarka.Classes.MapDB
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Category")]
-	public partial class Category : INotifyPropertyChanging, INotifyPropertyChanged
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.App_settings")]
+	public partial class App_settings : INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
 		
-		private int _id_category;
+		private int _id_app_settings;
 		
-		private string _name;
+		private System.DateTime _last_backup;
 		
-		private string _description;
-		
-		private EntitySet<Item> _Item;
+		private int _theme;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
     partial void OnCreated();
-    partial void Onid_categoryChanging(int value);
-    partial void Onid_categoryChanged();
-    partial void OnnameChanging(string value);
-    partial void OnnameChanged();
-    partial void OndescriptionChanging(string value);
-    partial void OndescriptionChanged();
+    partial void Onid_app_settingsChanging(int value);
+    partial void Onid_app_settingsChanged();
+    partial void Onlast_backupChanging(System.DateTime value);
+    partial void Onlast_backupChanged();
+    partial void OnthemeChanging(int value);
+    partial void OnthemeChanged();
     #endregion
 		
-		public Category()
+		public App_settings()
 		{
-			this._Item = new EntitySet<Item>(new Action<Item>(this.attach_Item), new Action<Item>(this.detach_Item));
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id_category", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int id_category
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id_app_settings", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int id_app_settings
 		{
 			get
 			{
-				return this._id_category;
+				return this._id_app_settings;
 			}
 			set
 			{
-				if ((this._id_category != value))
+				if ((this._id_app_settings != value))
 				{
-					this.Onid_categoryChanging(value);
+					this.Onid_app_settingsChanging(value);
 					this.SendPropertyChanging();
-					this._id_category = value;
-					this.SendPropertyChanged("id_category");
-					this.Onid_categoryChanged();
+					this._id_app_settings = value;
+					this.SendPropertyChanged("id_app_settings");
+					this.Onid_app_settingsChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_name", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
-		public string name
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_last_backup", DbType="DateTime NOT NULL")]
+		public System.DateTime last_backup
 		{
 			get
 			{
-				return this._name;
+				return this._last_backup;
 			}
 			set
 			{
-				if ((this._name != value))
+				if ((this._last_backup != value))
 				{
-					this.OnnameChanging(value);
+					this.Onlast_backupChanging(value);
 					this.SendPropertyChanging();
-					this._name = value;
-					this.SendPropertyChanged("name");
-					this.OnnameChanged();
+					this._last_backup = value;
+					this.SendPropertyChanged("last_backup");
+					this.Onlast_backupChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_description", DbType="Text", UpdateCheck=UpdateCheck.Never)]
-		public string description
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_theme", DbType="Int NOT NULL")]
+		public int theme
 		{
 			get
 			{
-				return this._description;
+				return this._theme;
 			}
 			set
 			{
-				if ((this._description != value))
+				if ((this._theme != value))
 				{
-					this.OndescriptionChanging(value);
+					this.OnthemeChanging(value);
 					this.SendPropertyChanging();
-					this._description = value;
-					this.SendPropertyChanged("description");
-					this.OndescriptionChanged();
+					this._theme = value;
+					this.SendPropertyChanged("theme");
+					this.OnthemeChanged();
 				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Category_Item", Storage="_Item", ThisKey="id_category", OtherKey="id_category")]
-		public EntitySet<Item> Item
-		{
-			get
-			{
-				return this._Item;
-			}
-			set
-			{
-				this._Item.Assign(value);
 			}
 		}
 		
@@ -252,18 +258,6 @@ namespace Szafiarka.Classes.MapDB
 			{
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
-		}
-		
-		private void attach_Item(Item entity)
-		{
-			this.SendPropertyChanging();
-			entity.Category = this;
-		}
-		
-		private void detach_Item(Item entity)
-		{
-			this.SendPropertyChanging();
-			entity.Category = null;
 		}
 	}
 	
@@ -446,6 +440,343 @@ namespace Szafiarka.Classes.MapDB
 		}
 	}
 	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Category")]
+	public partial class Category : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _id_category;
+		
+		private string _name;
+		
+		private string _description;
+		
+		private EntitySet<Item> _Item;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void Onid_categoryChanging(int value);
+    partial void Onid_categoryChanged();
+    partial void OnnameChanging(string value);
+    partial void OnnameChanged();
+    partial void OndescriptionChanging(string value);
+    partial void OndescriptionChanged();
+    #endregion
+		
+		public Category()
+		{
+			this._Item = new EntitySet<Item>(new Action<Item>(this.attach_Item), new Action<Item>(this.detach_Item));
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id_category", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int id_category
+		{
+			get
+			{
+				return this._id_category;
+			}
+			set
+			{
+				if ((this._id_category != value))
+				{
+					this.Onid_categoryChanging(value);
+					this.SendPropertyChanging();
+					this._id_category = value;
+					this.SendPropertyChanged("id_category");
+					this.Onid_categoryChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_name", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		public string name
+		{
+			get
+			{
+				return this._name;
+			}
+			set
+			{
+				if ((this._name != value))
+				{
+					this.OnnameChanging(value);
+					this.SendPropertyChanging();
+					this._name = value;
+					this.SendPropertyChanged("name");
+					this.OnnameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_description", DbType="Text", UpdateCheck=UpdateCheck.Never)]
+		public string description
+		{
+			get
+			{
+				return this._description;
+			}
+			set
+			{
+				if ((this._description != value))
+				{
+					this.OndescriptionChanging(value);
+					this.SendPropertyChanging();
+					this._description = value;
+					this.SendPropertyChanged("description");
+					this.OndescriptionChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Category_Item", Storage="_Item", ThisKey="id_category", OtherKey="id_category")]
+		public EntitySet<Item> Item
+		{
+			get
+			{
+				return this._Item;
+			}
+			set
+			{
+				this._Item.Assign(value);
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+		
+		private void attach_Item(Item entity)
+		{
+			this.SendPropertyChanging();
+			entity.Category = this;
+		}
+		
+		private void detach_Item(Item entity)
+		{
+			this.SendPropertyChanging();
+			entity.Category = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.History")]
+	public partial class History : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _id_history;
+		
+		private int _id_item;
+		
+		private string _action;
+		
+		private System.DateTime _date;
+		
+		private string _status_name;
+		
+		private EntityRef<Item> _Item;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void Onid_historyChanging(int value);
+    partial void Onid_historyChanged();
+    partial void Onid_itemChanging(int value);
+    partial void Onid_itemChanged();
+    partial void OnactionChanging(string value);
+    partial void OnactionChanged();
+    partial void OndateChanging(System.DateTime value);
+    partial void OndateChanged();
+    partial void Onstatus_nameChanging(string value);
+    partial void Onstatus_nameChanged();
+    #endregion
+		
+		public History()
+		{
+			this._Item = default(EntityRef<Item>);
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id_history", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int id_history
+		{
+			get
+			{
+				return this._id_history;
+			}
+			set
+			{
+				if ((this._id_history != value))
+				{
+					this.Onid_historyChanging(value);
+					this.SendPropertyChanging();
+					this._id_history = value;
+					this.SendPropertyChanged("id_history");
+					this.Onid_historyChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id_item", DbType="Int NOT NULL")]
+		public int id_item
+		{
+			get
+			{
+				return this._id_item;
+			}
+			set
+			{
+				if ((this._id_item != value))
+				{
+					if (this._Item.HasLoadedOrAssignedValue)
+					{
+						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+					}
+					this.Onid_itemChanging(value);
+					this.SendPropertyChanging();
+					this._id_item = value;
+					this.SendPropertyChanged("id_item");
+					this.Onid_itemChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_action", DbType="VarChar(50)")]
+		public string action
+		{
+			get
+			{
+				return this._action;
+			}
+			set
+			{
+				if ((this._action != value))
+				{
+					this.OnactionChanging(value);
+					this.SendPropertyChanging();
+					this._action = value;
+					this.SendPropertyChanged("action");
+					this.OnactionChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_date", DbType="DateTime NOT NULL")]
+		public System.DateTime date
+		{
+			get
+			{
+				return this._date;
+			}
+			set
+			{
+				if ((this._date != value))
+				{
+					this.OndateChanging(value);
+					this.SendPropertyChanging();
+					this._date = value;
+					this.SendPropertyChanged("date");
+					this.OndateChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_status_name", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		public string status_name
+		{
+			get
+			{
+				return this._status_name;
+			}
+			set
+			{
+				if ((this._status_name != value))
+				{
+					this.Onstatus_nameChanging(value);
+					this.SendPropertyChanging();
+					this._status_name = value;
+					this.SendPropertyChanged("status_name");
+					this.Onstatus_nameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Item_History", Storage="_Item", ThisKey="id_item", OtherKey="id_item", IsForeignKey=true)]
+		public Item Item
+		{
+			get
+			{
+				return this._Item.Entity;
+			}
+			set
+			{
+				Item previousValue = this._Item.Entity;
+				if (((previousValue != value) 
+							|| (this._Item.HasLoadedOrAssignedValue == false)))
+				{
+					this.SendPropertyChanging();
+					if ((previousValue != null))
+					{
+						this._Item.Entity = null;
+						previousValue.History.Remove(this);
+					}
+					this._Item.Entity = value;
+					if ((value != null))
+					{
+						value.History.Add(this);
+						this._id_item = value.id_item;
+					}
+					else
+					{
+						this._id_item = default(int);
+					}
+					this.SendPropertyChanged("Item");
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Item")]
 	public partial class Item : INotifyPropertyChanging, INotifyPropertyChanged
 	{
@@ -469,6 +800,12 @@ namespace Szafiarka.Classes.MapDB
 		private System.Data.Linq.Binary _image;
 		
 		private System.DateTime _creation_date;
+		
+		private System.Nullable<System.DateTime> _modify_date;
+		
+		private bool _deleted;
+		
+		private EntitySet<History> _History;
 		
 		private EntityRef<Category> _Category;
 		
@@ -498,10 +835,15 @@ namespace Szafiarka.Classes.MapDB
     partial void OnimageChanged();
     partial void Oncreation_dateChanging(System.DateTime value);
     partial void Oncreation_dateChanged();
+    partial void Onmodify_dateChanging(System.Nullable<System.DateTime> value);
+    partial void Onmodify_dateChanged();
+    partial void OndeletedChanging(bool value);
+    partial void OndeletedChanged();
     #endregion
 		
 		public Item()
 		{
+			this._History = new EntitySet<History>(new Action<History>(this.attach_History), new Action<History>(this.detach_History));
 			this._Category = default(EntityRef<Category>);
 			this._Shelf = default(EntityRef<Shelf>);
 			this._Status = default(EntityRef<Status>);
@@ -680,7 +1022,7 @@ namespace Szafiarka.Classes.MapDB
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_creation_date", DbType="Date NOT NULL")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_creation_date", DbType="DateTime NOT NULL")]
 		public System.DateTime creation_date
 		{
 			get
@@ -697,6 +1039,59 @@ namespace Szafiarka.Classes.MapDB
 					this.SendPropertyChanged("creation_date");
 					this.Oncreation_dateChanged();
 				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_modify_date", DbType="DateTime", UpdateCheck=UpdateCheck.Never)]
+		public System.Nullable<System.DateTime> modify_date
+		{
+			get
+			{
+				return this._modify_date;
+			}
+			set
+			{
+				if ((this._modify_date != value))
+				{
+					this.Onmodify_dateChanging(value);
+					this.SendPropertyChanging();
+					this._modify_date = value;
+					this.SendPropertyChanged("modify_date");
+					this.Onmodify_dateChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_deleted", DbType="Bit NOT NULL")]
+		public bool deleted
+		{
+			get
+			{
+				return this._deleted;
+			}
+			set
+			{
+				if ((this._deleted != value))
+				{
+					this.OndeletedChanging(value);
+					this.SendPropertyChanging();
+					this._deleted = value;
+					this.SendPropertyChanged("deleted");
+					this.OndeletedChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="Item_History", Storage="_History", ThisKey="id_item", OtherKey="id_item")]
+		public EntitySet<History> History
+		{
+			get
+			{
+				return this._History;
+			}
+			set
+			{
+				this._History.Assign(value);
 			}
 		}
 		
@@ -820,6 +1215,18 @@ namespace Szafiarka.Classes.MapDB
 			{
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
+		}
+		
+		private void attach_History(History entity)
+		{
+			this.SendPropertyChanging();
+			entity.Item = this;
+		}
+		
+		private void detach_History(History entity)
+		{
+			this.SendPropertyChanging();
+			entity.Item = null;
 		}
 	}
 	

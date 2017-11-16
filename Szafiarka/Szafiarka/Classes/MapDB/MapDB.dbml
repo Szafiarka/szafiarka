@@ -1,11 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><Database Name="database" Class="MapDBDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
-  <Connection Mode="AppSettings" ConnectionString="Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=&quot;D:\OneDrive\Studia\Inżynieria oprogramowania\Projekt\Szafiarka\database.mdf&quot;;Integrated Security=True;Connect Timeout=30" SettingsObjectName="Szafiarka.Properties.Settings" SettingsPropertyName="databaseConnectionString1" Provider="System.Data.SqlClient" />
-  <Table Name="dbo.Category" Member="Category">
-    <Type Name="Category">
-      <Column Name="id_category" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="name" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
-      <Column Name="description" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
-      <Association Name="Category_Item" Member="Item" ThisKey="id_category" OtherKey="id_category" Type="Item" />
+  <Connection Mode="AppSettings" ConnectionString="Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\database.mdf;Integrated Security=True;Connect Timeout=30" SettingsObjectName="Szafiarka.Properties.Settings" SettingsPropertyName="databaseConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.App_settings" Member="App_settings">
+    <Type Name="App_settings">
+      <Column Name="id_app_settings" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="last_backup" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="theme" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
     </Type>
   </Table>
   <Table Name="dbo.Wardrobe" Member="Wardrobe">
@@ -15,6 +14,24 @@
       <Column Name="name" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
       <Association Name="Wardrobe_Shelf" Member="Shelf" ThisKey="id_wardrobe" OtherKey="id_wardrobe" Type="Shelf" />
       <Association Name="Room_Wardrobe" Member="Room" ThisKey="id_room" OtherKey="id_room" Type="Room" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Category" Member="Category">
+    <Type Name="Category">
+      <Column Name="id_category" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="name" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="description" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
+      <Association Name="Category_Item" Member="Item" ThisKey="id_category" OtherKey="id_category" Type="Item" />
+    </Type>
+  </Table>
+  <Table Name="dbo.History" Member="History">
+    <Type Name="History">
+      <Column Name="id_history" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="id_item" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="action" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="date" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="status_name" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Association Name="Item_History" Member="Item" ThisKey="id_item" OtherKey="id_item" Type="Item" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.Item" Member="Item">
@@ -27,7 +44,10 @@
       <Column Name="description" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
       <Column Name="size" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="image" Type="System.Data.Linq.Binary" DbType="Image" CanBeNull="true" UpdateCheck="Never" />
-      <Column Name="creation_date" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Column Name="creation_date" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="modify_date" Type="System.DateTime" DbType="DateTime" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="deleted" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Association Name="Item_History" Member="History" ThisKey="id_item" OtherKey="id_item" Type="History" />
       <Association Name="Category_Item" Member="Category" ThisKey="id_category" OtherKey="id_category" Type="Category" IsForeignKey="true" />
       <Association Name="Shelf_Item" Member="Shelf" ThisKey="id_shelf" OtherKey="id_shelf" Type="Shelf" IsForeignKey="true" />
       <Association Name="Status_Item" Member="Status" ThisKey="id_status" OtherKey="id_status" Type="Status" IsForeignKey="true" />
