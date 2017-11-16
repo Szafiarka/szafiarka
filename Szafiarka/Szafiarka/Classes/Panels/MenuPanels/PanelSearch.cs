@@ -9,10 +9,19 @@ namespace Szafiarka.Classes
 {
     class PanelSearch : Panels
     {
+
         public PanelSearch()
         {
             Name = "pSearch";
             BackColor = System.Drawing.Color.FromArgb(0, 50, 0);
+            InitializeComponent();
+        }
+
+        private void InitializeComponent()
+        {
+            this.SuspendLayout();
+            this.ResumeLayout(false);
+
         }
     }
 }

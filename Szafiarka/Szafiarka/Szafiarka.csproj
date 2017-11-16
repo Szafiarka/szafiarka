@@ -141,6 +141,9 @@
     <Compile Include="Forms\Splashscreen\Splashscreen.Designer.cs">
       <DependentUpon>Splashscreen.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Classes\Panels\MenuPanels\PanelSearch.resx">
+      <DependentUpon>PanelSearch.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Classes\Panels\PanelsAdd\PanelAddStatus.resx">
       <DependentUpon>PanelAddStatus.cs</DependentUpon>
     </EmbeddedResource>
@@ -181,7 +184,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.5.2">
