@@ -32,7 +32,7 @@ namespace Szafiarka.Forms.Splashscreen
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Splashscreen));
-            this.SplashscreenProgressBar = new Classes.MapDB.ColoredProgressBar(new SolidBrush(Color.FromArgb(127, 195, 28)));
+            this.SplashscreenProgressBar = new Classes.ColoredProgressBar(new SolidBrush(Color.FromArgb(127, 195, 28)), false);
             this.splashTimer = new System.Windows.Forms.Timer(this.components);
             this.SuspendLayout();
             // 
@@ -67,7 +67,7 @@ namespace Szafiarka.Forms.Splashscreen
 
         #endregion
 
-        private Classes.MapDB.ColoredProgressBar SplashscreenProgressBar;
+        private Classes.ColoredProgressBar SplashscreenProgressBar;
         private System.Windows.Forms.Timer splashTimer;
 
     }
