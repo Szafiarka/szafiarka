@@ -14,7 +14,7 @@ namespace Szafiarka.Classes
             PSTART, PSEARCH, PADDSTATUS
         };
 
-        private static List<Panels> ObjectList;
+        private static List<Panels> PanelsList;
         
         public Panels()
         {
@@ -25,13 +25,13 @@ namespace Szafiarka.Classes
 
         public void initializePanels(Form form)
         {
-            ObjectList = new List<Panels> {
+            PanelsList = new List<Panels> {
                 new PanelStart(),
                 new PanelSearch(),
                 new PanelAddStatus()
             };
 
-            foreach (var panel in ObjectList)
+            foreach (var panel in PanelsList)
             {
                 form.Controls.Add(panel);
             };
@@ -39,13 +39,13 @@ namespace Szafiarka.Classes
 
         public static void changePanelsVisableToFalse()
         {
-            foreach (var item in ObjectList)
+            foreach (var item in PanelsList)
                 item.Visible = false;
         }
 
         public static void changePanelVisableToTrue(PanelsName name)
         {
-            var panel = ObjectList.Find(X => X.Name.ToUpper() == name.ToString("g"));
+            var panel = PanelsList.Find(X => X.Name.ToUpper() == name.ToString("g"));
             panel.Visible = true;
         }
     }
