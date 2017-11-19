@@ -141,7 +141,7 @@ namespace Szafiarka.Classes
             DGVMainData.Size = new Size(DGVMainWidth, DGVHeight);
             DGVMainData.CellDoubleClick += DTVLastItems_CellDoubleClick;
             DGVMainData.Visible = false;
-            DGVMainData.CellFormatting += new DataGridViewCellFormattingEventHandler(getDescription_CellFormatting);
+            DGVMainData.CellFormatting += new DataGridViewCellFormattingEventHandler(getDescriptionCellFormatting);
 
             Controls.Add(DGVMainData);
         }
@@ -359,8 +359,7 @@ namespace Szafiarka.Classes
             progressBar.Location = new Point(Width - 300, 425 + space * 60);
             progressBar.Size = new Size(300, 20);
             if (item.capacity > 0 )
-                progressBar.Value = (int)((item.capacity / item.capacity_wardrobe) * 100);
-            
+                progressBar.Value = (int)((item.capacity / item.capacity_wardrobe) * 100);            
             else
                 progressBar.Value = 0;
 
@@ -381,7 +380,7 @@ namespace Szafiarka.Classes
                 return value.ToString();
         }
 
-        private void getDescription_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        private void getDescriptionCellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
             var grid = (DataGridView)sender;
             var row = grid.Rows[e.RowIndex];

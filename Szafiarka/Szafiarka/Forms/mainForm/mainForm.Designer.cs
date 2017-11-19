@@ -1,4 +1,9 @@
-﻿namespace Szafiarka
+﻿using System;
+using System.ComponentModel;
+using System.Drawing;
+using Szafiarka.Classes;
+
+namespace Szafiarka
 {
     partial class MainForm
     {
@@ -22,15 +27,14 @@
 
         private void InitializeComponent(RetrievingAssemblyData assemblyData)
         {
-            this.pMenu = new Classes.PanelMenu();
-            this.bTools = new Szafiarka.Classes.ToolsButton();
+            this.pMenu = new PanelMenu();
+            this.bTools = new ToolsButton();
             this.pMenu.SuspendLayout();
             this.SuspendLayout();
             // 
             // InitializeMenuButtons
             // 
-            var menuButton = new Classes.MenuButton();
-            menuButton.InitializeMenuButtons(this, this.pMenu);
+            InitializeMenuButtons(pMenu);
             //
             // InitializePanels
             //
@@ -51,6 +55,36 @@
             this.pMenu.ResumeLayout(false);
             this.ResumeLayout(false);
 
+        }
+
+        private void InitializeMenuButtons(PanelMenu pMenu)
+        {
+            for (int i = 0; i < MENUBUTTONSNAMES.Length / 2; i++)
+            {
+                var button = new Classes.MenuButton()
+                {
+                    Location = new Point(0, 100 * i),
+                    BackColor = pMenu.BackColor,
+                    Name = MENUBUTTONSNAMES[i, 0].ToString(),
+                    Text = utils.GetEnumDescription(MENUBUTTONSNAMES[i, 0] as Enum)
+                };
+                addImageToButton(button, i);
+                selectAndAddEvent(ref button);
+                pMenu.Controls.Add(button);
+            }
+        }
+        private void addImageToButton(MenuButton button, int selectedButton)
+        {
+            try
+            {
+                button.Image = Image.FromFile(@MENUBUTTONSNAMES[selectedButton, 1].ToString());
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(
+                    String.Format("Unable to add image to button name = {0}\n{1}", button.Name, e.Message)
+                    );
+            }
         }
 
         private Classes.PanelMenu pMenu;
