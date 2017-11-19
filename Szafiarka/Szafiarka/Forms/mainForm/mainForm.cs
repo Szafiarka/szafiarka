@@ -18,6 +18,7 @@ namespace Szafiarka
     {
         Utils utils;
 
+        #region Menu Button Properties
         private static string PATHTOSTART = "..\\..\\images\\menuButtons\\home.png";
         private static string PATHTOSEARCH = "..\\..\\images\\menuButtons\\search.png";
         private static string PATHTOADD = "..\\..\\images\\menuButtons\\add.png";
@@ -25,6 +26,7 @@ namespace Szafiarka
         private static string PATHTODELETE = "..\\..\\images\\menuButtons\\delete.png";
         private static string PATHTOBIN = "..\\..\\images\\menuButtons\\bin.png";
         private static string PATHTOEXIT = "..\\..\\images\\menuButtons\\exit.png";
+
         private enum buttonsNames
         {
             [Description("Start")]
@@ -60,6 +62,15 @@ namespace Szafiarka
             [Description("Nie wybrałeś elementu do edycji")]
             EDIT,
         }
+        #endregion
+        #region Menu Panels Properties
+        private static List<Panels> PanelsList;
+        private enum PanelsName
+        {
+            PSTART, PSEARCH
+        };
+        #endregion
+
 
         public MainForm()
         {
@@ -77,6 +88,7 @@ namespace Szafiarka
             Application.Run(new Splashscreen());
         }
 
+        #region Menu Buttons
         private void selectAndAddEvent(ref MenuButton button)
         {
             if (button.Name == buttonsNames.exit.ToString())
@@ -128,14 +140,15 @@ namespace Szafiarka
 
         private void search_Click(object sender, EventArgs e)
         {
-            Panels.changePanelsVisableToFalse();
-            Panels.changePanelVisableToTrue(Panels.PanelsName.PSEARCH);
+            utils.changePanelsVisableToFalse(PanelsList);
+            utils.changePanelVisableToTrue(PanelsList, PanelsName.PSEARCH);
         }
 
         private void start_Click(object sender, EventArgs e)
         {
-            Panels.changePanelsVisableToFalse();
-            Panels.changePanelVisableToTrue(Panels.PanelsName.PSTART);
+            utils.changePanelsVisableToFalse(PanelsList);
+            utils.changePanelVisableToTrue(PanelsList, PanelsName.PSTART);
         }
+        #endregion
     }
 }

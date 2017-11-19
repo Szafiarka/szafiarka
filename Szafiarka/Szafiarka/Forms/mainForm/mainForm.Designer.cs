@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
 using Szafiarka.Classes;
@@ -34,12 +35,11 @@ namespace Szafiarka
             // 
             // InitializeMenuButtons
             // 
-            InitializeMenuButtons(pMenu);
+            InitializeMenuButtons();
             //
             // InitializePanels
             //
-            var panels = new Classes.Panels();
-            panels.initializePanels(this);
+            InitializePanels();
             // 
             // MainForm
             // 
@@ -57,7 +57,8 @@ namespace Szafiarka
 
         }
 
-        private void InitializeMenuButtons(PanelMenu pMenu)
+        #region Menu Buttons
+        private void InitializeMenuButtons()
         {
             for (int i = 0; i < MENUBUTTONSNAMES.Length / 2; i++)
             {
@@ -86,6 +87,21 @@ namespace Szafiarka
                     );
             }
         }
+        #endregion
+        #region Menu Panels
+        private void InitializePanels()
+        {
+            PanelsList = new List<Panels> {
+                new PanelStart(),
+                new PanelSearch(),
+            };
+
+            foreach (var panel in PanelsList)
+            {
+                Controls.Add(panel);
+            };
+        }
+        #endregion  
 
         private Classes.PanelMenu pMenu;
         private Classes.ToolsButton bTools;

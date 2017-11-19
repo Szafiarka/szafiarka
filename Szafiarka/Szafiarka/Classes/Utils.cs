@@ -27,5 +27,25 @@ namespace Szafiarka.Classes
             else
                 return value.ToString();
         }
+
+        public void changePanelsVisableToFalse(List<Panels> PanelsList)
+        {
+            try
+            {
+                foreach (var item in PanelsList)
+                    item.changeVisableToFalse();
+            }
+            catch { }
+        }
+
+        public void changePanelVisableToTrue(List<Panels> PanelsList, Enum name)
+        {
+            try
+            {
+                var panel = PanelsList.Find(X => X.Name.ToUpper() == name.ToString("g"));
+                panel.changeVisableToTrue();
+            }
+            catch { }
+        }
     }
 }

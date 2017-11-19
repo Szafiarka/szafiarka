@@ -9,13 +9,7 @@ using System.Windows.Forms;
 namespace Szafiarka.Classes
 {
     class Panels : Panel
-    {
-        public enum PanelsName {
-            PSTART, PSEARCH
-        };
-
-        private static List<Panels> PanelsList;
-        
+    {        
         public Panels()
         {
             Location = new System.Drawing.Point(110, 70);
@@ -23,29 +17,14 @@ namespace Szafiarka.Classes
             Visible = false;
         }
 
-        public void initializePanels(Form form)
+        public void changeVisableToTrue()
         {
-            PanelsList = new List<Panels> {
-                new PanelStart(),
-                new PanelSearch(),
-            };
-
-            foreach (var panel in PanelsList)
-            {
-                form.Controls.Add(panel);
-            };
+            Visible = true;
         }
 
-        public static void changePanelsVisableToFalse()
+        public void changeVisableToFalse()
         {
-            foreach (var item in PanelsList)
-                item.Visible = false;
-        }
-
-        public static void changePanelVisableToTrue(PanelsName name)
-        {
-            var panel = PanelsList.Find(X => X.Name.ToUpper() == name.ToString("g"));
-            panel.Visible = true;
+            Visible = false;
         }
     }
 }
