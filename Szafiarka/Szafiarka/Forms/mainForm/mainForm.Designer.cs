@@ -47,11 +47,12 @@ namespace Szafiarka
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
             this.ClientSize = new System.Drawing.Size(1184, 766);
-            this.Controls.Add(this.bTools);
-            this.Controls.Add(this.pMenu);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "MainForm";
             this.Text = assemblyData.AssemblyTitle;
+
+            this.Controls.Add(this.bTools);
+            this.Controls.Add(this.pMenu);
             this.pMenu.ResumeLayout(false);
             this.ResumeLayout(false);
 
