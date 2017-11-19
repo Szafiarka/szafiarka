@@ -21,6 +21,7 @@ namespace Szafiarka.Classes
         private static int LocationHeightStart = 50;
         private static int DGVMainWidth = 720;
         private MapDB.Queries queries;
+        private Utils utils = new Utils();
 
         private FlatButton oldButton;
 
@@ -110,13 +111,13 @@ namespace Szafiarka.Classes
             var label = new LabelRightPanelStartPanel
             {
                 Location = new Point(Width - 300, 0),
-                Text = GetEnumDescription(rightLabelsNames.lastItems)
+                Text = utils.GetEnumDescription(rightLabelsNames.lastItems)
             };
 
             var label2 = new LabelRightPanelStartPanel
             {
                 Location = new Point(Width - 300, 360),
-                Text = GetEnumDescription(rightLabelsNames.mostOccupancy)
+                Text = utils.GetEnumDescription(rightLabelsNames.mostOccupancy)
             };
 
             Controls.Add(label);
@@ -213,7 +214,7 @@ namespace Szafiarka.Classes
                 button.BackColor = Color.White;
             }
         }
-
+        #region Add DGV Views
         private void DGVItemsView(object sender, EventArgs e)
         {
             GridViewClearRowsAndColumns(DGVMainData);
@@ -320,7 +321,7 @@ namespace Szafiarka.Classes
 
             DGVMainData.Columns[0].Visible = false;
         }
-
+        #endregion
         private void GridViewClearRowsAndColumns(DataGridView gridView)
         {
             gridView.Name = DGVMainDataNames.nameCleared.ToString();
@@ -365,19 +366,6 @@ namespace Szafiarka.Classes
 
             Controls.Add(label);
             Controls.Add(progressBar);
-        }
-
-        private string GetEnumDescription(Enum value)
-        {
-            FieldInfo fi = value.GetType().GetField(value.ToString());
-
-            DescriptionAttribute[] attributes =
-                (DescriptionAttribute[])fi.GetCustomAttributes(typeof(DescriptionAttribute), false);
-
-            if (attributes != null && attributes.Length > 0)
-                return attributes[0].Description;
-            else
-                return value.ToString();
         }
 
         private void getDescriptionCellFormatting(object sender, DataGridViewCellFormattingEventArgs e)

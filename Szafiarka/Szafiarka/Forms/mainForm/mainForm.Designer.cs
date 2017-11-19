@@ -70,6 +70,7 @@ namespace Szafiarka
                     Name = MENUBUTTONSNAMES[i, 0].ToString(),
                     Text = utils.GetEnumDescription(MENUBUTTONSNAMES[i, 0] as Enum)
                 };
+                button.changeBackColor(pMenu.BackColor);
                 addImageToButton(button, i);
                 selectAndAddEvent(ref button);
                 pMenu.Controls.Add(button);

@@ -11,7 +11,6 @@ namespace Szafiarka.Classes
         public MenuButton() : base()
         {
             UseVisualStyleBackColor = false;
-            BackColor = PanelMenu.defaultColor;
             Size = new Size(100, 100);
             TextAlign = ContentAlignment.BottomCenter;
         }

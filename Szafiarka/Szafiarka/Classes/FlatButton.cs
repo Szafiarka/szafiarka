@@ -19,5 +19,10 @@ namespace Szafiarka.Classes
             FlatAppearance.BorderSize = 0;
             BackColor = Color.FromArgb(1, 168, 204);
         }
+
+        public void changeBackColor(Color color)
+        {
+            BackColor = color;
+        }
     }
 }
