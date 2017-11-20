@@ -47,5 +47,11 @@ namespace Szafiarka.Classes
             }
             catch { }
         }
+
+        public bool mod2(int value)
+        {
+            return (value % 2 == 0);
+        }
+
     }
 }

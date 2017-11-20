@@ -14,7 +14,7 @@ namespace Szafiarka.Classes
         {
             Size = new Size(300, 30);
             ForeColor = Color.White;
-            Font = Font = new Font("Arial", 16, FontStyle.Bold);
+            Font = new Font("Arial", 16, FontStyle.Bold);
         }
     }
 }

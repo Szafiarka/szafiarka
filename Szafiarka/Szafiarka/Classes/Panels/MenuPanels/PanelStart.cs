@@ -131,9 +131,7 @@ namespace Szafiarka.Classes
             DGVLastItems.Location = new Point(Width - sizeWidth, LocationHeightStart);
             DGVLastItems.Name = "DTVLastItems";
             DGVLastItems.Size = new Size(sizeWidth, DGVHeight-(DGVHeight/2));
-            AddColumnsToDGV(DGVLastItems, LASTITEMSCOLUMNS);
             DTVLastItemsFillColumns(DGVLastItems);
-            DGVLastItems.Columns[0].Visible = false;
 
             Controls.Add(DGVLastItems);
 
@@ -147,14 +145,17 @@ namespace Szafiarka.Classes
             Controls.Add(DGVMainData);
         }
 
-        private void DTVLastItemsFillColumns(DataGridView gridView)
+        private void DTVLastItemsFillColumns(DataGridViewStartPanel gridView)
         {
+            gridView.clearRowsAndColumns();
+            gridView.AddColumns(LASTITEMSCOLUMNS);
             var query = queries.getGridViewLastItems();
 
             foreach (var item in query.OrderByDescending(X => X.modify_date))
             {
                 gridView.Rows.Add(item.id, item.name, item.category, item.modify_date);
             }
+            DGVLastItems.changeIdColumnVisableToFalse();
         }
 
         private void DTVLastItems_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
@@ -217,8 +218,8 @@ namespace Szafiarka.Classes
         #region Add DGV Views
         private void DGVItemsView(object sender, EventArgs e)
         {
-            GridViewClearRowsAndColumns(DGVMainData);
-            DGVMainData.Name = DGVMainDataNames.items.ToString();
+            DGVMainData.clearRowsAndColumns();
+            DGVMainData.setName(DGVMainDataNames.items.ToString());
             string[,] columns = {
                 { "id", "ID" },
                 { "name", "Nazwa" },
@@ -228,29 +229,30 @@ namespace Szafiarka.Classes
                 { "wardrobe", "Szafa" },
                 { "shelf", "Szuflada" },
             };
-            AddColumnsToDGV(DGVMainData, columns);
+            DGVMainData.AddColumns(columns);
 
             var query = queries.getGridViewItem();
 
             foreach (var item in query)
             {
+
                 DGVMainData.Rows.Add(item.id, item.name, item.category, item.status,
                     item.room, item.wardorobe, Int32.Parse(item.shelf)+1);
             }
 
-            DGVMainData.Columns[0].Visible = false;
-
+            DGVMainData.changeIdColumnVisableToFalse();
         }
 
         private void DGVRoomsView(object sender, EventArgs e)
         {
-            GridViewClearRowsAndColumns(DGVMainData);
+            DGVMainData.clearRowsAndColumns();
+            DGVMainData.setName(DGVMainDataNames.nameCleared.ToString());
             string[,] columns = {
                 { "id", "ID" },
                 { "name", "Nazwa" },
                 { "wardrobesCount", "Ilość szaf" },
             };
-            AddColumnsToDGV(DGVMainData, columns);
+            DGVMainData.AddColumns(columns);
 
             var query = queries.getGridViewRoom();
             foreach (var item in query)
@@ -258,18 +260,19 @@ namespace Szafiarka.Classes
                 DGVMainData.Rows.Add(item.id, item.name, item.wardrobesCount);
             }
 
-            DGVMainData.Columns[0].Visible = false;
+            DGVMainData.changeIdColumnVisableToFalse();
         }
 
         private void DGVStatusView(object sender, EventArgs e)
         {
-            GridViewClearRowsAndColumns(DGVMainData);
+            DGVMainData.clearRowsAndColumns();
+            DGVMainData.setName(DGVMainDataNames.nameCleared.ToString());
             string[,] columns = {
                 { "id", "ID" },
                 { "name", "Nazwa" },
                 { "itemsCount", "Ilość rzeczy" }
             };
-            AddColumnsToDGV(DGVMainData, columns);
+            DGVMainData.AddColumns(columns);
 
             var query = queries.getGridViewStatus();
             foreach (var item in query)
@@ -277,19 +280,19 @@ namespace Szafiarka.Classes
                 DGVMainData.Rows.Add(item.id, item.name, item.itemsCount);
             }
 
-            DGVMainData.Columns[0].Visible = false;
+            DGVMainData.changeIdColumnVisableToFalse();
         }
 
         private void DGVCategoriesView(object sender, EventArgs e)
         {
-            GridViewClearRowsAndColumns(DGVMainData);
-            DGVMainData.Name = DGVMainDataNames.categories.ToString();
+            DGVMainData.clearRowsAndColumns();
+            DGVMainData.setName(DGVMainDataNames.categories.ToString());
             string[,] columns = {
                 { "id", "ID" },
                 { "name", "Nazwa" },
                 { "itemsCount", "Ilość rzeczy" }
             };
-            AddColumnsToDGV(DGVMainData, columns);
+            DGVMainData.AddColumns(columns);
 
             var query = queries.getGridViewCategory();
 
@@ -297,12 +300,13 @@ namespace Szafiarka.Classes
             {
                 DGVMainData.Rows.Add(item.id, item.name, item.itemsCount);
             }
-            DGVMainData.Columns[0].Visible = false;
+            DGVMainData.changeIdColumnVisableToFalse();
         }
 
         private void DGVWardrobesView(object sender, EventArgs e)
         {
-            GridViewClearRowsAndColumns(DGVMainData);
+            DGVMainData.clearRowsAndColumns();
+            DGVMainData.setName(DGVMainDataNames.nameCleared.ToString());
             string[,] columns = {
                 { "id", "ID" },
                 { "name", "Nazwa" },
@@ -310,7 +314,7 @@ namespace Szafiarka.Classes
                 { "shelfCount", "Ilość półek" },
                 { "mostCategory", "Najpopularniejsza kategoria" }
             };
-            AddColumnsToDGV(DGVMainData, columns);
+            DGVMainData.AddColumns(columns);
 
             var query = queries.getGridViewWardrobe();
 
@@ -319,24 +323,9 @@ namespace Szafiarka.Classes
                 DGVMainData.Rows.Add(item.id, item.name, item.room, item.shelfCount, item.mostCategory);
             }
 
-            DGVMainData.Columns[0].Visible = false;
+            DGVMainData.changeIdColumnVisableToFalse();
         }
         #endregion
-        private void GridViewClearRowsAndColumns(DataGridView gridView)
-        {
-            gridView.Name = DGVMainDataNames.nameCleared.ToString();
-            gridView.Rows.Clear();
-            gridView.Columns.Clear();
-        }
-
-        private void AddColumnsToDGV(DataGridView gridView, string[,] columns)
-        {
-            for (int i = 0; i < columns.Length / 2; i++)
-            {
-                gridView.Columns.Add(columns[i, 0], columns[i, 1]);
-            }
-        }
-
         private void IntializeProgressBars()
         {
             var query = queries.getWardrobesCapacity();
