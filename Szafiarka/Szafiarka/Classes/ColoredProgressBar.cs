@@ -17,7 +17,7 @@ namespace Szafiarka.Classes
         }
 
         Brush colorBar;
-        bool text;
+        private bool textCheck;
         //Property to set to decide whether to print a % or Text
         public ProgressBarDisplayText DisplayStyle { get; set; }
 
@@ -25,7 +25,7 @@ namespace Szafiarka.Classes
         public String CustomText { get; set; }
         public ColoredProgressBar(Brush color, bool textB = true)
         {
-            text = textB;
+            textCheck = textB;
             colorBar = color;
             this.SetStyle(ControlStyles.UserPaint, true);
         }
@@ -40,11 +40,9 @@ namespace Szafiarka.Classes
             rec.Height = rec.Height;
             e.Graphics.FillRectangle(colorBar, 0, 0, rec.Width, rec.Height);
 
-            if (text)
+            if (textCheck)
             {
                 string text = DisplayStyle == ProgressBarDisplayText.Percentage ? Value.ToString() + '%' : CustomText;
-
-
                 using (Font f = new Font(FontFamily.GenericSerif, 10))
                 {
 

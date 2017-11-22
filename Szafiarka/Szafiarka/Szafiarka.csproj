@@ -69,11 +69,18 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>MapDB.dbml</DependentUpon>
     </Compile>
-    <Compile Include="Classes\Panels\RightPanelStartPanel\DataGridViewStartPanel.cs">
+    <Compile Include="Classes\DataGridViewNew.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Classes\DBconnection.cs" />
     <Compile Include="Classes\FlatButton.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Classes\Panels\MenuPanels\IPanels.cs" />
+    <Compile Include="Classes\Panels\MenuPanels\PanelBin.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Classes\Panels\MenuPanels\PanelSearch.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Classes\Panels\RightPanelStartPanel\LabelRightPanelStartPanel.cs">
@@ -82,24 +89,6 @@
     <Compile Include="Classes\MapDB\Helpers.cs" />
     <Compile Include="Classes\MapDB\Queries.cs" />
     <Compile Include="Classes\MenuButton.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Classes\MenuButton\Add.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Classes\MenuButton\Delete.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Classes\MenuButton\Edit.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Classes\MenuButton\Exit.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Classes\MenuButton\Search.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Classes\MenuButton\Start.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Classes\TabControls\OptionsTabControl\OptionsTabControl.cs">
@@ -117,13 +106,11 @@
     <Compile Include="Classes\Panels\MenuPanels\Panels.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Classes\Panels\MenuPanels\PanelSearch.cs">
-      <SubType>Component</SubType>
-    </Compile>
     <Compile Include="Classes\Panels\MenuPanels\PanelStart.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Classes\RetrievingAssemblyData.cs" />
+    <Compile Include="Classes\Utils.cs" />
     <Compile Include="Forms\HelpForm\HelpForm.cs">
       <SubType>Form</SubType>
     </Compile>
