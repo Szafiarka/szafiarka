@@ -67,7 +67,7 @@ namespace Szafiarka
         private static List<Panels> PanelsList;
         private enum PanelsName
         {
-            PSTART, PSEARCH
+            PSTART, PSEARCH, PBIN
         };
         #endregion
 
@@ -89,7 +89,7 @@ namespace Szafiarka
         }
 
         #region Menu Buttons
-        private void selectAndAddEvent(ref MenuButton button)
+        private void selectAndAddEvent(MenuButton button)
         {
             if (button.Name == buttonsNames.exit.ToString())
             {
@@ -115,6 +115,8 @@ namespace Szafiarka
             {
                 button.Click += new EventHandler(delete_Click);
             }
+            if (button.Name == buttonsNames.bin.ToString())
+                button.Click += new EventHandler(bin_Click);
         }
 
         private void add_Click(object sender, EventArgs e)
@@ -147,7 +149,27 @@ namespace Szafiarka
         private void start_Click(object sender, EventArgs e)
         {
             utils.changePanelsVisableToFalse(PanelsList);
+            refreshPanelStartGrid();
             utils.changePanelVisableToTrue(PanelsList, PanelsName.PSTART);
+        }
+
+        private void bin_Click(object sender, EventArgs e)
+        {
+            utils.changePanelsVisableToFalse(PanelsList);
+            refreshPanelBinGrid();
+            utils.changePanelVisableToTrue(PanelsList, PanelsName.PBIN);
+        }
+
+        private static void refreshPanelBinGrid()
+        {
+            PanelBin panel = PanelsList.Find(x => x.Name.ToUpper() == PanelsName.PBIN.ToString()) as PanelBin;
+            panel.refreashGrid();
+        }
+
+        private void refreshPanelStartGrid()
+        {
+            PanelStart panel = PanelsList.Find(x => x.Name.ToUpper() == PanelsName.PSTART.ToString()) as PanelStart;
+            panel.refreashGrid();
         }
         #endregion
     }

@@ -69,11 +69,18 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>MapDB.dbml</DependentUpon>
     </Compile>
-    <Compile Include="Classes\Panels\RightPanelStartPanel\DataGridViewStartPanel.cs">
+    <Compile Include="Classes\DataGridViewNew.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Classes\DBconnection.cs" />
     <Compile Include="Classes\FlatButton.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Classes\Panels\MenuPanels\IPanels.cs" />
+    <Compile Include="Classes\Panels\MenuPanels\PanelBin.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Classes\Panels\MenuPanels\PanelSearch.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Classes\Panels\RightPanelStartPanel\LabelRightPanelStartPanel.cs">
@@ -97,9 +104,6 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Classes\Panels\MenuPanels\Panels.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Classes\Panels\MenuPanels\PanelSearch.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Classes\Panels\MenuPanels\PanelStart.cs">

@@ -13,10 +13,10 @@ using Szafiarka.Forms.ItemForm;
 
 namespace Szafiarka.Classes
 {
-    class PanelStart : Panels
+    class PanelStart : Panels, IPanels
     {
-        private DataGridViewStartPanel DGVLastItems;
-        private DataGridViewStartPanel DGVMainData;
+        private DataGridViewNew DGVLastItems;
+        private DataGridViewNew DGVMainData;
         private static int DGVHeight = 600;
         private static int LocationHeightStart = 50;
         private static int DGVMainWidth = 720;
@@ -28,11 +28,6 @@ namespace Szafiarka.Classes
         private enum buttonsNames
         {
             rooms, wardrobes, items, status, categories
-        }
-
-        private enum DGVMainDataNames
-        {
-            categories, items, nameCleared
         }
 
         private enum rightLabelsNames
@@ -127,33 +122,38 @@ namespace Szafiarka.Classes
         private void InitalizeDataGrids()
         {
             var sizeWidth = 300;
-            DGVLastItems = new DataGridViewStartPanel();
+            DGVLastItems = new DataGridViewNew();
             DGVLastItems.Location = new Point(Width - sizeWidth, LocationHeightStart);
-            DGVLastItems.Name = "DTVLastItems";
+            DGVLastItems.setName(DataGridViewNew.DGVMainDataNames.lastItems.ToString());
             DGVLastItems.Size = new Size(sizeWidth, DGVHeight-(DGVHeight/2));
-            DTVLastItemsFillColumns(DGVLastItems);
+            DTVLastItemsFillColumns();
 
             Controls.Add(DGVLastItems);
 
-            DGVMainData = new DataGridViewStartPanel();
+            DGVMainData = new DataGridViewNew();
             DGVMainData.Location = new Point(0, LocationHeightStart);
             DGVMainData.Size = new Size(DGVMainWidth, DGVHeight);
             DGVMainData.CellDoubleClick += DTVLastItems_CellDoubleClick;
             DGVMainData.Visible = false;
-            DGVMainData.CellFormatting += new DataGridViewCellFormattingEventHandler(getDescriptionCellFormatting);
 
             Controls.Add(DGVMainData);
         }
 
-        private void DTVLastItemsFillColumns(DataGridViewStartPanel gridView)
+        private void DTVLastItemsFillColumns()
         {
-            gridView.clearRowsAndColumns();
-            gridView.AddColumns(LASTITEMSCOLUMNS);
+            DGVLastItems.clearRowsAndColumns();
+            string [,] columns = {
+                { "id", "ID" },
+                { "name", "Nazwa" },
+                { "category", "Kategoria" },
+                { "date", "Data" }
+            };
+            DGVLastItems.AddColumns(LASTITEMSCOLUMNS);
             var query = queries.getGridViewLastItems();
 
             foreach (var item in query.OrderByDescending(X => X.modify_date))
             {
-                gridView.Rows.Add(item.id, item.name, item.category, item.modify_date);
+                DGVLastItems.Rows.Add(item.id, item.name, item.category, item.modify_date);
             }
             DGVLastItems.changeIdColumnVisableToFalse();
         }
@@ -167,26 +167,8 @@ namespace Szafiarka.Classes
 
         private void addEventToButton(Button button)
         {
-            if (button.Name.ToUpper() ==  buttonsNames.items.ToString().ToUpper())
-            {
-                button.Click += new EventHandler(DGVItemsView);
-            }
-            if (button.Name.ToUpper() == buttonsNames.rooms.ToString().ToUpper())
-            {
-                button.Click += new EventHandler(DGVRoomsView);
-            }
-            if (button.Name.ToUpper() == buttonsNames.status.ToString().ToUpper())
-            {
-                button.Click += new EventHandler(DGVStatusView);
-            }
-            if (button.Name.ToUpper() == buttonsNames.categories.ToString().ToUpper())
-            {
-                button.Click += new EventHandler(DGVCategoriesView);
-            }
-            if (button.Name.ToUpper() == buttonsNames.wardrobes.ToString().ToUpper())
-            {
-                button.Click += new EventHandler(DGVWardrobesView);
-            }
+
+            button.Click += new EventHandler(cos);
             button.Click += new EventHandler(DGVMainDataChangeVisable);
             button.Click += new EventHandler(ChangeButtonSelection);
         }
@@ -215,11 +197,37 @@ namespace Szafiarka.Classes
                 button.BackColor = Color.White;
             }
         }
+
+        private void cos(object sender, EventArgs e)
+        {
+            var button = sender as FlatButton;
+            if (button.Name.ToUpper() == buttonsNames.items.ToString().ToUpper())
+            {
+                DGVItemsView();
+            }
+            if (button.Name.ToUpper() == buttonsNames.rooms.ToString().ToUpper())
+            {
+                DGVRoomsView();
+            }
+            if (button.Name.ToUpper() == buttonsNames.status.ToString().ToUpper())
+            {
+                DGVStatusView();
+            }
+            if (button.Name.ToUpper() == buttonsNames.categories.ToString().ToUpper())
+            {
+                DGVCategoriesView();
+            }
+            if (button.Name.ToUpper() == buttonsNames.wardrobes.ToString().ToUpper())
+            {
+                DGVWardrobesView();
+            }
+        }
+
         #region Add DGV Views
-        private void DGVItemsView(object sender, EventArgs e)
+        private void DGVItemsView()
         {
             DGVMainData.clearRowsAndColumns();
-            DGVMainData.setName(DGVMainDataNames.items.ToString());
+            DGVMainData.setName(DataGridViewNew.DGVMainDataNames.items.ToString());
             string[,] columns = {
                 { "id", "ID" },
                 { "name", "Nazwa" },
@@ -243,10 +251,10 @@ namespace Szafiarka.Classes
             DGVMainData.changeIdColumnVisableToFalse();
         }
 
-        private void DGVRoomsView(object sender, EventArgs e)
+        private void DGVRoomsView()
         {
             DGVMainData.clearRowsAndColumns();
-            DGVMainData.setName(DGVMainDataNames.nameCleared.ToString());
+            DGVMainData.setName(DataGridViewNew.DGVMainDataNames.nameCleared.ToString());
             string[,] columns = {
                 { "id", "ID" },
                 { "name", "Nazwa" },
@@ -263,10 +271,10 @@ namespace Szafiarka.Classes
             DGVMainData.changeIdColumnVisableToFalse();
         }
 
-        private void DGVStatusView(object sender, EventArgs e)
+        private void DGVStatusView()
         {
             DGVMainData.clearRowsAndColumns();
-            DGVMainData.setName(DGVMainDataNames.nameCleared.ToString());
+            DGVMainData.setName(DataGridViewNew.DGVMainDataNames.nameCleared.ToString());
             string[,] columns = {
                 { "id", "ID" },
                 { "name", "Nazwa" },
@@ -283,10 +291,10 @@ namespace Szafiarka.Classes
             DGVMainData.changeIdColumnVisableToFalse();
         }
 
-        private void DGVCategoriesView(object sender, EventArgs e)
+        private void DGVCategoriesView()
         {
             DGVMainData.clearRowsAndColumns();
-            DGVMainData.setName(DGVMainDataNames.categories.ToString());
+            DGVMainData.setName(DataGridViewNew.DGVMainDataNames.categories.ToString());
             string[,] columns = {
                 { "id", "ID" },
                 { "name", "Nazwa" },
@@ -303,10 +311,10 @@ namespace Szafiarka.Classes
             DGVMainData.changeIdColumnVisableToFalse();
         }
 
-        private void DGVWardrobesView(object sender, EventArgs e)
+        private void DGVWardrobesView()
         {
             DGVMainData.clearRowsAndColumns();
-            DGVMainData.setName(DGVMainDataNames.nameCleared.ToString());
+            DGVMainData.setName(DataGridViewNew.DGVMainDataNames.nameCleared.ToString());
             string[,] columns = {
                 { "id", "ID" },
                 { "name", "Nazwa" },
@@ -357,18 +365,12 @@ namespace Szafiarka.Classes
             Controls.Add(progressBar);
         }
 
-        private void getDescriptionCellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        public void refreashGrid()
         {
-            var grid = (DataGridView)sender;
-            var row = grid.Rows[e.RowIndex];
-            var cell = row.Cells[e.ColumnIndex];
-            if (grid.Name == DGVMainDataNames.categories.ToString())
+            DTVLastItemsFillColumns();
+            if (DGVMainData.Name == DataGridViewNew.DGVMainDataNames.items.ToString())
             {
-                cell.ToolTipText = queries.getCategoryDescriptionById(Int32.Parse(row.Cells[0].Value.ToString()));
-            }
-            else if (grid.Name == DGVMainDataNames.items.ToString())
-            {
-                cell.ToolTipText = queries.getItemDescriptionById(Int32.Parse(row.Cells[0].Value.ToString()));
+                DGVItemsView();
             }
         }
     }

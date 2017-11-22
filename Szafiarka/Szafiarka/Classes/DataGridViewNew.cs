@@ -5,13 +5,20 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Szafiarka.Classes.MapDB;
 
 namespace Szafiarka.Classes
 {
-    class DataGridViewStartPanel : DataGridView
+    class DataGridViewNew : DataGridView
     {
+        public enum DGVMainDataNames
+        {
+            categories, items, nameCleared, bin, lastItems
+        }
+
         Utils utils = new Utils();
-        public DataGridViewStartPanel() : base()
+        Queries queries = new Queries();
+        public DataGridViewNew() : base()
         {
             SelectionMode = DataGridViewSelectionMode.FullRowSelect;
 
@@ -28,6 +35,7 @@ namespace Szafiarka.Classes
             BorderStyle = BorderStyle.None;
             CellBorderStyle = DataGridViewCellBorderStyle.None;
             RowsAdded += new DataGridViewRowsAddedEventHandler(rowAdded);
+            CellFormatting += new DataGridViewCellFormattingEventHandler(getDescriptionCellFormatting);
             RowsDefaultCellStyle.SelectionBackColor = System.Drawing.Color.Tomato;
         }
 
@@ -42,6 +50,23 @@ namespace Szafiarka.Classes
                         item.DefaultCellStyle.BackColor = Color.LightGray;
                     }
                 }
+            }
+        }
+
+        private void getDescriptionCellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            var grid = (DataGridView)sender;
+            var row = grid.Rows[e.RowIndex];
+            var cell = row.Cells[e.ColumnIndex];
+            if (grid.Name == DGVMainDataNames.categories.ToString())
+            {
+                cell.ToolTipText = queries.getCategoryDescriptionById(Int32.Parse(row.Cells[0].Value.ToString()));
+            }
+            else if (grid.Name == DGVMainDataNames.items.ToString()
+                || grid.Name == DGVMainDataNames.bin.ToString()
+                || grid.Name == DGVMainDataNames.lastItems.ToString())
+            {
+                cell.ToolTipText = queries.getItemDescriptionById(Int32.Parse(row.Cells[0].Value.ToString()));
             }
         }
 

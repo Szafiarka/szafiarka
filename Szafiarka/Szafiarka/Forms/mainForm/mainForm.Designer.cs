@@ -72,7 +72,7 @@ namespace Szafiarka
                 };
                 button.changeBackColor(pMenu.BackColor);
                 addImageToButton(button, i);
-                selectAndAddEvent(ref button);
+                selectAndAddEvent(button);
                 pMenu.Controls.Add(button);
             }
         }
@@ -96,6 +96,7 @@ namespace Szafiarka
             PanelsList = new List<Panels> {
                 new PanelStart(),
                 new PanelSearch(),
+                new PanelBin(refreshPanelStartGrid, refreshPanelBinGrid),
             };
 
             foreach (var panel in PanelsList)
