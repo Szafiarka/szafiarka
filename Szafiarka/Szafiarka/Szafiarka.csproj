@@ -156,6 +156,9 @@
     <Compile Include="Forms\Splashscreen\Splashscreen.Designer.cs">
       <DependentUpon>Splashscreen.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Classes\Panels\MenuPanels\PanelSearch.resx">
+      <DependentUpon>PanelSearch.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\ItemForm\ItemForm.resx">
       <DependentUpon>ItemForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -215,10 +218,6 @@
   <ItemGroup>
     <Content Include="database.mdf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="database_log.ldf">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      <DependentUpon>database.mdf</DependentUpon>
     </Content>
     <Content Include="images\logo_white.png" />
     <Content Include="images\menuButtons\add.png" />
