@@ -21,7 +21,7 @@ namespace Szafiarka.Classes.MapDB
                    {
                        id = category.id_category,
                        name = category.name,
-                       itemsCount = connection.Item.Where(x => x.id_category == category.id_category && x.deleted != false).Count()
+                       itemsCount = connection.Item.Where(x => x.id_category == category.id_category && x.deleted == false).Count()
                    };
         }
 
@@ -61,10 +61,10 @@ namespace Szafiarka.Classes.MapDB
                    };
         }
 
-        public IEnumerable<ResultDataGridItem> getGridViewItem()
+        public IEnumerable<ResultDataGridItem> getGridViewItem(bool deleted = false)
         {
             return from item in connection.Item
-                   where item.deleted == false
+                   where item.deleted == deleted
                    join category in connection.Category on item.id_category equals category.id_category
                    join status in connection.Status on item.id_status equals status.id_status
                    join shelf in connection.Shelf on item.id_shelf equals shelf.id_shelf
@@ -106,7 +106,6 @@ namespace Szafiarka.Classes.MapDB
         public IEnumerable<ResultDataGridLastItems> getGridViewLastItems()
         {
             return from i in connection.Item
-                   where i.deleted == false
                    join c in connection.Category on i.id_category equals c.id_category
                    select new ResultDataGridLastItems
                    {
@@ -128,6 +127,14 @@ namespace Szafiarka.Classes.MapDB
                         capacity_wardrobe = shelfsGB.Sum(x => x.capacity),
                         capacity = getWardrobeOccupancyByWardrobeId(shelfsGB.FirstOrDefault().id_wardrobe)
                     };
+        }
+
+        public void changeItemDeletedById(int id, bool deleted)
+        {
+            var item = connection.Item.Where(x => x.id_item == id).FirstOrDefault();
+            item.deleted = deleted;
+            item.modify_date = DateTime.Now;
+            connection.SubmitChanges();
         }
 
         public double getWardrobeOccupancyByWardrobeId(int id)
