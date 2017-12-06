@@ -206,6 +206,10 @@
     <Content Include="database.mdf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="database_log.ldf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <DependentUpon>database.mdf</DependentUpon>
+    </Content>
     <Content Include="images\logo_white.png" />
     <Content Include="images\menuButtons\add.png" />
     <Content Include="images\menuButtons\bin.png" />
