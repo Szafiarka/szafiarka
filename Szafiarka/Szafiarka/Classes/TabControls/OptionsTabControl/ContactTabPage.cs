@@ -178,7 +178,7 @@ namespace Szafiarka.Classes
 
 
                 SmtpServer.Port = 587;
-                SmtpServer.Credentials = new NetworkCredential("smtp_username", "smtp_password");
+                SmtpServer.Credentials = new NetworkCredential("smtp_username", "smtp_password");   //potrzeba ukrycia tych danych
                 SmtpServer.EnableSsl = true;
 
                 SmtpServer.Send(mail);
