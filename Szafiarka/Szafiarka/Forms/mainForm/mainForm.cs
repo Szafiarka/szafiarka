@@ -16,44 +16,7 @@ namespace Szafiarka
 {
     public partial class MainForm : Form
     {
-        Utils utils;
-
-        #region Menu Button Properties
-        private static string PATHTOSTART = "..\\..\\images\\menuButtons\\home.png";
-        private static string PATHTOSEARCH = "..\\..\\images\\menuButtons\\search.png";
-        private static string PATHTOADD = "..\\..\\images\\menuButtons\\add.png";
-        private static string PATHTOEDIT = "..\\..\\images\\menuButtons\\edit.png";
-        private static string PATHTODELETE = "..\\..\\images\\menuButtons\\delete.png";
-        private static string PATHTOBIN = "..\\..\\images\\menuButtons\\bin.png";
-        private static string PATHTOEXIT = "..\\..\\images\\menuButtons\\exit.png";
-
-        private enum buttonsNames
-        {
-            [Description("Start")]
-            home,
-            [Description("Wyszukaj")]
-            search,
-            [Description("Dodaj")]
-            add,
-            [Description("Edytuj")]
-            edit,
-            [Description("Usuń")]
-            delete,
-            [Description("Kosz")]
-            bin,
-            [Description("Wyjście")]
-            exit
-        }
-
-        private static object[,] MENUBUTTONSNAMES = {
-            { buttonsNames.home, PATHTOSTART },
-            { buttonsNames.search, PATHTOSEARCH},
-            { buttonsNames.add, PATHTOADD},
-            { buttonsNames.edit,  PATHTOEDIT},
-            { buttonsNames.delete, PATHTODELETE},
-            { buttonsNames.bin, PATHTOBIN},
-            { buttonsNames.exit, PATHTOEXIT}
-        };
+        private Classes.MapDB.Queries queries;
 
         private enum Messages
         {
@@ -62,14 +25,6 @@ namespace Szafiarka
             [Description("Nie wybrałeś elementu do edycji")]
             EDIT,
         }
-        #endregion
-        #region Menu Panels Properties
-        private static List<Panels> PanelsList;
-        private enum PanelsName
-        {
-            PSTART, PSEARCH, PBIN
-        };
-        #endregion
 
 
         public MainForm()
@@ -78,7 +33,7 @@ namespace Szafiarka
             splashThread.Start();
             Thread.Sleep(3000);
             var assemblyData = new RetrievingAssemblyData();
-            utils = new Utils();
+            queries = new Classes.MapDB.Queries();
             InitializeComponent(assemblyData);
             splashThread.Abort();
         }
@@ -91,32 +46,33 @@ namespace Szafiarka
         #region Menu Buttons
         private void selectAndAddEvent(MenuButton button)
         {
-            if (button.Name == buttonsNames.exit.ToString())
+            if (button.compareEnumValueToButtonName(MenuButton.buttonsNames.exit))
             {
                 button.Click += new EventHandler(exit_Click);
             }
-            if (button.Name == buttonsNames.home.ToString())
+            if (button.compareEnumValueToButtonName(MenuButton.buttonsNames.home))
             {
                 button.Click += new EventHandler(start_Click);
             }
-            if (button.Name == buttonsNames.add.ToString())
+            if (button.compareEnumValueToButtonName(MenuButton.buttonsNames.add))
             {
                 button.Click += new EventHandler(add_Click);
             }
-            if (button.Name == buttonsNames.search.ToString())
+            if (button.compareEnumValueToButtonName(MenuButton.buttonsNames.search))
             {
                 button.Click += new EventHandler(search_Click);
             }
-            if (button.Name == buttonsNames.edit.ToString())
+            if (button.compareEnumValueToButtonName(MenuButton.buttonsNames.edit))
             {
                 button.Click += new EventHandler(edit_Click);
             }
-            if (button.Name == buttonsNames.delete.ToString())
+            if (button.compareEnumValueToButtonName(MenuButton.buttonsNames.delete))
             {
                 button.Click += new EventHandler(delete_Click);
             }
-            if (button.Name == buttonsNames.bin.ToString())
+            if (button.compareEnumValueToButtonName(MenuButton.buttonsNames.bin))
                 button.Click += new EventHandler(bin_Click);
+            button.Click += new EventHandler(global_Click);
         }
 
         private void add_Click(object sender, EventArgs e)
@@ -127,12 +83,30 @@ namespace Szafiarka
 
         private void delete_Click(object sender, EventArgs e)
         {
-            MessageBox.Show(utils.GetEnumDescription(Messages.DELETE), "Warrning");
+            PanelStart panel = Panels.getPanelByName(Panels.PanelsName.PSTART) as PanelStart;
+            var row = panel.getGridViewItemRow();
+            if (panel.Visible == true && panel.getGridViewName() == DataGridViewNew.DGVMainDataNames.items.ToString() &&
+                 row != null)
+            {
+                string messageBoxText = String.Format("Czy na pewno chcesz usunąć {0}?",
+                    row.Cells["name"].Value.ToString());
+                string caption = "Usuwanie";
+                MessageBoxButtons button = MessageBoxButtons.YesNo;
+                DialogResult res = MessageBox.Show(messageBoxText, caption, button);
+                if (res == DialogResult.Yes)
+                {
+                    var itemId = Int32.Parse(row.Cells[0].Value.ToString());
+                    queries.changeItemDeletedById(itemId, true);
+                    refreshPanelStartGrid();
+                }
+            }
+            else
+                MessageBox.Show(Utils.GetEnumDescription(Messages.DELETE), "Warrning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
         }
 
         private void edit_Click(object sender, EventArgs e)
         {
-            MessageBox.Show(utils.GetEnumDescription(Messages.EDIT), "Warrning");
+            MessageBox.Show(Utils.GetEnumDescription(Messages.EDIT), "Warrning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
         }
 
         private void exit_Click(object sender, EventArgs e)
@@ -140,37 +114,46 @@ namespace Szafiarka
             Application.Exit();
         }
 
+        private void global_Click(object sender, EventArgs e)
+        {
+            PanelStart panelStart = Panels.getPanelByName(Panels.PanelsName.PSTART) as PanelStart;
+            if (panelStart.Visible == false)
+                MenuButton.changeButtonsEnabled(false);
+            else
+                MenuButton.changeButtonsEnabled(true);
+        }
+
         private void search_Click(object sender, EventArgs e)
         {
-            utils.changePanelsVisableToFalse(PanelsList);
-            utils.changePanelVisableToTrue(PanelsList, PanelsName.PSEARCH);
+            Panels.changePanelsVisableToFalse();
+            Panels.changePanelVisableToTrueByEnum(Panels.PanelsName.PSEARCH);
         }
 
         private void start_Click(object sender, EventArgs e)
         {
-            utils.changePanelsVisableToFalse(PanelsList);
+            Panels.changePanelsVisableToFalse();
             refreshPanelStartGrid();
-            utils.changePanelVisableToTrue(PanelsList, PanelsName.PSTART);
+            Panels.changePanelVisableToTrueByEnum(Panels.PanelsName.PSTART);
         }
 
         private void bin_Click(object sender, EventArgs e)
         {
-            utils.changePanelsVisableToFalse(PanelsList);
+            Panels.changePanelsVisableToFalse();
             refreshPanelBinGrid();
-            utils.changePanelVisableToTrue(PanelsList, PanelsName.PBIN);
+            Panels.changePanelVisableToTrueByEnum(Panels.PanelsName.PBIN);
         }
-
+        #endregion
         private static void refreshPanelBinGrid()
         {
-            PanelBin panel = PanelsList.Find(x => x.Name.ToUpper() == PanelsName.PBIN.ToString()) as PanelBin;
+            PanelBin panel = Panels.getPanelByName(Panels.PanelsName.PBIN) as PanelBin;
             panel.refreashGrid();
         }
 
         private void refreshPanelStartGrid()
         {
-            PanelStart panel = PanelsList.Find(x => x.Name.ToUpper() == PanelsName.PSTART.ToString()) as PanelStart;
+            PanelStart panel = Panels.getPanelByName(Panels.PanelsName.PSTART) as PanelStart;
             panel.refreashGrid();
         }
-        #endregion
+        
     }
 }

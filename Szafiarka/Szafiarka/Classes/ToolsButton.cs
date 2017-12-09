@@ -24,7 +24,6 @@ namespace Szafiarka.Classes
             OPTIONS,
         }
 
-        private Utils utils = new Utils();
         public ToolsButton()
         {
             Location = new Point(1097, 21);
@@ -41,7 +40,7 @@ namespace Szafiarka.Classes
             contextMenuStrip1.Items.Clear();
             foreach (ToolName item in Enum.GetValues(typeof(ToolName)))
             {
-                contextMenuStrip1.Items.Add(utils.GetEnumDescription(item));
+                contextMenuStrip1.Items.Add(Utils.GetEnumDescription(item));
             }
             contextMenuStrip1.ItemClicked += new ToolStripItemClickedEventHandler(
                                                  contextMenuStrip1_ItemClicked);
@@ -61,17 +60,17 @@ namespace Szafiarka.Classes
         {
             contextMenuStrip1Clicked = false;
 
-            if (e.ClickedItem.Text == utils.GetEnumDescription(ToolName.HELP))
+            if (e.ClickedItem.Text == Utils.GetEnumDescription(ToolName.HELP))
             {
                 var helpForm = new HelpForm();
                 helpForm.Show();
-                helpForm.Text = utils.GetEnumDescription(ToolName.HELP);
+                helpForm.Text = Utils.GetEnumDescription(ToolName.HELP);
             }
-            if (e.ClickedItem.Text == utils.GetEnumDescription(ToolName.OPTIONS))
+            if (e.ClickedItem.Text == Utils.GetEnumDescription(ToolName.OPTIONS))
             {
                 var optionForm = new OptionsForm();
                 optionForm.Show();
-                optionForm.Text = utils.GetEnumDescription(ToolName.OPTIONS);
+                optionForm.Text = Utils.GetEnumDescription(ToolName.OPTIONS);
             }
         }
 

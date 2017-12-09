@@ -7,7 +7,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Szafiarka.Classes;
 using Szafiarka.Classes.MapDB;
 
 namespace Szafiarka.Forms.ItemForm
@@ -26,11 +25,12 @@ namespace Szafiarka.Forms.ItemForm
             queries = new Queries();
         }
 
-        public ItemForm(int itemID)
+        public ItemForm(int itemId)
         {
+            InitializeComponent();
             queries = new Queries();
-            item = queries.getItemById(itemID);
-            InitializeComponent(item);
+            getItem(itemId);
+            fillForm();
         }
 
         private void flatButton2_Click(object sender, EventArgs e)
@@ -74,7 +74,7 @@ namespace Szafiarka.Forms.ItemForm
         private void image_DoubleClick(object sender, EventArgs e)
         {
             var image = sender as PictureBox;
-            if(image.Image != null)
+            if (image.Image != null)
             {
                 var form = new Form();
                 form.ClientSize = oryginalImage.Size;
@@ -85,9 +85,21 @@ namespace Szafiarka.Forms.ItemForm
                     form.Text = string.Format("{0} zdjęcie", item.name);
                 }
                 catch { }
-                
+
                 form.ShowDialog();
             }
+        }
+
+        private void getItem(int id)
+        {
+            var _item = queries.getItemById(id);
+            item = _item;
+        }
+
+        private void fillForm()
+        {
+            this.textBox1.Text = item.name;
+            this.checkBox1.Checked = item.deleted ? false : true;
         }
     }
 }

@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Szafiarka.Classes.MapDB;
+using Szafiarka.Forms.ItemForm;
 
 namespace Szafiarka.Classes
 {
@@ -16,7 +17,6 @@ namespace Szafiarka.Classes
             categories, items, nameCleared, bin, lastItems
         }
 
-        Utils utils = new Utils();
         Queries queries = new Queries();
         public DataGridViewNew() : base()
         {
@@ -36,44 +36,86 @@ namespace Szafiarka.Classes
             CellBorderStyle = DataGridViewCellBorderStyle.None;
             RowsAdded += new DataGridViewRowsAddedEventHandler(rowAdded);
             CellFormatting += new DataGridViewCellFormattingEventHandler(getDescriptionCellFormatting);
-            RowsDefaultCellStyle.SelectionBackColor = System.Drawing.Color.Tomato;
+            CellDoubleClick += DataGridView_CellDoubleClick;
+            RowsDefaultCellStyle.SelectionBackColor = Color.Tomato;
+            Sorted += new EventHandler(columnsSortChanged);
+            RowTemplate.Height = 35;
+            this.ColumnHeadersHeight = 35;
         }
 
         private void rowAdded(object sender, DataGridViewRowsAddedEventArgs e)
         {
-            var grid = sender as DataGridView;
+            colorsCells();
+        }
+
+        private void columnsSortChanged(object sender, EventArgs e)
+        {
+            colorsCells();
+        }
+
+        private void colorsCells()
+        {
+            foreach (DataGridViewRow item in Rows)
             {
-                foreach (DataGridViewRow item in grid.Rows)
+                if (!Utils.mod2(item.Index))
                 {
-                    if (!utils.mod2(item.Index))
-                    {
-                        item.DefaultCellStyle.BackColor = Color.LightGray;
-                    }
+                    item.DefaultCellStyle.BackColor = Color.LightGray;
+                }
+                else
+                {
+                    item.DefaultCellStyle.BackColor = Color.White;
                 }
             }
         }
 
         private void getDescriptionCellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
-            var grid = (DataGridView)sender;
-            var row = grid.Rows[e.RowIndex];
+            var row = Rows[e.RowIndex];
             var cell = row.Cells[e.ColumnIndex];
-            if (grid.Name == DGVMainDataNames.categories.ToString())
+            if (Name == DGVMainDataNames.categories.ToString())
             {
                 cell.ToolTipText = queries.getCategoryDescriptionById(Int32.Parse(row.Cells[0].Value.ToString()));
             }
-            else if (grid.Name == DGVMainDataNames.items.ToString()
-                || grid.Name == DGVMainDataNames.bin.ToString()
-                || grid.Name == DGVMainDataNames.lastItems.ToString())
+            else if (Name == DGVMainDataNames.items.ToString()
+                || Name == DGVMainDataNames.bin.ToString()
+                || Name == DGVMainDataNames.lastItems.ToString())
             {
                 cell.ToolTipText = queries.getItemDescriptionById(Int32.Parse(row.Cells[0].Value.ToString()));
             }
+        }
+
+        public void DataGridView_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (checkIfGridEnableToShowItemForm(Name) && !checkIfDoubleClicedRowsIsHeader(e.RowIndex))
+            {
+                var itemId = Int32.Parse(Rows[e.RowIndex].Cells[0].Value.ToString());
+                var itemForm = new ItemForm(itemId);
+                itemForm.Show();
+            }
+        }
+
+        private bool checkIfGridEnableToShowItemForm(string gridName)
+        {
+            List<string> namesGridsEnableToShowItemForm = new List<string> {
+                DGVMainDataNames.items.ToString(),
+                DGVMainDataNames.lastItems.ToString(),
+                DGVMainDataNames.bin.ToString()
+            };
+
+            return namesGridsEnableToShowItemForm.Contains(gridName);
+        }
+
+        private bool checkIfDoubleClicedRowsIsHeader(int rowIndex)
+        {
+            const int indexHeaderRow = -1;
+            return rowIndex == indexHeaderRow;
         }
 
         public void AddColumns(string[,] columns)
         {
             try
             {
+                clearRowsAndColumns();
                 var lenght = columns[0, 0].Length;
                 for (int i = 0; i < columns.Length / 2; i++)
                 {
