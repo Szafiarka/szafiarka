@@ -18,13 +18,11 @@ namespace Szafiarka.Classes
         private Queries queries = new Queries();
         private DataGridViewNew DGVMainData;
         private static int DGVHeight = 600;
-        private static int LocationHeightStart = 30;
+        private static int LocationHeightStart = 60;
         private Label labelSearchName;
         private Label labelSearchStatus;
         private Label labelSearchCategory;
-        private Label labelSearchChangeDate;
         private TextBox textBoxItemCategory;
-        private TextBox textBoxItemChangeDate;
         private static int DGVMainWidth = 900;
         
 
@@ -52,9 +50,7 @@ namespace Szafiarka.Classes
             this.labelSearchName = new System.Windows.Forms.Label();
             this.labelSearchStatus = new System.Windows.Forms.Label();
             this.labelSearchCategory = new System.Windows.Forms.Label();
-            this.labelSearchChangeDate = new System.Windows.Forms.Label();
             this.textBoxItemCategory = new System.Windows.Forms.TextBox();
-            this.textBoxItemChangeDate = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // searchItemName
@@ -64,9 +60,9 @@ namespace Szafiarka.Classes
             this.searchItemName.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.searchItemName.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
             this.searchItemName.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.searchItemName.Location = new System.Drawing.Point(800, 0);
+            this.searchItemName.Location = new System.Drawing.Point(520, 0);
             this.searchItemName.Name = "searchItemName";
-            this.searchItemName.Size = new System.Drawing.Size(90, 35);
+            this.searchItemName.Size = new System.Drawing.Size(90, 32);
             this.searchItemName.TabIndex = 0;
             this.searchItemName.Text = "Szukaj";
             this.searchItemName.UseVisualStyleBackColor = false;
@@ -75,15 +71,15 @@ namespace Szafiarka.Classes
             // textBoxItemName
             // 
             this.textBoxItemName.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.textBoxItemName.Location = new System.Drawing.Point(80, 0);
+            this.textBoxItemName.Location = new System.Drawing.Point(70, 0);
             this.textBoxItemName.Name = "textBoxItemName";
-            this.textBoxItemName.Size = new System.Drawing.Size(570, 32);
+            this.textBoxItemName.Size = new System.Drawing.Size(440, 32);
             this.textBoxItemName.TabIndex = 0;
             // 
             // textBoxItemStatus
             // 
             this.textBoxItemStatus.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.textBoxItemStatus.Location = new System.Drawing.Point(80, 35);
+            this.textBoxItemStatus.Location = new System.Drawing.Point(70, 35);
             this.textBoxItemStatus.Name = "textBoxItemStatus";
             this.textBoxItemStatus.Size = new System.Drawing.Size(100, 21);
             this.textBoxItemStatus.TabIndex = 0;
@@ -93,16 +89,16 @@ namespace Szafiarka.Classes
             this.labelSearchName.AutoSize = true;
             this.labelSearchName.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.labelSearchName.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.labelSearchName.Location = new System.Drawing.Point(0, 0);
+            this.labelSearchName.Location = new System.Drawing.Point(0, 5);
             this.labelSearchName.Name = "labelSearchName";
-            this.labelSearchName.Size = new System.Drawing.Size(55, 18);
+            this.labelSearchName.Size = new System.Drawing.Size(64, 18);
             this.labelSearchName.TabIndex = 0;
-            this.labelSearchName.Text = "Nzwa:";
+            this.labelSearchName.Text = "Nazwa:";
             // 
             // labelSearchStatus
             // 
             this.labelSearchStatus.AutoSize = true;
-            this.labelSearchStatus.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.labelSearchStatus.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.labelSearchStatus.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.labelSearchStatus.Location = new System.Drawing.Point(0, 35);
             this.labelSearchStatus.Name = "labelSearchStatus";
@@ -115,36 +111,18 @@ namespace Szafiarka.Classes
             this.labelSearchCategory.AutoSize = true;
             this.labelSearchCategory.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.labelSearchCategory.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.labelSearchCategory.Location = new System.Drawing.Point(190, 35);
+            this.labelSearchCategory.Location = new System.Drawing.Point(200, 35);
             this.labelSearchCategory.Name = "labelSearchCategory";
             this.labelSearchCategory.Size = new System.Drawing.Size(75, 18);
             this.labelSearchCategory.TabIndex = 0;
             this.labelSearchCategory.Text = "Kategoria:";
             // 
-            // labelSearchChangeDate
-            // 
-            this.labelSearchChangeDate.AutoSize = true;
-            this.labelSearchChangeDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.labelSearchChangeDate.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.labelSearchChangeDate.Location = new System.Drawing.Point(385, 35);
-            this.labelSearchChangeDate.Name = "labelSearchChangeDate";
-            this.labelSearchChangeDate.Size = new System.Drawing.Size(153, 18);
-            this.labelSearchChangeDate.TabIndex = 0;
-            this.labelSearchChangeDate.Text = "Data ostatniej zmiany:";
-            // 
             // textBoxItemCategory
             // 
-            this.textBoxItemCategory.Location = new System.Drawing.Point(275, 35);
+            this.textBoxItemCategory.Location = new System.Drawing.Point(290, 35);
             this.textBoxItemCategory.Name = "textBoxItemCategory";
             this.textBoxItemCategory.Size = new System.Drawing.Size(100, 20);
             this.textBoxItemCategory.TabIndex = 0;
-            // 
-            // textBoxItemChangeDate
-            // 
-            this.textBoxItemChangeDate.Location = new System.Drawing.Point(550, 35);
-            this.textBoxItemChangeDate.Name = "textBoxItemChangeDate";
-            this.textBoxItemChangeDate.Size = new System.Drawing.Size(100, 20);
-            this.textBoxItemChangeDate.TabIndex = 0;
             // 
             // PanelSearch
             // 
@@ -153,12 +131,11 @@ namespace Szafiarka.Classes
             this.Controls.Add(this.labelSearchName);
             this.Controls.Add(this.labelSearchStatus);
             this.Controls.Add(this.textBoxItemCategory);
-            this.Controls.Add(this.textBoxItemChangeDate);
             this.Controls.Add(this.labelSearchCategory);
-            this.Controls.Add(this.labelSearchChangeDate);
             this.Controls.Add(this.searchItemName);
             this.ResumeLayout(false);
             this.PerformLayout();
+            this.InitalizeDataGrids();
 
         }
 
@@ -189,8 +166,7 @@ namespace Szafiarka.Classes
             string name = textBoxItemName.Text;
             string status = textBoxItemStatus.Text;
             string category = textBoxItemCategory.Text;
-            string changeDate = textBoxItemChangeDate.Text;
-            var query = queries.getGridViewItemByName(name);
+            var query = queries.getGridViewItemByName(name, category, status);
 
             foreach (var item in query)
             {
