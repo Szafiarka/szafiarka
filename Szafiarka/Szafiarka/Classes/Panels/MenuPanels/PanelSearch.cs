@@ -23,6 +23,11 @@ namespace Szafiarka.Classes
         private Label labelSearchStatus;
         private Label labelSearchCategory;
         private TextBox textBoxItemCategory;
+        private Label labelRoom;
+        private Label labelWardrobe;
+        private TextBox textBoxRoom;
+        private TextBox textBoxWardrobe;
+        private System.ComponentModel.IContainer components;
         private static int DGVMainWidth = 900;
         
 
@@ -51,6 +56,10 @@ namespace Szafiarka.Classes
             this.labelSearchStatus = new System.Windows.Forms.Label();
             this.labelSearchCategory = new System.Windows.Forms.Label();
             this.textBoxItemCategory = new System.Windows.Forms.TextBox();
+            this.labelRoom = new System.Windows.Forms.Label();
+            this.labelWardrobe = new System.Windows.Forms.Label();
+            this.textBoxRoom = new System.Windows.Forms.TextBox();
+            this.textBoxWardrobe = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // searchItemName
@@ -60,7 +69,7 @@ namespace Szafiarka.Classes
             this.searchItemName.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.searchItemName.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
             this.searchItemName.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.searchItemName.Location = new System.Drawing.Point(520, 0);
+            this.searchItemName.Location = new System.Drawing.Point(740, 0);
             this.searchItemName.Name = "searchItemName";
             this.searchItemName.Size = new System.Drawing.Size(90, 32);
             this.searchItemName.TabIndex = 0;
@@ -73,7 +82,7 @@ namespace Szafiarka.Classes
             this.textBoxItemName.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.textBoxItemName.Location = new System.Drawing.Point(70, 0);
             this.textBoxItemName.Name = "textBoxItemName";
-            this.textBoxItemName.Size = new System.Drawing.Size(440, 32);
+            this.textBoxItemName.Size = new System.Drawing.Size(650, 32);
             this.textBoxItemName.TabIndex = 0;
             // 
             // textBoxItemStatus
@@ -102,7 +111,7 @@ namespace Szafiarka.Classes
             this.labelSearchStatus.ForeColor = System.Drawing.SystemColors.ControlLightLight;
             this.labelSearchStatus.Location = new System.Drawing.Point(0, 35);
             this.labelSearchStatus.Name = "labelSearchStatus";
-            this.labelSearchStatus.Size = new System.Drawing.Size(61, 18);
+            this.labelSearchStatus.Size = new System.Drawing.Size(54, 18);
             this.labelSearchStatus.TabIndex = 0;
             this.labelSearchStatus.Text = "Status:";
             // 
@@ -111,7 +120,7 @@ namespace Szafiarka.Classes
             this.labelSearchCategory.AutoSize = true;
             this.labelSearchCategory.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.labelSearchCategory.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.labelSearchCategory.Location = new System.Drawing.Point(200, 35);
+            this.labelSearchCategory.Location = new System.Drawing.Point(185, 35);
             this.labelSearchCategory.Name = "labelSearchCategory";
             this.labelSearchCategory.Size = new System.Drawing.Size(75, 18);
             this.labelSearchCategory.TabIndex = 0;
@@ -119,10 +128,46 @@ namespace Szafiarka.Classes
             // 
             // textBoxItemCategory
             // 
-            this.textBoxItemCategory.Location = new System.Drawing.Point(290, 35);
+            this.textBoxItemCategory.Location = new System.Drawing.Point(270, 35);
             this.textBoxItemCategory.Name = "textBoxItemCategory";
             this.textBoxItemCategory.Size = new System.Drawing.Size(100, 20);
             this.textBoxItemCategory.TabIndex = 0;
+            // 
+            // labelRoom
+            // 
+            this.labelRoom.AutoSize = true;
+            this.labelRoom.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.labelRoom.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.labelRoom.Location = new System.Drawing.Point(385, 35);
+            this.labelRoom.Name = "labelRoom";
+            this.labelRoom.Size = new System.Drawing.Size(51, 18);
+            this.labelRoom.TabIndex = 0;
+            this.labelRoom.Text = "Pokój:";
+            // 
+            // labelWardrobe
+            // 
+            this.labelWardrobe.AutoSize = true;
+            this.labelWardrobe.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.labelWardrobe.ForeColor = System.Drawing.SystemColors.ControlLightLight;
+            this.labelWardrobe.Location = new System.Drawing.Point(560, 35);
+            this.labelWardrobe.Name = "labelWardrobe";
+            this.labelWardrobe.Size = new System.Drawing.Size(50, 18);
+            this.labelWardrobe.TabIndex = 0;
+            this.labelWardrobe.Text = "Szafa:";
+            // 
+            // textBoxRoom
+            // 
+            this.textBoxRoom.Location = new System.Drawing.Point(445, 35);
+            this.textBoxRoom.Name = "textBoxRoom";
+            this.textBoxRoom.Size = new System.Drawing.Size(100, 20);
+            this.textBoxRoom.TabIndex = 0;
+            // 
+            // textBoxWardrobe
+            // 
+            this.textBoxWardrobe.Location = new System.Drawing.Point(620, 35);
+            this.textBoxWardrobe.Name = "textBoxWardrobe";
+            this.textBoxWardrobe.Size = new System.Drawing.Size(100, 20);
+            this.textBoxWardrobe.TabIndex = 0;
             // 
             // PanelSearch
             // 
@@ -132,6 +177,10 @@ namespace Szafiarka.Classes
             this.Controls.Add(this.labelSearchStatus);
             this.Controls.Add(this.textBoxItemCategory);
             this.Controls.Add(this.labelSearchCategory);
+            this.Controls.Add(this.labelRoom);
+            this.Controls.Add(this.textBoxRoom);
+            this.Controls.Add(this.labelWardrobe);
+            this.Controls.Add(this.textBoxWardrobe);
             this.Controls.Add(this.searchItemName);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -166,7 +215,9 @@ namespace Szafiarka.Classes
             string name = textBoxItemName.Text;
             string status = textBoxItemStatus.Text;
             string category = textBoxItemCategory.Text;
-            var query = queries.getGridViewItemByName(name, category, status);
+            string room = textBoxRoom.Text;
+            string wardrobe = textBoxWardrobe.Text;
+            var query = queries.getGridViewItemByName(name, category, status, room, wardrobe);
 
             foreach (var item in query)
             {

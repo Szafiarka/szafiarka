@@ -82,36 +82,15 @@ namespace Szafiarka.Classes.MapDB
                    };
         }
 
-        public IEnumerable<ResultDataGridItem> getGridViewItemByName(string name, string _category, string _status)
+        public IEnumerable<ResultDataGridItem> getGridViewItemByName(string name, string _category, string _status, string _wardrobe, string _room)
         {
             return from item in connection.Item
                    where item.deleted == false && item.name.Contains(name)
                    join category in connection.Category on item.id_category equals category.id_category where category.name.Contains(_category)
                    join status in connection.Status on item.id_status equals status.id_status where status.name.Contains(_status)
                    join shelf in connection.Shelf on item.id_shelf equals shelf.id_shelf
-                   join wardorobe in connection.Wardrobe on shelf.id_wardrobe equals wardorobe.id_wardrobe
-                   join room in connection.Room on wardorobe.id_room equals room.id_room
-                   select new ResultDataGridItem
-                   {
-                       id = item.id_item,
-                       name = item.name,
-                       category = category.name,
-                       status = status.name,
-                       room = room.name,
-                       wardorobe = wardorobe.name,
-                       shelf = shelf.location
-                   };
-        }
-
-        public IEnumerable<ResultDataGridItem> getGridViewItemByCategory(string _category)
-        {
-            return from item in connection.Item
-                   where item.deleted == false
-                   join category in connection.Category on item.id_category equals category.id_category where category.name.Contains(_category)
-                   join status in connection.Status on item.id_status equals status.id_status
-                   join shelf in connection.Shelf on item.id_shelf equals shelf.id_shelf
-                   join wardorobe in connection.Wardrobe on shelf.id_wardrobe equals wardorobe.id_wardrobe
-                   join room in connection.Room on wardorobe.id_room equals room.id_room
+                   join wardorobe in connection.Wardrobe on shelf.id_wardrobe equals wardorobe.id_wardrobe where status.name.Contains(_wardrobe)
+                   join room in connection.Room on wardorobe.id_room equals room.id_room where status.name.Contains(_room)
                    select new ResultDataGridItem
                    {
                        id = item.id_item,
