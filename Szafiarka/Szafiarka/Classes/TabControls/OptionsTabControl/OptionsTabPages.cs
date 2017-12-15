@@ -29,8 +29,11 @@ namespace Szafiarka.Classes
                     Name = TABPAGESNAMES[i, 0],
                     Text = TABPAGESNAMES[i, 1]
                 };
+                tab.BackColor = Color.FromArgb(0, 0, 64);
                 tabControl.Controls.Add(tab);
             }
+            tabControl.SizeMode = TabSizeMode.Fixed;
+            tabControl.ItemSize = new Size(tabControl.Width / tabControl.TabCount-1, 50);
         }
 
         public OptionsTabPages()
