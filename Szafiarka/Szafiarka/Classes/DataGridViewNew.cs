@@ -40,7 +40,29 @@ namespace Szafiarka.Classes
             RowsDefaultCellStyle.SelectionBackColor = Color.Tomato;
             Sorted += new EventHandler(columnsSortChanged);
             RowTemplate.Height = 35;
-            this.ColumnHeadersHeight = 35;
+            ColumnHeadersHeight = 35;
+            this.MouseClick += dataGridView1_MouseClick;
+        }
+
+        private void dataGridView1_MouseClick(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Right)
+            {
+                ContextMenu m = new ContextMenu();
+                m.MenuItems.Add(new MenuItem("Cut"));
+                m.MenuItems.Add(new MenuItem("Copy"));
+                m.MenuItems.Add(new MenuItem("Paste"));
+
+                int currentMouseOverRow = HitTest(e.X, e.Y).RowIndex;
+
+                if (currentMouseOverRow >= 0)
+                {
+                    m.MenuItems.Add(new MenuItem(string.Format("Do something to row {0}", currentMouseOverRow.ToString())));
+                }
+
+                m.Show(this, new Point(e.X, e.Y));
+
+            }
         }
 
         private void rowAdded(object sender, DataGridViewRowsAddedEventArgs e)
