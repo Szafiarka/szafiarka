@@ -8,12 +8,12 @@ namespace Szafiarka.Classes.MapDB
 {
     class Queries
     {
-        private MapDBDataContext connection;
+        private MapDBDataContext connection; 
         public Queries()
         {
             connection = DBconnection.DBCONNECTION;
         }
-
+        #region GridViews
         public IEnumerable<ResultDataGridCategory> getGridViewCategory()
         {
             return from category in connection.Category
@@ -78,7 +78,7 @@ namespace Szafiarka.Classes.MapDB
                        status = status.name,
                        room = room.name,
                        wardorobe = wardorobe.name,
-                       shelf = shelf.location
+                       shelf = Utils.increaseValueByOne(Int32.Parse(shelf.location))
                    };
         }
 
@@ -99,7 +99,7 @@ namespace Szafiarka.Classes.MapDB
                        status = status.name,
                        room = room.name,
                        wardorobe = wardorobe.name,
-                       shelf = shelf.location
+                       shelf = Utils.increaseValueByOne(Int32.Parse(shelf.location))
                    };
         }
 
@@ -128,7 +128,7 @@ namespace Szafiarka.Classes.MapDB
                         capacity = getWardrobeOccupancyByWardrobeId(shelfsGB.FirstOrDefault().id_wardrobe)
                     };
         }
-
+        #endregion
         public void changeItemDeletedById(int id, bool deleted)
         {
             var item = connection.Item.Where(x => x.id_item == id).FirstOrDefault();

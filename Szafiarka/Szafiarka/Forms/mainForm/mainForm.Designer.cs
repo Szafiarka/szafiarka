@@ -61,45 +61,32 @@ namespace Szafiarka
         #region Menu Buttons
         private void InitializeMenuButtons()
         {
-            for (int i = 0; i < MENUBUTTONSNAMES.Length / 2; i++)
+            var buttons = MenuButton.getButtonsArray();
+            for (int i = 0; i < buttons.Length / 2; i++)
             {
                 var button = new Classes.MenuButton()
                 {
                     Location = new Point(0, 100 * i),
                     BackColor = pMenu.BackColor,
-                    Name = MENUBUTTONSNAMES[i, 0].ToString(),
-                    Text = utils.GetEnumDescription(MENUBUTTONSNAMES[i, 0] as Enum)
+                    Name = buttons[i, 0].ToString(),
+                    Text = Utils.GetEnumDescription(buttons[i, 0] as Enum)
                 };
                 button.changeBackColor(pMenu.BackColor);
-                addImageToButton(button, i);
+                button.addImage();
                 selectAndAddEvent(button);
                 pMenu.Controls.Add(button);
-            }
-        }
-        private void addImageToButton(MenuButton button, int selectedButton)
-        {
-            try
-            {
-                button.Image = Image.FromFile(@MENUBUTTONSNAMES[selectedButton, 1].ToString());
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(
-                    String.Format("Unable to add image to button name = {0}\n{1}", button.Name, e.Message)
-                    );
+                MenuButton.addNewButtonToList(button);
             }
         }
         #endregion
         #region Menu Panels
         private void InitializePanels()
         {
-            PanelsList = new List<Panels> {
-                new PanelStart(),
-                new PanelSearch(),
-                new PanelBin(refreshPanelStartGrid, refreshPanelBinGrid),
-            };
+            Panels.addNewPanelToList(new PanelStart());
+            Panels.addNewPanelToList(new PanelSearch());
+            Panels.addNewPanelToList(new PanelBin(refreshPanelBinGrid));
 
-            foreach (var panel in PanelsList)
+            foreach (var panel in Panels.getPanelsList())
             {
                 Controls.Add(panel);
             };

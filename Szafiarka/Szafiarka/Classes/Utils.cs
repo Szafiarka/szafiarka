@@ -8,14 +8,10 @@ using System.Threading.Tasks;
 
 namespace Szafiarka.Classes
 {
-    class Utils
+    public static class Utils
     {
-        public Utils()
-        {
-
-        }
-        
-        public string GetEnumDescription(Enum value)
+        public static string CAPITALIZEENUM = "g";
+        public static string GetEnumDescription(Enum value)
         {
             FieldInfo fi = value.GetType().GetField(value.ToString());
 
@@ -28,29 +24,14 @@ namespace Szafiarka.Classes
                 return value.ToString();
         }
 
-        public void changePanelsVisableToFalse(List<Panels> PanelsList)
-        {
-            try
-            {
-                foreach (var item in PanelsList)
-                    item.changeVisableToFalse();
-            }
-            catch { }
-        }
-
-        public void changePanelVisableToTrue(List<Panels> PanelsList, Enum name)
-        {
-            try
-            {
-                var panel = PanelsList.Find(X => X.Name.ToUpper() == name.ToString("g"));
-                panel.changeVisableToTrue();
-            }
-            catch { }
-        }
-
-        public bool mod2(int value)
+        public static bool mod2(int value)
         {
             return (value % 2 == 0);
+        }
+
+        public static int increaseValueByOne(int value)
+        {
+            return value+1;
         }
 
     }

@@ -1,15 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 using Szafiarka.Classes;
-using System.Threading;
-using Szafiarka.Forms.Splashscreen;
 
 namespace Szafiarka.Forms.ItemForm
 {
@@ -41,118 +33,106 @@ namespace Szafiarka.Forms.ItemForm
         /// </summary>
         private void InitializeComponent()
         {
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.textBox3 = new System.Windows.Forms.TextBox();
+            InitializeLabels();
+            InitializeComboboxes();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.comboBox2 = new System.Windows.Forms.ComboBox();
-            this.textBox4 = new System.Windows.Forms.TextBox();
+            this.flatButton1 = new Szafiarka.Classes.FlatButton();
+            this.flatButton2 = new Szafiarka.Classes.FlatButton();
+            this.flatButton3 = new Szafiarka.Classes.FlatButton();
+            this.flatButton4 = new Szafiarka.Classes.FlatButton();
+            this.flatButton5 = new Szafiarka.Classes.FlatButton();
+
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
-            // textBox1
-            // 
-            this.textBox1.Location = new System.Drawing.Point(25, 149);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(166, 20);
-            this.textBox1.TabIndex = 0;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(25, 130);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(35, 13);
-            this.label1.TabIndex = 1;
-            this.label1.Text = "label1";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(25, 186);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(35, 13);
-            this.label2.TabIndex = 3;
-            this.label2.Text = "label2";
-            // 
-            // textBox2
-            // 
-            this.textBox2.Location = new System.Drawing.Point(25, 205);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(166, 20);
-            this.textBox2.TabIndex = 2;
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(25, 238);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(35, 13);
-            this.label3.TabIndex = 5;
-            this.label3.Text = "label3";
-            // 
-            // textBox3
-            // 
-            this.textBox3.Location = new System.Drawing.Point(25, 257);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(166, 20);
-            this.textBox3.TabIndex = 4;
-            // 
             // pictureBox1
             // 
-            this.pictureBox1.Location = new System.Drawing.Point(25, 13);
+            this.pictureBox1.Location = new System.Drawing.Point(13, 13);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(530, 104);
-            this.pictureBox1.TabIndex = 6;
+            this.pictureBox1.Size = new System.Drawing.Size(759, 160);
+            this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
             // 
-            // comboBox1
+            // flatButton1
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(266, 149);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(195, 21);
-            this.comboBox1.TabIndex = 7;
+            this.flatButton1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(1)))), ((int)(((byte)(168)))), ((int)(((byte)(204)))));
+            this.flatButton1.FlatAppearance.BorderSize = 0;
+            this.flatButton1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.flatButton1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.flatButton1.Location = new System.Drawing.Point(696, 149);
+            this.flatButton1.Name = "flatButton1";
+            this.flatButton1.Size = new System.Drawing.Size(75, 23);
+            this.flatButton1.TabIndex = 1;
+            this.flatButton1.Text = "flatButton1";
+            this.flatButton1.UseVisualStyleBackColor = false;
+            this.flatButton1.Click += new System.EventHandler(flatButton2_Click);
             // 
-            // comboBox2
+            // flatButton2
             // 
-            this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Location = new System.Drawing.Point(266, 204);
-            this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(195, 21);
-            this.comboBox2.TabIndex = 8;
+            this.flatButton2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(1)))), ((int)(((byte)(168)))), ((int)(((byte)(204)))));
+            this.flatButton2.FlatAppearance.BorderSize = 0;
+            this.flatButton2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.flatButton2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.flatButton2.Location = new System.Drawing.Point(697, 527);
+            this.flatButton2.Name = "flatButton2";
+            this.flatButton2.Size = new System.Drawing.Size(75, 23);
+            this.flatButton2.TabIndex = 2;
+            this.flatButton2.Text = "flatButton2";
+            this.flatButton2.UseVisualStyleBackColor = false;
             // 
-            // textBox4
+            // flatButton3
             // 
-            this.textBox4.Location = new System.Drawing.Point(25, 311);
-            this.textBox4.Multiline = true;
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(436, 84);
-            this.textBox4.TabIndex = 9;
+            this.flatButton3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(1)))), ((int)(((byte)(168)))), ((int)(((byte)(204)))));
+            this.flatButton3.FlatAppearance.BorderSize = 0;
+            this.flatButton3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.flatButton3.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.flatButton3.Location = new System.Drawing.Point(616, 527);
+            this.flatButton3.Name = "flatButton3";
+            this.flatButton3.Size = new System.Drawing.Size(75, 23);
+            this.flatButton3.TabIndex = 3;
+            this.flatButton3.Text = "flatButton3";
+            this.flatButton3.UseVisualStyleBackColor = false;
+            // 
+            // flatButton4
+            // 
+            this.flatButton4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(1)))), ((int)(((byte)(168)))), ((int)(((byte)(204)))));
+            this.flatButton4.FlatAppearance.BorderSize = 0;
+            this.flatButton4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.flatButton4.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.flatButton4.Location = new System.Drawing.Point(535, 527);
+            this.flatButton4.Name = "flatButton4";
+            this.flatButton4.Size = new System.Drawing.Size(75, 23);
+            this.flatButton4.TabIndex = 4;
+            this.flatButton4.Text = "flatButton4";
+            this.flatButton4.UseVisualStyleBackColor = false;
+            // 
+            // flatButton5
+            // 
+            this.flatButton5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(1)))), ((int)(((byte)(168)))), ((int)(((byte)(204)))));
+            this.flatButton5.FlatAppearance.BorderSize = 0;
+            this.flatButton5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.flatButton5.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.flatButton5.Location = new System.Drawing.Point(454, 527);
+            this.flatButton5.Name = "flatButton5";
+            this.flatButton5.Size = new System.Drawing.Size(75, 23);
+            this.flatButton5.TabIndex = 5;
+            this.flatButton5.Text = "flatButton5";
+            this.flatButton5.UseVisualStyleBackColor = false;
+            
             // 
             // ItemForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.ClientSize = new System.Drawing.Size(584, 466);
-            this.Controls.Add(this.textBox4);
-            this.Controls.Add(this.comboBox2);
-            this.Controls.Add(this.comboBox1);
+            this.ClientSize = new System.Drawing.Size(784, 562);
+            this.Controls.Add(this.flatButton5);
+            this.Controls.Add(this.flatButton4);
+            this.Controls.Add(this.flatButton3);
+            this.Controls.Add(this.flatButton2);
+            this.Controls.Add(this.flatButton1);
             this.Controls.Add(this.pictureBox1);
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.textBox3);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.textBox2);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.textBox1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "ItemForm";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "ItemForm";
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
@@ -162,169 +142,52 @@ namespace Szafiarka.Forms.ItemForm
 
         #endregion
 
-        private void InitializeComponent(Classes.MapDB.Item item)
-        {
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.comboBox2 = new System.Windows.Forms.ComboBox();
-            this.textBox4 = new System.Windows.Forms.TextBox();
-            this.flatButton1 = new Szafiarka.Classes.FlatButton();
-            this.flatButton2 = new Szafiarka.Classes.FlatButton();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            this.SuspendLayout();
-            // 
-            // textBox1
-            // 
-            this.textBox1.Location = new System.Drawing.Point(25, 149);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(166, 20);
-            this.textBox1.TabIndex = 0;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(25, 130);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(35, 13);
-            this.label1.TabIndex = 1;
-            this.label1.Text = "label1";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(25, 186);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(35, 13);
-            this.label2.TabIndex = 3;
-            this.label2.Text = "label2";
-            // 
-            // textBox2
-            // 
-            this.textBox2.Location = new System.Drawing.Point(25, 205);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(166, 20);
-            this.textBox2.TabIndex = 2;
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(25, 238);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(35, 13);
-            this.label3.TabIndex = 5;
-            this.label3.Text = "label3";
-            // 
-            // textBox3
-            // 
-            this.textBox3.Location = new System.Drawing.Point(25, 257);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(166, 20);
-            this.textBox3.TabIndex = 4;
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Location = new System.Drawing.Point(25, 13);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(530, 104);
-            this.pictureBox1.TabIndex = 6;
-            this.pictureBox1.TabStop = false;
-            // 
-            // comboBox1
-            // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(266, 149);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(195, 21);
-            this.comboBox1.TabIndex = 7;
-            // 
-            // comboBox2
-            // 
-            this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Location = new System.Drawing.Point(266, 204);
-            this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(195, 21);
-            this.comboBox2.TabIndex = 8;
-            // 
-            // textBox4
-            // 
-            this.textBox4.Location = new System.Drawing.Point(25, 311);
-            this.textBox4.Multiline = true;
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(436, 84);
-            this.textBox4.TabIndex = 9;
-            // 
-            // flatButton1
-            // 
-            this.flatButton1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(1)))), ((int)(((byte)(168)))), ((int)(((byte)(204)))));
-            this.flatButton1.FlatAppearance.BorderSize = 0;
-            this.flatButton1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.flatButton1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.flatButton1.Location = new System.Drawing.Point(480, 431);
-            this.flatButton1.Name = "flatButton1";
-            this.flatButton1.Size = new System.Drawing.Size(75, 23);
-            this.flatButton1.TabIndex = 10;
-            this.flatButton1.Text = "flatButton1";
-            this.flatButton1.UseVisualStyleBackColor = false;
-            // 
-            // flatButton2
-            // 
-            this.flatButton2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(1)))), ((int)(((byte)(168)))), ((int)(((byte)(204)))));
-            this.flatButton2.FlatAppearance.BorderSize = 0;
-            this.flatButton2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.flatButton2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.flatButton2.Location = new System.Drawing.Point(479, 93);
-            this.flatButton2.Name = "flatButton2";
-            this.flatButton2.Size = new System.Drawing.Size(75, 23);
-            this.flatButton2.TabIndex = 11;
-            this.flatButton2.Text = "flatButton2";
-            this.flatButton2.UseVisualStyleBackColor = false;
-            this.flatButton2.Click += new System.EventHandler(this.flatButton2_Click);
-            // 
-            // ItemForm
-            // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.ClientSize = new System.Drawing.Size(584, 466);
-            this.Controls.Add(this.flatButton2);
-            this.Controls.Add(this.flatButton1);
-            this.Controls.Add(this.textBox4);
-            this.Controls.Add(this.comboBox2);
-            this.Controls.Add(this.comboBox1);
-            this.Controls.Add(this.pictureBox1);
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.textBox3);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.textBox2);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.textBox1);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
-            this.Name = "ItemForm";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "ItemForm";
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            this.ResumeLayout(false);
-            this.PerformLayout();
+        private System.Windows.Forms.PictureBox pictureBox1;
+        private Classes.FlatButton flatButton1;
+        private Classes.FlatButton flatButton2;
+        private Classes.FlatButton flatButton3;
+        private Classes.FlatButton flatButton4;
+        private Classes.FlatButton flatButton5;
 
+        private void InitializeComboboxes()
+        {
+            for (int i = 0; i < 5; i++)
+            {
+                var combobox = new ComboboxesNames()
+                {
+                    Location = new System.Drawing.Point(250, 225 + 60 * i)
+                };
+
+
+                Controls.Add(combobox);
+            }
         }
 
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox textBox3;
-        private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.ComboBox comboBox1;
-        private System.Windows.Forms.ComboBox comboBox2;
-        private System.Windows.Forms.TextBox textBox4;
-        private FlatButton flatButton1;
-        private FlatButton flatButton2;
+        private void InitializeLabels()
+        {
+            var labelIndex = 0;
+            int coulmsCount = 2;
+            int rowCounts = 4;
+            var labels = LabelsNames.getLabelsArray();
+            for (int i = 1; i <= coulmsCount; i++)
+            {
+                var k = 0;
+                for (int j = 1; j <= rowCounts + (i-1); j++)
+                {
+                    var label = new LabelsNames()
+                    {
+                        Location = new System.Drawing.Point(13 + 237 * (i - 1), 200 + 60  * (j - 1) + k),
+                        Text = Utils.GetEnumDescription(labels[labelIndex] as Enum)
+                    };
+                    Controls.Add(label);
+
+                    if (labels[labelIndex] is LabelsNames.names.description)
+                        k = 60;
+
+                    labelIndex++;
+                }
+                k = 0;
+            }
+        }
     }
 }

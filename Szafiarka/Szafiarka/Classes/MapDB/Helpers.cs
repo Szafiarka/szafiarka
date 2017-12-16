@@ -57,7 +57,7 @@ namespace Szafiarka.Classes.MapDB
         public virtual string room { get; set; }
         public virtual string status { get; set; }
         public virtual string wardorobe { get; set; }
-        public virtual string shelf { get; set; }
+        public virtual int shelf { get; set; }
     }
 
     public class ResultDataGridLastItems : ResultDataGrid

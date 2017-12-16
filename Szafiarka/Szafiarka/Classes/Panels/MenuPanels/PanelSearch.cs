@@ -222,7 +222,7 @@ namespace Szafiarka.Classes
             foreach (var item in query)
             {
                 DGVMainData.Rows.Add(item.id, item.name, item.category, item.status,
-                    item.room, item.wardorobe, Int32.Parse(item.shelf) + 1);
+                    item.room, item.wardorobe, item.shelf);
             }
             DGVMainData.changeIdColumnVisableToFalse();            
         }

@@ -5,20 +5,18 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Szafiarka.Forms.ItemForm;
 
 namespace Szafiarka.Classes
 {
     class PanelBin : Panels, IPanels
     {
         private MapDB.Queries queries;
-        private Utils utils = new Utils();
         private DataGridViewNew grid;
-        private Action refreashGridStart;
         private Action refreashGridBin;
-        public PanelBin(Action refreshStart, Action refreashBin)
+        public PanelBin(Action refreashBin)
         {
             queries = new MapDB.Queries();
-            refreashGridStart = refreshStart;
             refreashGridBin = refreashBin;
             Name = "pBin";
             InitializeComponent();
@@ -40,9 +38,11 @@ namespace Szafiarka.Classes
 
         private void initializeGrid()
         {
-            grid = new DataGridViewNew();
-            grid.Location = new Point(0, 50);
-            grid.Size = new Size(Size.Width, Size.Height - 100);
+            grid = new DataGridViewNew()
+            {
+                Location = new Point(0, 50),
+                Size = new Size(Size.Width, Size.Height - 100),
+            };
             grid.setName(DataGridViewNew.DGVMainDataNames.bin.ToString());
 
             Controls.Add(grid);
@@ -50,15 +50,14 @@ namespace Szafiarka.Classes
 
         public void refreashGrid()
         {
-            grid.clearRowsAndColumns();
             string[,] columns = {
                 { "id", "ID" },
                 { "name", "Nazwa" },
                 { "category", "Kategoria" },
                 { "status", "Status" },
-                { "rooms", "Pokój" },
+                { "room", "Pokój" },
                 { "wardrobe", "Szafa" },
-                { "shelf", "Szuflada" },
+                { "shelf", "Półka" },
             };
 
             grid.AddColumns(columns);
@@ -74,7 +73,7 @@ namespace Szafiarka.Classes
             {
 
                 grid.Rows.Add(item.id, item.name, item.category, item.status,
-                    item.room, item.wardorobe, Int32.Parse(item.shelf) + 1);
+                    item.room, item.wardorobe, item.shelf);
             }
 
             grid.changeIdColumnVisableToFalse();
@@ -86,11 +85,10 @@ namespace Szafiarka.Classes
             string caption = "Przywracanie";
             MessageBoxButtons button = MessageBoxButtons.YesNo;
             DialogResult res = MessageBox.Show(messageBoxText, caption, button);
-            if (res == DialogResult.Yes)
+            if (res == DialogResult.Yes && grid.CurrentRow != null)
             {
                 var itemId = Int32.Parse(grid.CurrentRow.Cells[0].Value.ToString());
                 queries.changeItemDeletedById(itemId, false);
-                refreashGridStart();
                 refreashGridBin();
             }
         }
