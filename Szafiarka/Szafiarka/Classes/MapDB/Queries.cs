@@ -78,7 +78,7 @@ namespace Szafiarka.Classes.MapDB
                        status = status.name,
                        room = room.name,
                        wardorobe = wardorobe.name,
-                       shelf = Utils.increaseValueByOne(Int32.Parse(shelf.location))
+                       shelf = Utils.increaseValueByOne(shelf.location)
                    };
         }
 
@@ -89,8 +89,8 @@ namespace Szafiarka.Classes.MapDB
                    join category in connection.Category on item.id_category equals category.id_category where category.name.Contains(_category)
                    join status in connection.Status on item.id_status equals status.id_status where status.name.Contains(_status)
                    join shelf in connection.Shelf on item.id_shelf equals shelf.id_shelf
-                   join wardorobe in connection.Wardrobe on shelf.id_wardrobe equals wardorobe.id_wardrobe where status.name.Contains(_wardrobe)
-                   join room in connection.Room on wardorobe.id_room equals room.id_room where status.name.Contains(_room)
+                   join wardorobe in connection.Wardrobe on shelf.id_wardrobe equals wardorobe.id_wardrobe where wardorobe.name.Contains(_wardrobe)
+                   join room in connection.Room on wardorobe.id_room equals room.id_room where room.name.Contains(_room)
                    select new ResultDataGridItem
                    {
                        id = item.id_item,
@@ -99,7 +99,7 @@ namespace Szafiarka.Classes.MapDB
                        status = status.name,
                        room = room.name,
                        wardorobe = wardorobe.name,
-                       shelf = Utils.increaseValueByOne(Int32.Parse(shelf.location))
+                       shelf = Utils.increaseValueByOne(shelf.location)
                    };
         }
 
