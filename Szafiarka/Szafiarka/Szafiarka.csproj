@@ -91,6 +91,24 @@
     <Compile Include="Classes\MenuButton.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Classes\TabControls\OptionsTabControl\AboutProgramTabPage.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Classes\TabControls\OptionsTabControl\AppearanceTabPage.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Classes\TabControls\OptionsTabControl\BackupTabPage.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Classes\TabControls\OptionsTabControl\ContactTabPage.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Classes\TabControls\OptionsTabControl\ContactTabPage\FieldTitleLabel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Classes\TabControls\OptionsTabControl\ContactTabPage\HeaderLabel1.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Classes\TabControls\OptionsTabControl\OptionsTabControl.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -150,12 +168,17 @@
     </Compile>
     <EmbeddedResource Include="Classes\Panels\MenuPanels\PanelSearch.resx">
       <DependentUpon>PanelSearch.cs</DependentUpon>
+    <EmbeddedResource Include="Classes\TabControls\OptionsTabControl\ContactTabPage.resx">
+      <DependentUpon>ContactTabPage.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\ItemForm\ItemForm.resx">
       <DependentUpon>ItemForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\MainForm\MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\OptionsForm\OptionsForm.resx">
+      <DependentUpon>OptionsForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
