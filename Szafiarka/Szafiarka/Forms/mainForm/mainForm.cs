@@ -29,13 +29,13 @@ namespace Szafiarka
 
         public MainForm()
         {
-            Thread splashThread = new Thread(new ThreadStart(SplashscreenStart));
-            splashThread.Start();
-            Thread.Sleep(3000);
+            //Thread splashThread = new Thread(new ThreadStart(SplashscreenStart));
+            //splashThread.Start();
+            //Thread.Sleep(3000);
             var assemblyData = new RetrievingAssemblyData();
             queries = new Classes.MapDB.Queries();
             InitializeComponent(assemblyData);
-            splashThread.Abort();
+            //splashThread.Abort();
         }
 
         public void SplashscreenStart()

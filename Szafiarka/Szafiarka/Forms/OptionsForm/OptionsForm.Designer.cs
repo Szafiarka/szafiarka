@@ -34,7 +34,7 @@ namespace Szafiarka.Forms.OptionsForm
             // 
             // InitializeTabs
             //        
-            OptionsTabPages.InitializeOptionsTabPages(this.tabControl); //var optionsTabPages = new Classes.OptionsTabPages(); optionsTabPages.InitializeOptionsTabPages(this.tabControl);
+           // OptionsTabPages.InitializeOptionsTabPages(this.tabControl); //var optionsTabPages = new Classes.OptionsTabPages(); optionsTabPages.InitializeOptionsTabPages(this.tabControl);
             // 
             // OptionsForm
             // 
