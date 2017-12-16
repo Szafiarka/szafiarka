@@ -29,13 +29,12 @@ namespace Szafiarka.Classes
         private TextBox textBoxWardrobe;
         private System.ComponentModel.IContainer components;
         private static int DGVMainWidth = 900;
-        
 
 
         public PanelSearch()
         {
             Name = "pSearch";
-           // BackColor = System.Drawing.Color.FromArgb(0, 50, 0);
+            // BackColor = System.Drawing.Color.FromArgb(0, 50, 0);
             InitializeComponent();
         }
 
@@ -224,19 +223,12 @@ namespace Szafiarka.Classes
                 DGVMainData.Rows.Add(item.id, item.name, item.category, item.status,
                     item.room, item.wardorobe, item.shelf);
             }
-            DGVMainData.changeIdColumnVisableToFalse();            
-        }
-
-        private void DTVLastItems_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
-        {
-            var itemId = Int32.Parse(DGVMainData.Rows[e.RowIndex].Cells[0].Value.ToString());
-            var itemForm = new ItemForm(itemId);
-            itemForm.Show();
+            DGVMainData.changeIdColumnVisableToFalse();
         }
 
         private void searchItemName_Click(object sender, EventArgs e)
         {
-            DGVItemsView();            
+            DGVItemsView();
         }
     }
 }
