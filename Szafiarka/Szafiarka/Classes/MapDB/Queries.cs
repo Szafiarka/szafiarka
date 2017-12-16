@@ -99,7 +99,7 @@ namespace Szafiarka.Classes.MapDB
                        status = status.name,
                        room = room.name,
                        wardorobe = wardorobe.name,
-                       shelf = shelf.location
+                       shelf = Utils.increaseValueByOne(Int32.Parse(shelf.location))
                    };
         }
 

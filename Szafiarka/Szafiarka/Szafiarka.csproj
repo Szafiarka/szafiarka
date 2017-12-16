@@ -173,19 +173,8 @@
     <Compile Include="Forms\Splashscreen\Splashscreen.Designer.cs">
       <DependentUpon>Splashscreen.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="Classes\Panels\MenuPanels\PanelSearch.resx">
-      <DependentUpon>PanelSearch.cs</DependentUpon>
     <EmbeddedResource Include="Classes\TabControls\OptionsTabControl\ContactTabPage.resx">
       <DependentUpon>ContactTabPage.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\ItemForm\ItemForm.resx">
-      <DependentUpon>ItemForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\MainForm\MainForm.resx">
-      <DependentUpon>MainForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\OptionsForm\OptionsForm.resx">
-      <DependentUpon>OptionsForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -196,9 +185,6 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="Forms\Splashscreen\Splashscreen.resx">
-      <DependentUpon>Splashscreen.cs</DependentUpon>
-    </EmbeddedResource>
     <None Include="Classes\MapDB\MapDB.dbml">
       <Generator>MSLinqToSQLGenerator</Generator>
       <LastGenOutput>MapDB.designer.cs</LastGenOutput>
