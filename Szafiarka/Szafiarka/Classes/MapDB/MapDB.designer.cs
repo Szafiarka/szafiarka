@@ -30,12 +30,12 @@ namespace Szafiarka.Classes.MapDB
 		
     #region Extensibility Method Definitions
     partial void OnCreated();
-    partial void InsertApp_settings(App_settings instance);
-    partial void UpdateApp_settings(App_settings instance);
-    partial void DeleteApp_settings(App_settings instance);
     partial void InsertWardrobe(Wardrobe instance);
     partial void UpdateWardrobe(Wardrobe instance);
     partial void DeleteWardrobe(Wardrobe instance);
+    partial void InsertApp_settings(App_settings instance);
+    partial void UpdateApp_settings(App_settings instance);
+    partial void DeleteApp_settings(App_settings instance);
     partial void InsertCategory(Category instance);
     partial void UpdateCategory(Category instance);
     partial void DeleteCategory(Category instance);
@@ -89,19 +89,19 @@ namespace Szafiarka.Classes.MapDB
 			OnCreated();
 		}
 		
-		public System.Data.Linq.Table<App_settings> App_settings
-		{
-			get
-			{
-				return this.GetTable<App_settings>();
-			}
-		}
-		
 		public System.Data.Linq.Table<Wardrobe> Wardrobe
 		{
 			get
 			{
 				return this.GetTable<Wardrobe>();
+			}
+		}
+		
+		public System.Data.Linq.Table<App_settings> App_settings
+		{
+			get
+			{
+				return this.GetTable<App_settings>();
 			}
 		}
 		
@@ -158,116 +158,6 @@ namespace Szafiarka.Classes.MapDB
 			get
 			{
 				return this.GetTable<Status>();
-			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.App_settings")]
-	public partial class App_settings : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _id_app_settings;
-		
-		private System.DateTime _last_backup;
-		
-		private int _theme;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void Onid_app_settingsChanging(int value);
-    partial void Onid_app_settingsChanged();
-    partial void Onlast_backupChanging(System.DateTime value);
-    partial void Onlast_backupChanged();
-    partial void OnthemeChanging(int value);
-    partial void OnthemeChanged();
-    #endregion
-		
-		public App_settings()
-		{
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id_app_settings", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int id_app_settings
-		{
-			get
-			{
-				return this._id_app_settings;
-			}
-			set
-			{
-				if ((this._id_app_settings != value))
-				{
-					this.Onid_app_settingsChanging(value);
-					this.SendPropertyChanging();
-					this._id_app_settings = value;
-					this.SendPropertyChanged("id_app_settings");
-					this.Onid_app_settingsChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_last_backup", DbType="Date NOT NULL")]
-		public System.DateTime last_backup
-		{
-			get
-			{
-				return this._last_backup;
-			}
-			set
-			{
-				if ((this._last_backup != value))
-				{
-					this.Onlast_backupChanging(value);
-					this.SendPropertyChanging();
-					this._last_backup = value;
-					this.SendPropertyChanged("last_backup");
-					this.Onlast_backupChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_theme", DbType="Int NOT NULL")]
-		public int theme
-		{
-			get
-			{
-				return this._theme;
-			}
-			set
-			{
-				if ((this._theme != value))
-				{
-					this.OnthemeChanging(value);
-					this.SendPropertyChanging();
-					this._theme = value;
-					this.SendPropertyChanged("theme");
-					this.OnthemeChanged();
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
 		}
 	}
@@ -448,6 +338,116 @@ namespace Szafiarka.Classes.MapDB
 		{
 			this.SendPropertyChanging();
 			entity.Wardrobe = null;
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.App_settings")]
+	public partial class App_settings : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _id_app_settings;
+		
+		private System.DateTime _last_backup;
+		
+		private int _theme;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void Onid_app_settingsChanging(int value);
+    partial void Onid_app_settingsChanged();
+    partial void Onlast_backupChanging(System.DateTime value);
+    partial void Onlast_backupChanged();
+    partial void OnthemeChanging(int value);
+    partial void OnthemeChanged();
+    #endregion
+		
+		public App_settings()
+		{
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id_app_settings", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int id_app_settings
+		{
+			get
+			{
+				return this._id_app_settings;
+			}
+			set
+			{
+				if ((this._id_app_settings != value))
+				{
+					this.Onid_app_settingsChanging(value);
+					this.SendPropertyChanging();
+					this._id_app_settings = value;
+					this.SendPropertyChanged("id_app_settings");
+					this.Onid_app_settingsChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_last_backup", DbType="DateTime NOT NULL")]
+		public System.DateTime last_backup
+		{
+			get
+			{
+				return this._last_backup;
+			}
+			set
+			{
+				if ((this._last_backup != value))
+				{
+					this.Onlast_backupChanging(value);
+					this.SendPropertyChanging();
+					this._last_backup = value;
+					this.SendPropertyChanged("last_backup");
+					this.Onlast_backupChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_theme", DbType="Int NOT NULL")]
+		public int theme
+		{
+			get
+			{
+				return this._theme;
+			}
+			set
+			{
+				if ((this._theme != value))
+				{
+					this.OnthemeChanging(value);
+					this.SendPropertyChanging();
+					this._theme = value;
+					this.SendPropertyChanged("theme");
+					this.OnthemeChanged();
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
 		}
 	}
 	
@@ -835,7 +835,7 @@ namespace Szafiarka.Classes.MapDB
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_creation_date", DbType="Date NOT NULL")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_creation_date", DbType="DateTime NOT NULL")]
 		public System.DateTime creation_date
 		{
 			get
@@ -1335,7 +1335,7 @@ namespace Szafiarka.Classes.MapDB
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_creation_date", DbType="Date NOT NULL")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_creation_date", DbType="DateTime NOT NULL")]
 		public System.DateTime creation_date
 		{
 			get
@@ -1355,7 +1355,7 @@ namespace Szafiarka.Classes.MapDB
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_modify_date", DbType="Date")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_modify_date", DbType="DateTime")]
 		public System.Nullable<System.DateTime> modify_date
 		{
 			get
