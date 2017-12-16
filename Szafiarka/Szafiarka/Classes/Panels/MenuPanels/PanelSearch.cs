@@ -216,7 +216,7 @@ namespace Szafiarka.Classes
             string category = textBoxItemCategory.Text;
             string room = textBoxRoom.Text;
             string wardrobe = textBoxWardrobe.Text;
-            var query = queries.getGridViewItemByName(name, category, status, room, wardrobe);
+            var query = queries.getGridViewItemByName(name, category, status, wardrobe, room);
 
             foreach (var item in query)
             {
