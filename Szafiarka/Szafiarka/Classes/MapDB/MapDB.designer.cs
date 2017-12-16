@@ -30,15 +30,18 @@ namespace Szafiarka.Classes.MapDB
 		
     #region Extensibility Method Definitions
     partial void OnCreated();
-    partial void InsertApp_settings(App_settings instance);
-    partial void UpdateApp_settings(App_settings instance);
-    partial void DeleteApp_settings(App_settings instance);
     partial void InsertWardrobe(Wardrobe instance);
     partial void UpdateWardrobe(Wardrobe instance);
     partial void DeleteWardrobe(Wardrobe instance);
+    partial void InsertApp_settings(App_settings instance);
+    partial void UpdateApp_settings(App_settings instance);
+    partial void DeleteApp_settings(App_settings instance);
     partial void InsertCategory(Category instance);
     partial void UpdateCategory(Category instance);
     partial void DeleteCategory(Category instance);
+    partial void InsertEmail_settings(Email_settings instance);
+    partial void UpdateEmail_settings(Email_settings instance);
+    partial void DeleteEmail_settings(Email_settings instance);
     partial void InsertHistory(History instance);
     partial void UpdateHistory(History instance);
     partial void DeleteHistory(History instance);
@@ -86,14 +89,6 @@ namespace Szafiarka.Classes.MapDB
 			OnCreated();
 		}
 		
-		public System.Data.Linq.Table<App_settings> App_settings
-		{
-			get
-			{
-				return this.GetTable<App_settings>();
-			}
-		}
-		
 		public System.Data.Linq.Table<Wardrobe> Wardrobe
 		{
 			get
@@ -102,11 +97,27 @@ namespace Szafiarka.Classes.MapDB
 			}
 		}
 		
+		public System.Data.Linq.Table<App_settings> App_settings
+		{
+			get
+			{
+				return this.GetTable<App_settings>();
+			}
+		}
+		
 		public System.Data.Linq.Table<Category> Category
 		{
 			get
 			{
 				return this.GetTable<Category>();
+			}
+		}
+		
+		public System.Data.Linq.Table<Email_settings> Email_settings
+		{
+			get
+			{
+				return this.GetTable<Email_settings>();
 			}
 		}
 		
@@ -147,116 +158,6 @@ namespace Szafiarka.Classes.MapDB
 			get
 			{
 				return this.GetTable<Status>();
-			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.App_settings")]
-	public partial class App_settings : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _id_app_settings;
-		
-		private System.DateTime _last_backup;
-		
-		private int _theme;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void Onid_app_settingsChanging(int value);
-    partial void Onid_app_settingsChanged();
-    partial void Onlast_backupChanging(System.DateTime value);
-    partial void Onlast_backupChanged();
-    partial void OnthemeChanging(int value);
-    partial void OnthemeChanged();
-    #endregion
-		
-		public App_settings()
-		{
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id_app_settings", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int id_app_settings
-		{
-			get
-			{
-				return this._id_app_settings;
-			}
-			set
-			{
-				if ((this._id_app_settings != value))
-				{
-					this.Onid_app_settingsChanging(value);
-					this.SendPropertyChanging();
-					this._id_app_settings = value;
-					this.SendPropertyChanged("id_app_settings");
-					this.Onid_app_settingsChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_last_backup", DbType="DateTime NOT NULL")]
-		public System.DateTime last_backup
-		{
-			get
-			{
-				return this._last_backup;
-			}
-			set
-			{
-				if ((this._last_backup != value))
-				{
-					this.Onlast_backupChanging(value);
-					this.SendPropertyChanging();
-					this._last_backup = value;
-					this.SendPropertyChanged("last_backup");
-					this.Onlast_backupChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_theme", DbType="Int NOT NULL")]
-		public int theme
-		{
-			get
-			{
-				return this._theme;
-			}
-			set
-			{
-				if ((this._theme != value))
-				{
-					this.OnthemeChanging(value);
-					this.SendPropertyChanging();
-					this._theme = value;
-					this.SendPropertyChanged("theme");
-					this.OnthemeChanged();
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
 		}
 	}
@@ -440,6 +341,116 @@ namespace Szafiarka.Classes.MapDB
 		}
 	}
 	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.App_settings")]
+	public partial class App_settings : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _id_app_settings;
+		
+		private System.DateTime _last_backup;
+		
+		private int _theme;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void Onid_app_settingsChanging(int value);
+    partial void Onid_app_settingsChanged();
+    partial void Onlast_backupChanging(System.DateTime value);
+    partial void Onlast_backupChanged();
+    partial void OnthemeChanging(int value);
+    partial void OnthemeChanged();
+    #endregion
+		
+		public App_settings()
+		{
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id_app_settings", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int id_app_settings
+		{
+			get
+			{
+				return this._id_app_settings;
+			}
+			set
+			{
+				if ((this._id_app_settings != value))
+				{
+					this.Onid_app_settingsChanging(value);
+					this.SendPropertyChanging();
+					this._id_app_settings = value;
+					this.SendPropertyChanged("id_app_settings");
+					this.Onid_app_settingsChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_last_backup", DbType="DateTime NOT NULL")]
+		public System.DateTime last_backup
+		{
+			get
+			{
+				return this._last_backup;
+			}
+			set
+			{
+				if ((this._last_backup != value))
+				{
+					this.Onlast_backupChanging(value);
+					this.SendPropertyChanging();
+					this._last_backup = value;
+					this.SendPropertyChanged("last_backup");
+					this.Onlast_backupChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_theme", DbType="Int NOT NULL")]
+		public int theme
+		{
+			get
+			{
+				return this._theme;
+			}
+			set
+			{
+				if ((this._theme != value))
+				{
+					this.OnthemeChanging(value);
+					this.SendPropertyChanging();
+					this._theme = value;
+					this.SendPropertyChanged("theme");
+					this.OnthemeChanged();
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Category")]
 	public partial class Category : INotifyPropertyChanging, INotifyPropertyChanged
 	{
@@ -578,6 +589,116 @@ namespace Szafiarka.Classes.MapDB
 		}
 	}
 	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Email_settings")]
+	public partial class Email_settings : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _Id;
+		
+		private string _user;
+		
+		private string _pwd;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIdChanging(int value);
+    partial void OnIdChanged();
+    partial void OnuserChanging(string value);
+    partial void OnuserChanged();
+    partial void OnpwdChanging(string value);
+    partial void OnpwdChanged();
+    #endregion
+		
+		public Email_settings()
+		{
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int Id
+		{
+			get
+			{
+				return this._Id;
+			}
+			set
+			{
+				if ((this._Id != value))
+				{
+					this.OnIdChanging(value);
+					this.SendPropertyChanging();
+					this._Id = value;
+					this.SendPropertyChanged("Id");
+					this.OnIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="[user]", Storage="_user", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		public string user
+		{
+			get
+			{
+				return this._user;
+			}
+			set
+			{
+				if ((this._user != value))
+				{
+					this.OnuserChanging(value);
+					this.SendPropertyChanging();
+					this._user = value;
+					this.SendPropertyChanged("user");
+					this.OnuserChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_pwd", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		public string pwd
+		{
+			get
+			{
+				return this._pwd;
+			}
+			set
+			{
+				if ((this._pwd != value))
+				{
+					this.OnpwdChanging(value);
+					this.SendPropertyChanging();
+					this._pwd = value;
+					this.SendPropertyChanged("pwd");
+					this.OnpwdChanged();
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.History")]
 	public partial class History : INotifyPropertyChanging, INotifyPropertyChanged
 	{
@@ -590,9 +711,25 @@ namespace Szafiarka.Classes.MapDB
 		
 		private string _action;
 		
-		private System.DateTime _date;
+		private System.DateTime _creation_date;
 		
 		private string _status_name;
+		
+		private int _id_shelf;
+		
+		private int _id_category;
+		
+		private int _id_status;
+		
+		private string _name;
+		
+		private string _description;
+		
+		private int _size;
+		
+		private System.Data.Linq.Binary _image;
+		
+		private bool _deleted;
 		
 		private EntityRef<Item> _Item;
 		
@@ -606,10 +743,26 @@ namespace Szafiarka.Classes.MapDB
     partial void Onid_itemChanged();
     partial void OnactionChanging(string value);
     partial void OnactionChanged();
-    partial void OndateChanging(System.DateTime value);
-    partial void OndateChanged();
+    partial void Oncreation_dateChanging(System.DateTime value);
+    partial void Oncreation_dateChanged();
     partial void Onstatus_nameChanging(string value);
     partial void Onstatus_nameChanged();
+    partial void Onid_shelfChanging(int value);
+    partial void Onid_shelfChanged();
+    partial void Onid_categoryChanging(int value);
+    partial void Onid_categoryChanged();
+    partial void Onid_statusChanging(int value);
+    partial void Onid_statusChanged();
+    partial void OnnameChanging(string value);
+    partial void OnnameChanged();
+    partial void OndescriptionChanging(string value);
+    partial void OndescriptionChanged();
+    partial void OnsizeChanging(int value);
+    partial void OnsizeChanged();
+    partial void OnimageChanging(System.Data.Linq.Binary value);
+    partial void OnimageChanged();
+    partial void OndeletedChanging(bool value);
+    partial void OndeletedChanged();
     #endregion
 		
 		public History()
@@ -662,7 +815,7 @@ namespace Szafiarka.Classes.MapDB
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_action", DbType="VarChar(50)")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_action", DbType="VarChar(150)")]
 		public string action
 		{
 			get
@@ -682,22 +835,22 @@ namespace Szafiarka.Classes.MapDB
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_date", DbType="DateTime NOT NULL")]
-		public System.DateTime date
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_creation_date", DbType="DateTime NOT NULL")]
+		public System.DateTime creation_date
 		{
 			get
 			{
-				return this._date;
+				return this._creation_date;
 			}
 			set
 			{
-				if ((this._date != value))
+				if ((this._creation_date != value))
 				{
-					this.OndateChanging(value);
+					this.Oncreation_dateChanging(value);
 					this.SendPropertyChanging();
-					this._date = value;
-					this.SendPropertyChanged("date");
-					this.OndateChanged();
+					this._creation_date = value;
+					this.SendPropertyChanged("creation_date");
+					this.Oncreation_dateChanged();
 				}
 			}
 		}
@@ -718,6 +871,166 @@ namespace Szafiarka.Classes.MapDB
 					this._status_name = value;
 					this.SendPropertyChanged("status_name");
 					this.Onstatus_nameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id_shelf", DbType="Int NOT NULL")]
+		public int id_shelf
+		{
+			get
+			{
+				return this._id_shelf;
+			}
+			set
+			{
+				if ((this._id_shelf != value))
+				{
+					this.Onid_shelfChanging(value);
+					this.SendPropertyChanging();
+					this._id_shelf = value;
+					this.SendPropertyChanged("id_shelf");
+					this.Onid_shelfChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id_category", DbType="Int NOT NULL")]
+		public int id_category
+		{
+			get
+			{
+				return this._id_category;
+			}
+			set
+			{
+				if ((this._id_category != value))
+				{
+					this.Onid_categoryChanging(value);
+					this.SendPropertyChanging();
+					this._id_category = value;
+					this.SendPropertyChanged("id_category");
+					this.Onid_categoryChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id_status", DbType="Int NOT NULL")]
+		public int id_status
+		{
+			get
+			{
+				return this._id_status;
+			}
+			set
+			{
+				if ((this._id_status != value))
+				{
+					this.Onid_statusChanging(value);
+					this.SendPropertyChanging();
+					this._id_status = value;
+					this.SendPropertyChanged("id_status");
+					this.Onid_statusChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_name", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		public string name
+		{
+			get
+			{
+				return this._name;
+			}
+			set
+			{
+				if ((this._name != value))
+				{
+					this.OnnameChanging(value);
+					this.SendPropertyChanging();
+					this._name = value;
+					this.SendPropertyChanged("name");
+					this.OnnameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_description", DbType="Text", UpdateCheck=UpdateCheck.Never)]
+		public string description
+		{
+			get
+			{
+				return this._description;
+			}
+			set
+			{
+				if ((this._description != value))
+				{
+					this.OndescriptionChanging(value);
+					this.SendPropertyChanging();
+					this._description = value;
+					this.SendPropertyChanged("description");
+					this.OndescriptionChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_size", DbType="Int NOT NULL")]
+		public int size
+		{
+			get
+			{
+				return this._size;
+			}
+			set
+			{
+				if ((this._size != value))
+				{
+					this.OnsizeChanging(value);
+					this.SendPropertyChanging();
+					this._size = value;
+					this.SendPropertyChanged("size");
+					this.OnsizeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_image", DbType="Image", UpdateCheck=UpdateCheck.Never)]
+		public System.Data.Linq.Binary image
+		{
+			get
+			{
+				return this._image;
+			}
+			set
+			{
+				if ((this._image != value))
+				{
+					this.OnimageChanging(value);
+					this.SendPropertyChanging();
+					this._image = value;
+					this.SendPropertyChanged("image");
+					this.OnimageChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_deleted", DbType="Bit NOT NULL")]
+		public bool deleted
+		{
+			get
+			{
+				return this._deleted;
+			}
+			set
+			{
+				if ((this._deleted != value))
+				{
+					this.OndeletedChanging(value);
+					this.SendPropertyChanging();
+					this._deleted = value;
+					this.SendPropertyChanged("deleted");
+					this.OndeletedChanged();
 				}
 			}
 		}
@@ -1042,7 +1355,7 @@ namespace Szafiarka.Classes.MapDB
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_modify_date", DbType="DateTime", UpdateCheck=UpdateCheck.Never)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_modify_date", DbType="DateTime")]
 		public System.Nullable<System.DateTime> modify_date
 		{
 			get
@@ -1354,7 +1667,7 @@ namespace Szafiarka.Classes.MapDB
 		
 		private int _id_wardrobe;
 		
-		private string _location;
+		private int _location;
 		
 		private int _capacity;
 		
@@ -1370,7 +1683,7 @@ namespace Szafiarka.Classes.MapDB
     partial void Onid_shelfChanged();
     partial void Onid_wardrobeChanging(int value);
     partial void Onid_wardrobeChanged();
-    partial void OnlocationChanging(string value);
+    partial void OnlocationChanging(int value);
     partial void OnlocationChanged();
     partial void OncapacityChanging(int value);
     partial void OncapacityChanged();
@@ -1427,8 +1740,8 @@ namespace Szafiarka.Classes.MapDB
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_location", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
-		public string location
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_location", DbType="Int NOT NULL")]
+		public int location
 		{
 			get
 			{
