@@ -14,8 +14,6 @@ namespace Szafiarka.Forms.ItemForm
 {
     public partial class ItemForm : Form
     {
-        private List<ComboBox> comboboxes;
-
         private Queries queries;
         private Bitmap oryginalImage;
         private Item item;

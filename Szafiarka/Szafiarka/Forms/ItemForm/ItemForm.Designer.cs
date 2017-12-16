@@ -158,6 +158,7 @@ namespace Szafiarka.Forms.ItemForm
                     Location = new System.Drawing.Point(250, 225 + 60 * i)
                 };
 
+                combobox.addRange(ComboboxesNames.getNamesArray()[i] as Enum);
 
                 Controls.Add(combobox);
             }
