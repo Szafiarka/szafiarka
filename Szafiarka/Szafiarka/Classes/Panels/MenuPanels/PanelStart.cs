@@ -167,7 +167,6 @@ namespace Szafiarka.Classes
 
         private void addEventToButton(Button button)
         {
-
             button.Click += new EventHandler(cos);
             button.Click += new EventHandler(DGVMainDataChangeVisable);
             button.Click += new EventHandler(ChangeButtonSelection);
