@@ -41,12 +41,15 @@ namespace Szafiarka.Classes
             Sorted += new EventHandler(columnsSortChanged);
             RowTemplate.Height = 35;
             ColumnHeadersHeight = 35;
-            this.MouseClick += dataGridView1_MouseClick;
+            MouseClick += dataGridView1_MouseClick;
         }
 
         private void dataGridView1_MouseClick(object sender, MouseEventArgs e)
         {
-            if (e.Button == MouseButtons.Right)
+            if (e.Button == MouseButtons.Right && 
+                (Name == DGVMainDataNames.items.ToString()
+                || Name == DGVMainDataNames.bin.ToString()
+                || Name == DGVMainDataNames.lastItems.ToString()))
             {
                 ContextMenu m = new ContextMenu();
                 m.MenuItems.Add(new MenuItem("Cut"));

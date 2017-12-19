@@ -23,6 +23,30 @@ namespace Szafiarka.Classes.MapDB
         }
     }
 
+    public partial class Room
+    {
+        public override string ToString()
+        {
+            return string.Format("{0}", name);
+        }
+    }
+
+    public partial class Wardrobe
+    {
+        public override string ToString()
+        {
+            return string.Format("{0}", name);
+        }
+    }
+
+    public partial class Shelf
+    {
+        public override string ToString()
+        {
+            return string.Format("{0}", Utils.increaseValueByOne(location));
+        }
+    }
+
     public class ResultDataGrid
     {
         public virtual int id { get; set; }
