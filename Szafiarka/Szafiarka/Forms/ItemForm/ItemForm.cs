@@ -38,7 +38,7 @@ namespace Szafiarka.Forms.ItemForm
             dialog.Filter = "Image files| *.jpg; *.jpeg; *.png";
             if (dialog.ShowDialog() == DialogResult.OK)
             {
-                pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
+                pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
                 var image = new Bitmap(dialog.FileName);
                 image = ImageDataBase.chnageImageSize(image);
                 pictureBox1.Image = image;

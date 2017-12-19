@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -30,6 +31,8 @@ namespace Szafiarka.Forms.ItemForm
             category,
             [Description("Status")]
             status,
+            [Description("Historia")]
+            histry,
         }
 
         private static object[] namesArray = {
@@ -41,12 +44,13 @@ namespace Szafiarka.Forms.ItemForm
             names.wardrobe,
             names.shelf,
             names.category,
-            names.status
+            names.status,
+            names.histry,
         };
 
         public LabelsNames() : base()
         {
-
+            ForeColor = Color.White;
         }
 
         public static object[] getLabelsArray()

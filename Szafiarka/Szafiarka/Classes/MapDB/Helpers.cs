@@ -43,7 +43,7 @@ namespace Szafiarka.Classes.MapDB
     {
         public override string ToString()
         {
-            return string.Format("{0}", Int32.Parse(location) + 1);
+            return string.Format("{0}", Utils.increaseValueByOne(location));
         }
     }
 
