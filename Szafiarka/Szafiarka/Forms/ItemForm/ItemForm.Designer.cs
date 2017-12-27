@@ -176,7 +176,7 @@ namespace Szafiarka.Forms.ItemForm
             var labelIndex = 0;
             int coulmsCount = 3;
             int rowCounts = 4;
-            var labels = LabelsNames.getLabelsArray();
+            var labels = LabelsNames.getArray();
             for (int i = 1; i <= coulmsCount; i++)
             {
                 var k = 0;
@@ -202,13 +202,19 @@ namespace Szafiarka.Forms.ItemForm
 
         private void InitializeTextBox()
         {
+            var textboxes = new TextboxesNames();
             var k = 0;
-            var textbox = new TextBox()
+            foreach (var item in textboxes.getList())
             {
-                Location = new System.Drawing.Point(13, 225 + 60 * k),
-                Width = 200
-            };
-            Controls.Add(textbox);
+                item.Location = new System.Drawing.Point(13, 225 + 60 * k);
+                item.Width = 200;
+                if (item.Name.ToUpper() == TextboxesNames.names.description.ToString().ToUpper())
+                {
+                    item.Height = 80;
+                }
+                k++;
+                Controls.Add(item);
+            }
         }
     }
 }

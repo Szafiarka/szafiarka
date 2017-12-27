@@ -53,7 +53,7 @@ namespace Szafiarka.Forms.ItemForm
             ForeColor = Color.White;
         }
 
-        public static object[] getLabelsArray()
+        public static object[] getArray()
         {
             return namesArray;
         }

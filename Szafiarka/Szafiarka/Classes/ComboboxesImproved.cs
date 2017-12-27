@@ -10,7 +10,7 @@ namespace Szafiarka.Classes
     class ComboboxesImproved 
     {
         private bool withAdd;
-        private List<ComboboxNew> comboboxes;
+        private static List<ComboboxNew> comboboxes;
         public enum names
         {
             room,
@@ -39,10 +39,12 @@ namespace Szafiarka.Classes
 
         private void createList()
         {
-            if (comboboxes == null)
+            if (comboboxes != null)
             {
-                comboboxes = new List<ComboboxNew> { };
+                comboboxes.Clear();
             }
+
+            comboboxes = new List<ComboboxNew> { };
 
             foreach (var item in namesArray)
             {
@@ -134,6 +136,11 @@ namespace Szafiarka.Classes
             addRangeShelf();
         }
 
+        public static ComboboxNew getComboboxByName(Enum name)
+        {
+            return comboboxes.Find(x => x.Name.ToUpper() == name.ToString().ToUpper());
+        }
+
     }
 
     class ComboboxNew : ComboBox
@@ -166,7 +173,7 @@ namespace Szafiarka.Classes
 
         private void Add_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (SelectedItem.ToString() == "Dodaj")
+            if (SelectedItem != null && SelectedItem.ToString() == "Dodaj")
             {
                 MessageBox.Show("Dodaj cos");
             }

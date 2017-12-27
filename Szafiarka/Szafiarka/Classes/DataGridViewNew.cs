@@ -115,7 +115,11 @@ namespace Szafiarka.Classes
             {
                 var itemId = Int32.Parse(Rows[e.RowIndex].Cells[0].Value.ToString());
                 var itemForm = new ItemForm(itemId);
-                itemForm.Show();
+                if (itemForm != null)
+                {
+                    itemForm.Show();
+                }
+
             }
         }
 

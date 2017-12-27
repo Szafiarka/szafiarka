@@ -74,7 +74,26 @@ namespace Szafiarka.Forms.ItemForm
 
         private void fillForm()
         {
-            //this.textBox1.Text = item.name;
+            var textbox = TextboxesNames.getTextBoxByName(TextboxesNames.names.name);
+            textbox.Text = item.name;
+
+            textbox = TextboxesNames.getTextBoxByName(TextboxesNames.names.description);
+            textbox.Text = item.description;
+
+            var combo = ComboboxesImproved.getComboboxByName(ComboboxesImproved.names.category);
+            combo.SelectedItem = queries.getCategoryById(item.id_category);
+
+            combo = ComboboxesImproved.getComboboxByName(ComboboxesImproved.names.room);
+            combo.SelectedItem = queries.getRoomByShelfId(item.id_shelf);
+
+            combo = ComboboxesImproved.getComboboxByName(ComboboxesImproved.names.wardrobe);
+            combo.SelectedItem = queries.getWardrobeByShelfId(item.id_shelf);
+
+            combo = ComboboxesImproved.getComboboxByName(ComboboxesImproved.names.shelf);
+            combo.SelectedItem = queries.getShelfById(item.id_shelf);
+
+            combo = ComboboxesImproved.getComboboxByName(ComboboxesImproved.names.status);
+            combo.SelectedItem = queries.getStatusById(item.id_status);
             //this.checkBox1.Checked = item.deleted ? false : true;
         }
     }

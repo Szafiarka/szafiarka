@@ -188,5 +188,83 @@ namespace Szafiarka.Classes.MapDB
                 return null;
             }
         }
+
+        public Category getCategoryById(int id)
+        {
+            var query = from items in connection.Category
+                        where items.id_category == id
+                        select items;
+            try
+            {
+                return query.First();
+            }
+            catch
+            {
+                return null;
+            }
+        }
+
+        public Room getRoomByShelfId(int id)
+        {
+            var query = from rooms in connection.Room
+                        where rooms.id_room == getWardrobeByShelfId(id).id_room
+                        select rooms;
+
+            try
+            {
+                return query.First();
+            }
+            catch
+            {
+                return null;
+            }
+        }
+
+        public Shelf getShelfById(int id)
+        {
+            var query = from shelfs in connection.Shelf
+                        where shelfs.id_shelf == id
+                        select shelfs;
+            try
+            {
+                return query.First();
+            }
+            catch
+            {
+                return null;
+            }
+        }
+
+        public Wardrobe getWardrobeByShelfId(int id)
+        {
+            var query = from wardrobes in connection.Wardrobe
+                        where wardrobes.id_wardrobe == getShelfById(id).id_wardrobe
+                        select wardrobes;
+            try
+            {
+                return query.First();
+            }
+            catch
+            {
+                return null;
+            }
+
+        }
+
+        public Status getStatusById(int id)
+        {
+            var query = from status in connection.Status
+                        where status.id_status == id
+                        select status;
+            try
+            {
+                return query.First();
+            }
+            catch
+            {
+                return null;
+            }
+
+        }
     }
 }
