@@ -67,10 +67,9 @@ namespace Szafiarka.Classes
                 }
                 Controls.Add(label);
             }
-
         }
 
-        private void initializeFields()
+        private void initializeFields() //zrobic error provider jak zmieni sie kolorystyka
         {
             textBoxList = new List<TextBox>((LABELNAMES.Length - 1) / 2);
             for (int i = 0; i < LABELNAMES.Length / 2; i++)
@@ -86,6 +85,7 @@ namespace Szafiarka.Classes
                     comboBoxCategories.Items.Add("Problem");
                     comboBoxCategories.Items.Add("Sugestia");
                     comboBoxCategories.Items.Add("Błąd");
+                    comboBoxCategories.Items.Add("Inne");
                     comboBoxCategories.SelectedIndex = 0;
                     Controls.Add(comboBoxCategories);
                     comboBoxCategories.BringToFront();
@@ -176,28 +176,37 @@ namespace Szafiarka.Classes
                     mail.Attachments.Add(new Attachment(textBoxList.Last().Text));
                 }
 
-
                 SmtpServer.Port = 587;
-                SmtpServer.Credentials = new NetworkCredential("smtp_username", "smtp_password");   //potrzeba ukrycia tych danych
+                SmtpServer.Credentials = new NetworkCredential(DBconnection.DBCONNECTION.Email_settings.FirstOrDefault().user, DBconnection.DBCONNECTION.Email_settings.FirstOrDefault().pwd);   //potrzeba ukrycia tych danych
                 SmtpServer.EnableSsl = true;
 
                 SmtpServer.Send(mail);
                 MessageBox.Show("Wiadomość została wysłana", "Potwierdzenie", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 clearFields();
             }
-            else
-            {
-                MessageBox.Show("Wszystkie pola są wymagane. Sprawdź ponownie dane w formularzu.", "Informacja", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            }
-
         }
 
         private bool validationOfFields()
         {
             foreach (var x in textBoxList)
             {
-                if(x.Text == "")
+                if (x.Name == "attachment")
                 {
+                    continue;
+                }
+
+                if (x.Name == "email")
+                {
+                    if (!(x.Text.Contains("@")))
+                    {
+                        MessageBox.Show("Sprawdź poprawność adresu mailowego.", "Informacja", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        return false;
+                    }
+                }
+
+                if (x.Text == "")
+                {
+                    MessageBox.Show("Wszystkie pola są wymagane. Sprawdź ponownie dane w formularzu.", "Informacja", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return false;
                 }
             }
@@ -206,13 +215,12 @@ namespace Szafiarka.Classes
 
         private void clearFields()
         {
-            foreach(var x in textBoxList)
+            foreach (var x in textBoxList)
             {
                 x.Text = "";
             }
-
+            comboBoxCategories.SelectedIndex = 0;
         }
-
     }
 }
 
