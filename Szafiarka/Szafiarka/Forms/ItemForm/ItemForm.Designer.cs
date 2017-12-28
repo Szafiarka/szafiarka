@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
+using System.Windows.Forms;
 using Szafiarka.Classes;
 
 namespace Szafiarka.Forms.ItemForm
@@ -35,6 +37,7 @@ namespace Szafiarka.Forms.ItemForm
         {
             InitializeLabels();
             InitializeComboboxes();
+            InitializeTextBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.flatButton1 = new Szafiarka.Classes.FlatButton();
             this.flatButton2 = new Szafiarka.Classes.FlatButton();
@@ -118,12 +121,18 @@ namespace Szafiarka.Forms.ItemForm
             this.flatButton5.TabIndex = 5;
             this.flatButton5.Text = "flatButton5";
             this.flatButton5.UseVisualStyleBackColor = false;
-            
+
+            var datagridview = new DataGridViewNew()
+            {
+                Location = new System.Drawing.Point(450, 225),
+                Size = new Size(200, 200)
+            };
             // 
             // ItemForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
             this.ClientSize = new System.Drawing.Size(784, 562);
             this.Controls.Add(this.flatButton5);
             this.Controls.Add(this.flatButton4);
@@ -131,6 +140,7 @@ namespace Szafiarka.Forms.ItemForm
             this.Controls.Add(this.flatButton2);
             this.Controls.Add(this.flatButton1);
             this.Controls.Add(this.pictureBox1);
+            this.Controls.Add(datagridview);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "ItemForm";
             this.Text = "ItemForm";
@@ -151,22 +161,20 @@ namespace Szafiarka.Forms.ItemForm
 
         private void InitializeComboboxes()
         {
-            for (int i = 0; i < 5; i++)
+            var k = 0;
+            var comboboxes = new ComboboxesImproved();
+            foreach (var item in comboboxes.getComboboxImprovedList())
             {
-                var combobox = new ComboboxesNames()
-                {
-                    Location = new System.Drawing.Point(250, 225 + 60 * i)
-                };
-
-
-                Controls.Add(combobox);
+                item.Location = new System.Drawing.Point(250, 225 + 60 * k);
+                Controls.Add(item);
+                k++;
             }
         }
 
         private void InitializeLabels()
         {
             var labelIndex = 0;
-            int coulmsCount = 2;
+            int coulmsCount = 3;
             int rowCounts = 4;
             var labels = LabelsNames.getLabelsArray();
             for (int i = 1; i <= coulmsCount; i++)
@@ -174,6 +182,8 @@ namespace Szafiarka.Forms.ItemForm
                 var k = 0;
                 for (int j = 1; j <= rowCounts + (i-1); j++)
                 {
+                    if (labelIndex == labels.Length)
+                        break;
                     var label = new LabelsNames()
                     {
                         Location = new System.Drawing.Point(13 + 237 * (i - 1), 200 + 60  * (j - 1) + k),
@@ -188,6 +198,17 @@ namespace Szafiarka.Forms.ItemForm
                 }
                 k = 0;
             }
+        }
+
+        private void InitializeTextBox()
+        {
+            var k = 0;
+            var textbox = new TextBox()
+            {
+                Location = new System.Drawing.Point(13, 225 + 60 * k),
+                Width = 200
+            };
+            Controls.Add(textbox);
         }
     }
 }
