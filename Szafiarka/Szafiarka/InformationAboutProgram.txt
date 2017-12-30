@@ -1,0 +1,5 @@
+﻿Program SZAFIARKA został opracowany przed studentów Uniwersytetu Łódzkiego, wydziału Matematyki i Informatyki z kierunku Informatyka jako aplikacja na zaliczenie przedmiotu związanego z programem nauczania. Aplikacja została w całości stworzona w Microsoft Visual Studio Enterprise 2017.
+
+Osoby biorące udział w projekcie: Anna Matczak, Szymon Całka, Damian Kuberski, Bartłomiej Surma
+
+Niniejsza aplikacja w rozumieniu prawa stanowi utwór prawa autorskiego i z tego tytułu zabrania się reprodukcji, opracowań oraz rozpowszechniania programu bez zgody jej twórców.

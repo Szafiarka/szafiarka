@@ -225,6 +225,7 @@
       <DependentUpon>database.mdf</DependentUpon>
     </Content>
     <Content Include="images\logo_white.png" />
+    <Content Include="images\Logo_white_about_program.png" />
     <Content Include="images\menuButtons\add.png" />
     <Content Include="images\menuButtons\bin.png" />
     <Content Include="images\menuButtons\delete.png" />
@@ -233,6 +234,9 @@
     <Content Include="images\menuButtons\home.png" />
     <Content Include="images\menuButtons\search.png" />
     <Content Include="images\settings.png" />
+    <Content Include="InformationAboutProgram.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

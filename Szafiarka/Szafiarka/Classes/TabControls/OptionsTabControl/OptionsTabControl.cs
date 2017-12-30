@@ -18,17 +18,15 @@ namespace Szafiarka.Classes
             this.Location = new Point(0,0);//(50, 32);     //testowy rozmiar i lokalizacja
             this.Name = "OptionsTabControl";
             this.SizeMode = TabSizeMode.Fixed;
-            this.ItemSize = new Size((1000/3)-1, 30);
+            this.ItemSize = new Size((1000/3)-1, 35);
             InitializeTabControls();
             this.DrawMode = TabDrawMode.OwnerDrawFixed;
             this.DrawItem += new DrawItemEventHandler(this.OptionsTabControl_DrawItem);
-
         }
 
         private void OptionsTabControl_DrawItem(object sender, DrawItemEventArgs e)
         {
-            //e.DrawBackground(); 
-            Font headerFontStyle = new Font("Arial", 16, FontStyle.Bold);
+            Font headerFontStyle = new Font("Arial", 14, FontStyle.Bold);
             var headerFontColor = new SolidBrush(Color.FromArgb(255, 0, 0, 64));
 
             using (Brush br = new SolidBrush(TabColors[this.TabPages[e.Index]]))
@@ -50,7 +48,6 @@ namespace Szafiarka.Classes
              tabPagesList = new List<OptionsTabPages> {
                 new AboutProgramTabPage(),
                 new AppearanceTabPage(),
-                //new BackupTabPage(),
                 new ContactTabPage()
             };
 
