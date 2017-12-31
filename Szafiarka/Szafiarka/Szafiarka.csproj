@@ -177,6 +177,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <None Include="Classes\MapDB\MapDB.dbml">
       <Generator>MSLinqToSQLGenerator</Generator>
@@ -237,6 +238,8 @@
     <Content Include="InformationAboutProgram.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <None Include="Resources\ERR.ico" />
+    <None Include="Resources\OK.ico" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
