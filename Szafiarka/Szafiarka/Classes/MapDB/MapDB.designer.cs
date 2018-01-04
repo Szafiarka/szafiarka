@@ -60,7 +60,7 @@ namespace Szafiarka.Classes.MapDB
     #endregion
 		
 		public MapDBDataContext() : 
-				base(global::Szafiarka.Properties.Settings.Default.databaseConnectionString1, mappingSource)
+				base(global::Szafiarka.Properties.Settings.Default.databaseConnectionString, mappingSource)
 		{
 			OnCreated();
 		}
