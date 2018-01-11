@@ -266,5 +266,18 @@ namespace Szafiarka.Classes.MapDB
             }
 
         }
+
+        public IEnumerable<ResultItemHistory> getHistoryByItemId(int id)
+        {
+            return from history in connection.History
+                   where history.id_item == id
+                   select new ResultItemHistory
+                   {
+                       id = history.id_history,
+                       name = history.name,
+                       action = history.action,
+                       creation_date = history.creation_date
+                   };
+        }
     }
 }

@@ -6,11 +6,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Szafiarka.Classes;
 
 namespace Szafiarka.Forms.ItemForm
 {
-    partial class LabelsNames : Label
+    partial class LabelsImproved
     {
+        public static List<Label> labels;
         public enum names
         {
             [Description("Nazwa")]
@@ -48,14 +50,46 @@ namespace Szafiarka.Forms.ItemForm
             names.histry,
         };
 
-        public LabelsNames() : base()
+        public LabelsImproved()
         {
-            ForeColor = Color.White;
+            createList();
         }
 
         public static object[] getArray()
         {
             return namesArray;
+        }
+
+        private void createList()
+        {
+            if(labels != null)
+            {
+                labels.Clear();
+            }
+
+            labels = new List<Label> { };
+
+            foreach (var item in namesArray)
+            {
+                var label = new Label
+                {
+                    Width = 200,
+                    ForeColor = Color.White,
+                    Name = item.ToString(),
+                    Text = Utils.GetEnumDescription(item as Enum)
+                };
+                labels.Add(label);
+            }
+        }
+
+        public static List<Label> getList()
+        {
+            return labels;
+        }
+
+        public static Label getLabelByName(Enum name)
+        {
+            return labels.Find(x => x.Name.ToUpper() == name.ToString().ToUpper());
         }
     }
 }

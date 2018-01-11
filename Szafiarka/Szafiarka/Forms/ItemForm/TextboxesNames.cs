@@ -40,9 +40,10 @@ namespace Szafiarka.Forms.ItemForm
             }
 
             for (int i = 0; i < namesArray.Length / 2; i++)
-            { 
+            {
                 var textbox = new TextBox()
                 {
+                    CausesValidation = true,
                     Name = namesArray[i , 0].ToString(),
                     Multiline = (Boolean)namesArray[i, 1]
                 };

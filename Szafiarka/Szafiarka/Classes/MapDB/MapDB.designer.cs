@@ -713,8 +713,6 @@ namespace Szafiarka.Classes.MapDB
 		
 		private System.DateTime _creation_date;
 		
-		private string _status_name;
-		
 		private int _id_shelf;
 		
 		private int _id_category;
@@ -745,8 +743,6 @@ namespace Szafiarka.Classes.MapDB
     partial void OnactionChanged();
     partial void Oncreation_dateChanging(System.DateTime value);
     partial void Oncreation_dateChanged();
-    partial void Onstatus_nameChanging(string value);
-    partial void Onstatus_nameChanged();
     partial void Onid_shelfChanging(int value);
     partial void Onid_shelfChanged();
     partial void Onid_categoryChanging(int value);
@@ -851,26 +847,6 @@ namespace Szafiarka.Classes.MapDB
 					this._creation_date = value;
 					this.SendPropertyChanged("creation_date");
 					this.Oncreation_dateChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_status_name", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
-		public string status_name
-		{
-			get
-			{
-				return this._status_name;
-			}
-			set
-			{
-				if ((this._status_name != value))
-				{
-					this.Onstatus_nameChanging(value);
-					this.SendPropertyChanging();
-					this._status_name = value;
-					this.SendPropertyChanged("status_name");
-					this.Onstatus_nameChanged();
 				}
 			}
 		}

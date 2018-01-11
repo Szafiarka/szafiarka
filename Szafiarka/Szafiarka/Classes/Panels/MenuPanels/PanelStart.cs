@@ -46,13 +46,6 @@ namespace Szafiarka.Classes
             { buttonsNames.categories.ToString(), "Kategorie" },
         };
 
-        private static string[,] LASTITEMSCOLUMNS = {
-            { "id", "ID" },
-            { "name", "Nazwa" },
-            { "category", "Kategoria" },
-            { "date", "Data" }
-        };
-
         public PanelStart()
         {
             Name = "pStart";
@@ -143,18 +136,19 @@ namespace Szafiarka.Classes
                 { "id", "ID" },
                 { "name", "Nazwa" },
                 { "category", "Kategoria" },
-                { "date", "Data" }
+                { "date", "Dni temu" }
             };
-            DGVLastItems.AddColumns(LASTITEMSCOLUMNS);
+            DGVLastItems.AddColumns(columns);
             var query = queries.getGridViewLastItems();
 
             foreach (var item in query.OrderByDescending(X => X.modify_date).Take(7))
             {
-                DGVLastItems.Rows.Add(item.id, item.name, item.category, item.modify_date);
+                var calculatedDays = Utils.compareDateToNowAndGetDaysCount((DateTime)item.modify_date);
+                DGVLastItems.Rows.Add(item.id, item.name, item.category, calculatedDays);
             }
             DGVLastItems.changeIdColumnVisableToFalse();
         }
-
+        
         private void addEventToButton(Button button)
         {
 

@@ -1,11 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.IO;
 using System.Windows.Forms;
 using Szafiarka.Classes;
 using Szafiarka.Classes.MapDB;
@@ -17,6 +13,8 @@ namespace Szafiarka.Forms.ItemForm
         private Queries queries;
         private Bitmap oryginalImage;
         private Item item;
+        private List<ErrorProvider> errorProviders;
+        private bool[] errors;
 
         public ItemForm()
         {
@@ -26,44 +24,10 @@ namespace Szafiarka.Forms.ItemForm
 
         public ItemForm(int itemId)
         {
-            InitializeComponent();
             queries = new Queries();
             getItem(itemId);
+            InitializeComponent();
             fillForm();
-        }
-
-        private void flatButton2_Click(object sender, EventArgs e)
-        {
-            OpenFileDialog dialog = new OpenFileDialog();
-            dialog.Filter = "Image files| *.jpg; *.jpeg; *.png";
-            if (dialog.ShowDialog() == DialogResult.OK)
-            {
-                pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
-                var image = new Bitmap(dialog.FileName);
-                image = ImageDataBase.chnageImageSize(image);
-                pictureBox1.Image = image;
-                oryginalImage = image;
-                pictureBox1.DoubleClick += new EventHandler(image_DoubleClick);
-            }
-        }
-
-        private void image_DoubleClick(object sender, EventArgs e)
-        {
-            var image = sender as PictureBox;
-            if (image.Image != null)
-            {
-                var form = new Form();
-                form.ClientSize = oryginalImage.Size;
-                form.BackgroundImage = oryginalImage;
-                form.FormBorderStyle = FormBorderStyle.FixedToolWindow;
-                try
-                {
-                    form.Text = string.Format("{0} zdjęcie", item.name);
-                }
-                catch { }
-
-                form.ShowDialog();
-            }
         }
 
         private void getItem(int id)
@@ -75,26 +39,74 @@ namespace Szafiarka.Forms.ItemForm
         private void fillForm()
         {
             var textbox = TextboxesNames.getTextBoxByName(TextboxesNames.names.name);
-            textbox.Text = item.name;
+            textbox.Text = (item != null) ? item.name : null;
 
             textbox = TextboxesNames.getTextBoxByName(TextboxesNames.names.description);
-            textbox.Text = item.description;
+            textbox.Text = (item != null) ? item.description : null;
 
             var combo = ComboboxesImproved.getComboboxByName(ComboboxesImproved.names.category);
-            combo.SelectedItem = queries.getCategoryById(item.id_category);
+            combo.SelectedItem = (item != null) ? queries.getCategoryById(item.id_category) : null;
 
             combo = ComboboxesImproved.getComboboxByName(ComboboxesImproved.names.room);
-            combo.SelectedItem = queries.getRoomByShelfId(item.id_shelf);
+            combo.SelectedItem = (item != null) ? queries.getRoomByShelfId(item.id_shelf) : null;
 
             combo = ComboboxesImproved.getComboboxByName(ComboboxesImproved.names.wardrobe);
-            combo.SelectedItem = queries.getWardrobeByShelfId(item.id_shelf);
+            combo.SelectedItem = (item != null) ? queries.getWardrobeByShelfId(item.id_shelf) : null;
 
             combo = ComboboxesImproved.getComboboxByName(ComboboxesImproved.names.shelf);
-            combo.SelectedItem = queries.getShelfById(item.id_shelf);
+            combo.SelectedItem = (item != null) ? queries.getShelfById(item.id_shelf) : null;
 
             combo = ComboboxesImproved.getComboboxByName(ComboboxesImproved.names.status);
-            combo.SelectedItem = queries.getStatusById(item.id_status);
+            combo.SelectedItem = (item != null) ? queries.getStatusById(item.id_status) : null;
+
+            var trackbar = TrackbarImproved.getTrackbar();
+            trackbar.Value = (item != null) ? item.size : 0;
+            
+            if (item != null && item.image != null)
+            {
+                pictureBox1.Image = Classes.ImageConverter.dbImgaeToImage(item.image);
+                oryginalImage = (Bitmap)pictureBox1.Image;
+                var button = ButtonsImproved.getList().Find(x => x.Name == ButtonsImproved.names.image_delete.ToString());
+                button.Enabled = true;
+            }
+            else
+            {
+                var button = ButtonsImproved.getList().Find(x => x.Name == ButtonsImproved.names.image_delete.ToString());
+                button.Enabled = false;
+                pictureBox1.Image = null;
+                oryginalImage = null;
+            }
+            fillHistoryGrid(historyDataGridView);
             //this.checkBox1.Checked = item.deleted ? false : true;
+        }
+
+        private void selectAndAddEvent(FlatButton button)
+        {
+            if (button.Name == ButtonsImproved.names.cancel.ToString())
+            {
+                button.Click += new EventHandler(exit_Click);
+            }
+
+            if (button.Name == ButtonsImproved.names.revert.ToString())
+            {
+                button.Click += new EventHandler(revert_Click);
+            }
+
+            if (button.Name == ButtonsImproved.names.save.ToString())
+            {
+                button.Click += new EventHandler(save_Click);
+            }
+
+            if (button.Name == ButtonsImproved.names.image.ToString())
+            {
+                button.Click += new EventHandler(addImage_Click);
+            }
+
+            if (button.Name == ButtonsImproved.names.image_delete.ToString())
+            {
+                button.Click += new EventHandler(deleteImage_Click);
+            }
+            
         }
     }
 }

@@ -37,7 +37,6 @@
       <Column Name="id_item" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="action" Type="System.String" DbType="VarChar(150)" CanBeNull="true" />
       <Column Name="creation_date" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
-      <Column Name="status_name" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
       <Column Name="id_shelf" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="id_category" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="id_status" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />

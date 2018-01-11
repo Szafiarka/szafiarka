@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -146,6 +147,11 @@ namespace Szafiarka.Classes
     class ComboboxNew : ComboBox
     {
         private bool withAdd;
+        private enum actions
+        {
+            [Description("<Dodaj>")]
+            add
+        }
         public ComboboxNew(bool withAdd)
         {
             this.withAdd = withAdd;
@@ -168,12 +174,13 @@ namespace Szafiarka.Classes
                 Items.Add(item);
             }
             if (withAdd)
-                Items.Add("Dodaj");
+                Items.Add(Utils.GetEnumDescription(actions.add));
         }
 
         private void Add_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (SelectedItem != null && SelectedItem.ToString() == "Dodaj")
+            if (SelectedItem != null 
+                && SelectedItem.ToString() == Utils.GetEnumDescription(actions.add))
             {
                 MessageBox.Show("Dodaj cos");
             }
