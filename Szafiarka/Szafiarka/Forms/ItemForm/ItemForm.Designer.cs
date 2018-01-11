@@ -35,12 +35,12 @@ namespace Szafiarka.Forms.ItemForm
         /// </summary>
         private void InitializeComponent()
         {
-            this.errorprovider1 = new ErrorProvider();
+            initializeErrorProviders();
             InitializeLabels();
             InitializeComboboxes();
             InitializeTextBox();
             InitializeButtons();
-            initializeErrorProviders();
+            
 
 
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
@@ -67,7 +67,9 @@ namespace Szafiarka.Forms.ItemForm
 
             var _trackbar = new TrackbarImproved();
             var trackbar = TrackbarImproved.getTrackbar();
+            trackbar.ValueChanged += trackbar_ValueChanged;
             trackbar.Location = new System.Drawing.Point(13, 405);
+            setTrackbarErrors(trackbar);
             // 
             // ItemForm
             // 
@@ -122,7 +124,6 @@ namespace Szafiarka.Forms.ItemForm
 
         #endregion
 
-        private ErrorProvider errorprovider1;
         private System.Windows.Forms.PictureBox pictureBox1;
         private DataGridViewNew historyDataGridView;
 
@@ -135,7 +136,8 @@ namespace Szafiarka.Forms.ItemForm
                 item.Location = new System.Drawing.Point(250, 225 + 60 * k);
                 Controls.Add(item);
                 k++;
-                item.Leave += new EventHandler(combobox_Leave);
+                item.SelectedIndexChanged += comboBoxSelectionChangeCommitted;
+                setComboboxesErrors(item);
             }
         }
 
@@ -176,13 +178,14 @@ namespace Szafiarka.Forms.ItemForm
             {
                 item.Location = new System.Drawing.Point(13, 225 + 60 * k);
                 item.Width = 200;
-                item.Leave += textBoxOut_Leave;
+                item.TextChanged += textBoxOut_TextChanged;
                 if (item.Name.ToUpper() == TextboxesNames.names.description.ToString().ToUpper())
                 {
                     item.Height = 80;
                 }
                 k++;
                 Controls.Add(item);
+                setTextboxesErrors(item);
             }
         }
 
@@ -196,7 +199,6 @@ namespace Szafiarka.Forms.ItemForm
                 if (item.Name != ButtonsImproved.names.image.ToString()
                     && item.Name != ButtonsImproved.names.image_delete.ToString())
                 {
-                    //item.Validating += new System.ComponentModel.CancelEventHandler(textBox1_Validating);
                     item.Location = new Point(13 + item.Width * k, 520);
                     k++;
                     selectAndAddEvent(item);
@@ -226,7 +228,7 @@ namespace Szafiarka.Forms.ItemForm
                 errorProviders.Clear();
             }
             errorProviders = new List<ErrorProvider> { };
-            var n = LabelsImproved.getList().Count - 1;
+            var n = 7;
             errors = new bool[n];
             ErrorProvider errorprovider;
             for (int i = 0; i < n; i++)

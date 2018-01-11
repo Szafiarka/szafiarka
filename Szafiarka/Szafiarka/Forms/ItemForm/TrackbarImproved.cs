@@ -21,7 +21,10 @@ namespace Szafiarka.Forms.ItemForm
         {
             if (trackbar != null)
                 trackbar = null;
-            trackbar = new TrackbarNew();
+            trackbar = new TrackbarNew()
+            {
+                Name = "size"
+            };
         }
 
         public static TrackbarNew getTrackbar()

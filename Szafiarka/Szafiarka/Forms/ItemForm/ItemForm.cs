@@ -40,28 +40,35 @@ namespace Szafiarka.Forms.ItemForm
         {
             var textbox = TextboxesNames.getTextBoxByName(TextboxesNames.names.name);
             textbox.Text = (item != null) ? item.name : null;
+            setTextboxesErrors(textbox);
 
             textbox = TextboxesNames.getTextBoxByName(TextboxesNames.names.description);
             textbox.Text = (item != null) ? item.description : null;
 
             var combo = ComboboxesImproved.getComboboxByName(ComboboxesImproved.names.category);
             combo.SelectedItem = (item != null) ? queries.getCategoryById(item.id_category) : null;
+            setComboboxesErrors(combo);
 
             combo = ComboboxesImproved.getComboboxByName(ComboboxesImproved.names.room);
             combo.SelectedItem = (item != null) ? queries.getRoomByShelfId(item.id_shelf) : null;
+            setComboboxesErrors(combo);
 
             combo = ComboboxesImproved.getComboboxByName(ComboboxesImproved.names.wardrobe);
             combo.SelectedItem = (item != null) ? queries.getWardrobeByShelfId(item.id_shelf) : null;
+            setComboboxesErrors(combo);
 
             combo = ComboboxesImproved.getComboboxByName(ComboboxesImproved.names.shelf);
             combo.SelectedItem = (item != null) ? queries.getShelfById(item.id_shelf) : null;
+            setComboboxesErrors(combo);
 
             combo = ComboboxesImproved.getComboboxByName(ComboboxesImproved.names.status);
             combo.SelectedItem = (item != null) ? queries.getStatusById(item.id_status) : null;
+            setComboboxesErrors(combo);
 
             var trackbar = TrackbarImproved.getTrackbar();
             trackbar.Value = (item != null) ? item.size : 0;
-            
+            setTrackbarErrors(trackbar);
+
             if (item != null && item.image != null)
             {
                 pictureBox1.Image = Classes.ImageConverter.dbImgaeToImage(item.image);

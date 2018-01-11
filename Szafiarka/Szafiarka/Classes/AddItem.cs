@@ -89,7 +89,7 @@ namespace Szafiarka.Classes
             DBconnection.DBCONNECTION.SubmitChanges();
             Panels.refreshPanelStartGrid();
             Panels.refreshPanelBinGrid();
-            MessageBox.Show(Utils.GetEnumDescription(Messages.addItem.saved));
+            MessageBox.Show(Utils.GetEnumDescription(Messages.ok.SAVE), "OK", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
             var hisotry = new HistoryLogic();
             hisotry.addItem(newItem);

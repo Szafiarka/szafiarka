@@ -74,19 +74,27 @@ namespace Szafiarka.Forms.ItemForm
                 addItem = new AddItem();
             }
 
-            addItem.setActive(false);
-            addItem.setName(TextboxesNames.getTextBoxByName(TextboxesNames.names.name).Text);
-            addItem.setStatus(ComboboxesImproved.getComboboxByName(ComboboxesImproved.names.status).SelectedItem as Status);
-            addItem.setShelf(ComboboxesImproved.getComboboxByName(ComboboxesImproved.names.shelf).SelectedItem as Shelf);
-            addItem.setCategory(ComboboxesImproved.getComboboxByName(ComboboxesImproved.names.category).SelectedItem as Category);
-            addItem.setSize(TrackbarImproved.getTrackbar().Value);
-            addItem.setImage(oryginalImage);
+            if (checkIfSave())
+            {
+                addItem.setActive(false);
+                addItem.setName(TextboxesNames.getTextBoxByName(TextboxesNames.names.name).Text);
+                addItem.setStatus(ComboboxesImproved.getComboboxByName(ComboboxesImproved.names.status).SelectedItem as Status);
+                addItem.setShelf(ComboboxesImproved.getComboboxByName(ComboboxesImproved.names.shelf).SelectedItem as Shelf);
+                addItem.setCategory(ComboboxesImproved.getComboboxByName(ComboboxesImproved.names.category).SelectedItem as Category);
+                addItem.setSize(TrackbarImproved.getTrackbar().Value);
+                addItem.setImage(oryginalImage);
 
-            var desc = TextboxesNames.getTextBoxByName(TextboxesNames.names.description).Text;
-            if (desc != null)
-                addItem.setDescription(desc);
-            item = addItem.save();
-            fillForm();
+                var desc = TextboxesNames.getTextBoxByName(TextboxesNames.names.description).Text;
+                if (desc != null)
+                    addItem.setDescription(desc);
+                item = addItem.save();
+                fillForm();
+            }
+            else
+            {
+                MessageBox.Show(Utils.GetEnumDescription(Messages.errors.SAVE), "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
         }
 
 
@@ -100,103 +108,158 @@ namespace Szafiarka.Forms.ItemForm
             return check;
         }
 
-        private void textBoxOut_Leave(object sender, EventArgs e)
+        private void textBoxOut_TextChanged(object sender, EventArgs e)
         {
             TextBox something = (TextBox)sender;
+            setTextboxesErrors(something);
+        }
+
+        private void setTextboxesErrors(TextBox something)
+        {
             switch (something.Name)
             {
-                case "name" :
-                    if (something.TextLength < 4)
+                case "name":
+                    if (something.TextLength < 3)
                     {
-                        //errorProviders[0].Icon = Icon
-                        errorProviders[0].SetError(TextboxesNames.getTextBoxByName(TextboxesNames.names.name), "Podpis musi mieć więcej niż 4 znaki!");
+                        errorProviders[0].Icon = Properties.Resources.ERR;
+                        errorProviders[0].SetError(TextboxesNames.getTextBoxByName(TextboxesNames.names.name), "Podpis musi mieć więcej niż 3 znaki!");
                         errors[0] = false;
                     }
                     else
                     {
-                        //errorProviders[0].Icon = Properties.Resources.OK;
-                        //errorProviders[0].SetError(textBoxList[0], "OK");
+                        errorProviders[0].Icon = Properties.Resources.OK;
+                        errorProviders[0].SetError(TextboxesNames.getTextBoxByName(TextboxesNames.names.name), "OK");
                         errors[0] = true;
                     }
                     break;
             }
         }
-        private void combobox_Leave(object sender, EventArgs e)
+
+        private void trackbar_ValueChanged(object sender, EventArgs e)
+        {
+            TrackBar something = (TrackBar)sender;
+            setTrackbarErrors(something);
+        }
+
+        private void setTrackbarErrors(TrackBar something)
+        {
+            switch (something.Name)
+            {
+                case "size":
+                    if (something.Value < 1)
+                    {
+                        errorProviders[6].Icon = Properties.Resources.ERR;
+                        errorProviders[6].SetError(TrackbarImproved.getTrackbar(), "Nie wybrałeś warości");
+                        errors[6] = false;
+                    }
+                    else
+                    {
+                        errorProviders[6].Icon = Properties.Resources.OK;
+                        errorProviders[6].SetError(TrackbarImproved.getTrackbar(), "OK");
+                        errors[6] = true;
+                    }
+                    break;
+            }
+        }
+
+        private void comboBoxSelectionChangeCommitted(object sender, EventArgs e)
+        {
+
+            ComboBox senderComboBox = (ComboBox)sender;
+            setComboboxesErrors(senderComboBox);
+        }
+
+            private void combobox_Leave(object sender, EventArgs e)
         {
             ComboBox something = (ComboBox)sender;
+            setComboboxesErrors(something);
+        }
+
+        private void setComboboxesErrors(ComboBox something)
+        {
             switch (something.Name)
             {
                 case "room":
                     if (something.SelectedItem == null)
                     {
-                        //errorProviders[0].Icon = Icon
+                        errorProviders[1].Icon = Properties.Resources.ERR;
                         errorProviders[1].SetError(ComboboxesImproved.getComboboxByName(ComboboxesImproved.names.room), "Nie wybrałeś pokoju");
                         errors[1] = false;
                     }
                     else
                     {
-                        //errorProviders[0].Icon = Properties.Resources.OK;
-                        //errorProviders[0].SetError(textBoxList[0], "OK");
-                        errors[0] = true;
+                        errorProviders[1].Icon = Properties.Resources.OK;
+                        errorProviders[1].SetError(ComboboxesImproved.getComboboxByName(ComboboxesImproved.names.room), "OK");
+                        errors[1] = true;
                     }
                     break;
                 case "wardrobe":
                     if (something.SelectedItem == null)
                     {
-                        //errorProviders[0].Icon = Icon
+                        errorProviders[2].Icon = Properties.Resources.ERR;
                         errorProviders[2].SetError(ComboboxesImproved.getComboboxByName(ComboboxesImproved.names.wardrobe), "Nie wybrałeś pokoju");
                         errors[2] = false;
                     }
                     else
                     {
-                        //errorProviders[0].Icon = Properties.Resources.OK;
-                        //errorProviders[0].SetError(textBoxList[0], "OK");
-                        errors[0] = true;
+                        errorProviders[2].Icon = Properties.Resources.OK;
+                        errorProviders[2].SetError(ComboboxesImproved.getComboboxByName(ComboboxesImproved.names.wardrobe), "OK");
+                        errors[2] = true;
                     }
                     break;
                 case "shelf":
                     if (something.SelectedItem == null)
                     {
-                        //errorProviders[0].Icon = Icon
+                        errorProviders[3].Icon = Properties.Resources.ERR;
                         errorProviders[3].SetError(ComboboxesImproved.getComboboxByName(ComboboxesImproved.names.shelf), "Nie wybrałeś pokoju");
                         errors[3] = false;
                     }
                     else
                     {
-                        //errorProviders[0].Icon = Properties.Resources.OK;
-                        //errorProviders[0].SetError(textBoxList[0], "OK");
-                        errors[0] = true;
+                        errorProviders[3].Icon = Properties.Resources.OK;
+                        errorProviders[3].SetError(ComboboxesImproved.getComboboxByName(ComboboxesImproved.names.shelf), "OK");
+                        errors[3] = true;
                     }
                     break;
                 case "status":
                     if (something.SelectedItem == null)
                     {
-                        //errorProviders[0].Icon = Icon
+                        errorProviders[4].Icon = Properties.Resources.ERR;
                         errorProviders[4].SetError(ComboboxesImproved.getComboboxByName(ComboboxesImproved.names.status), "Nie wybrałeś pokoju");
                         errors[4] = false;
                     }
                     else
                     {
-                        //errorProviders[0].Icon = Properties.Resources.OK;
-                        //errorProviders[0].SetError(textBoxList[0], "OK");
-                        errors[0] = true;
+                        errorProviders[4].Icon = Properties.Resources.OK;
+                        errorProviders[4].SetError(ComboboxesImproved.getComboboxByName(ComboboxesImproved.names.status), "OK");
+                        errors[4] = true;
                     }
                     break;
                 case "category":
                     if (something.SelectedItem == null)
                     {
-                        //errorProviders[0].Icon = Icon
+                        errorProviders[5].Icon = Properties.Resources.ERR;
                         errorProviders[5].SetError(ComboboxesImproved.getComboboxByName(ComboboxesImproved.names.category), "Nie wybrałeś pokoju");
                         errors[5] = false;
                     }
                     else
                     {
-                        //errorProviders[0].Icon = Properties.Resources.OK;
-                        //errorProviders[0].SetError(textBoxList[0], "OK");
-                        errors[0] = true;
+                        errorProviders[5].Icon = Properties.Resources.OK;
+                        errorProviders[5].SetError(ComboboxesImproved.getComboboxByName(ComboboxesImproved.names.category), "OK");
+                        errors[5] = true;
                     }
                     break;
             }
+        }
+
+        private bool checkIfSave()
+        {
+            foreach (var item in errors)
+            {
+                if (!item)
+                    return false;
+            }
+            return true;
         }
     }
 }

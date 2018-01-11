@@ -19,13 +19,14 @@ namespace Szafiarka.Classes
 
         public enum errors
         {
-
+            [Description("Nie można zapisać rzeczy, popraw dane")]
+            SAVE,
         }
 
-        public enum addItem
+        public enum ok
         {
             [Description("Rzecz zapisana")]
-            saved
+            SAVE,
         }
     }
 }
