@@ -15,6 +15,7 @@ namespace Szafiarka.Forms.OptionsForm
         public OptionsForm()
         {
             InitializeComponent();
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
         }
     }
 }

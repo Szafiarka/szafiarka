@@ -20,10 +20,10 @@
         <elementListCompartment Id="0664309e-57fc-4425-8bf1-eb4f721a96e5" absoluteBounds="6.265, 8.335, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="fbe6fa1f-3066-4e70-8b14-693ffecd822c" absoluteBounds="0.75, 7.75, 2, 1.3862939453124996">
+    <classShape Id="fbe6fa1f-3066-4e70-8b14-693ffecd822c" absoluteBounds="3.5, 4.625, 2, 1.3862939453124996">
       <DataClassMoniker Name="/MapDBDataContext/Email_settings" />
       <nestedChildShapes>
-        <elementListCompartment Id="99b4292e-b026-48a6-ae60-65995ae1e693" absoluteBounds="0.765, 8.21, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="99b4292e-b026-48a6-ae60-65995ae1e693" absoluteBounds="3.5149999999999997, 5.0850000000000009, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
     <classShape Id="142d3494-a680-4487-8d26-ae72918ba8d0" absoluteBounds="11.75, 1, 2, 3.1170068359374996">
@@ -56,7 +56,7 @@
         <elementListCompartment Id="e561a8de-6d1b-4c52-b192-b013c53187a8" absoluteBounds="6.265, 5.46, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <associationConnector edgePoints="[(11 : 2.58735270182292); (11.75 : 2.58735270182292)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+    <associationConnector edgePoints="[(11 : 2.58735270182292); (11.75 : 2.58735270182292)]" fixedFrom="NotFixed" fixedTo="NotFixed">
       <AssociationMoniker Name="/MapDBDataContext/Item/Item_History" />
       <nodes>
         <classShapeMoniker Id="2f3607f5-9e6e-4b60-9fea-07facea99643" />
