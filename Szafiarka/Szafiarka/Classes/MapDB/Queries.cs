@@ -279,5 +279,20 @@ namespace Szafiarka.Classes.MapDB
                        creation_date = history.creation_date
                    };
         }
+
+        public History getHistoryById(int id)
+        {
+            var query = from history in connection.History
+                        where history.id_history == id
+                        select history;
+            try
+            {
+                return query.First();
+            }
+            catch
+            {
+                return null;
+            }
+        }
     }
 }

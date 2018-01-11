@@ -10,6 +10,14 @@ using System.Windows.Forms;
 
 namespace Szafiarka.Classes.MapDB
 {
+    public partial class Item : ICloneable
+    {
+        public object Clone()
+        {
+            return this.MemberwiseClone();
+        }
+    }
+
     public partial class Category
     {
         public override string ToString()

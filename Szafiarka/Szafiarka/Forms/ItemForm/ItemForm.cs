@@ -104,6 +104,11 @@ namespace Szafiarka.Forms.ItemForm
                 button.Click += new EventHandler(save_Click);
             }
 
+            if (button.Name == ButtonsImproved.names.history.ToString())
+            {
+                button.Click += new EventHandler(revertHistory_Click);
+            }
+
             if (button.Name == ButtonsImproved.names.image.ToString())
             {
                 button.Click += new EventHandler(addImage_Click);
