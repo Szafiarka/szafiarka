@@ -34,5 +34,11 @@ namespace Szafiarka.Classes
             return value+1;
         }
 
+        public static string compareDateToNowAndGetDaysCount(DateTime startDate)
+        {
+            var now = DateTime.Now;
+            var countDays = (double)(now - startDate).TotalDays;
+            return countDays <= 0.7 ? "dziś" : ((int)countDays).ToString();
+        }
     }
 }

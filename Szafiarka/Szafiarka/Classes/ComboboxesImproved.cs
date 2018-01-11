@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,7 +11,7 @@ namespace Szafiarka.Classes
     class ComboboxesImproved 
     {
         private bool withAdd;
-        private List<ComboboxNew> comboboxes;
+        private static List<ComboboxNew> comboboxes;
         public enum names
         {
             room,
@@ -39,10 +40,12 @@ namespace Szafiarka.Classes
 
         private void createList()
         {
-            if (comboboxes == null)
+            if (comboboxes != null)
             {
-                comboboxes = new List<ComboboxNew> { };
+                comboboxes.Clear();
             }
+
+            comboboxes = new List<ComboboxNew> { };
 
             foreach (var item in namesArray)
             {
@@ -134,11 +137,21 @@ namespace Szafiarka.Classes
             addRangeShelf();
         }
 
+        public static ComboboxNew getComboboxByName(Enum name)
+        {
+            return comboboxes.Find(x => x.Name.ToUpper() == name.ToString().ToUpper());
+        }
+
     }
 
     class ComboboxNew : ComboBox
     {
         private bool withAdd;
+        private enum actions
+        {
+            [Description("<Dodaj>")]
+            add
+        }
         public ComboboxNew(bool withAdd)
         {
             this.withAdd = withAdd;
@@ -161,12 +174,13 @@ namespace Szafiarka.Classes
                 Items.Add(item);
             }
             if (withAdd)
-                Items.Add("Dodaj");
+                Items.Add(Utils.GetEnumDescription(actions.add));
         }
 
         private void Add_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (SelectedItem.ToString() == "Dodaj")
+            if (SelectedItem != null 
+                && SelectedItem.ToString() == Utils.GetEnumDescription(actions.add))
             {
                 MessageBox.Show("Dodaj cos");
             }

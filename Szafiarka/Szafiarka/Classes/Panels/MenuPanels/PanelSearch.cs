@@ -27,7 +27,6 @@ namespace Szafiarka.Classes
         private Label labelWardrobe;
         private TextBox textBoxRoom;
         private TextBox textBoxWardrobe;
-        private System.ComponentModel.IContainer components;
         private static int DGVMainWidth = 900;
 
 

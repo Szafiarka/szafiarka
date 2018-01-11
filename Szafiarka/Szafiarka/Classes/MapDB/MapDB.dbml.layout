@@ -26,10 +26,10 @@
         <elementListCompartment Id="99b4292e-b026-48a6-ae60-65995ae1e693" absoluteBounds="3.5149999999999997, 5.0850000000000009, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="142d3494-a680-4487-8d26-ae72918ba8d0" absoluteBounds="11.75, 1, 2, 3.3093082682291666">
+    <classShape Id="142d3494-a680-4487-8d26-ae72918ba8d0" absoluteBounds="11.75, 1, 2, 3.1170068359374996">
       <DataClassMoniker Name="/MapDBDataContext/History" />
       <nestedChildShapes>
-        <elementListCompartment Id="432a7f60-2479-47fd-bab1-3a9487d859cd" absoluteBounds="11.765, 1.46, 1.9700000000000002, 2.7493082682291665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="432a7f60-2479-47fd-bab1-3a9487d859cd" absoluteBounds="11.765, 1.46, 1.9700000000000002, 2.5570068359375" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
     <classShape Id="2f3607f5-9e6e-4b60-9fea-07facea99643" absoluteBounds="9, 1.125, 2, 2.9247054036458326">

@@ -13,12 +13,10 @@ namespace Szafiarka.Classes
     {
         private MapDB.Queries queries;
         private DataGridViewNew grid;
-        private Action refreashGridBin;
-        public PanelBin(Action refreashBin)
+        public PanelBin()
         {
             queries = new MapDB.Queries();
-            refreashGridBin = refreashBin;
-            Name = "pBin";
+            Name = Panels.PanelsName.PBIN.ToString();
             InitializeComponent();
         }
 
@@ -89,7 +87,7 @@ namespace Szafiarka.Classes
             {
                 var itemId = Int32.Parse(grid.CurrentRow.Cells[0].Value.ToString());
                 queries.changeItemDeletedById(itemId, false);
-                refreashGridBin();
+                Panels.refreshPanelBinGrid();
             }
         }
     }

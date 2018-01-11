@@ -84,7 +84,7 @@ namespace Szafiarka
         {
             Panels.addNewPanelToList(new PanelStart());
             Panels.addNewPanelToList(new PanelSearch());
-            Panels.addNewPanelToList(new PanelBin(refreshPanelBinGrid));
+            Panels.addNewPanelToList(new PanelBin());
 
             foreach (var panel in Panels.getPanelsList())
             {
