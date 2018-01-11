@@ -56,6 +56,19 @@ namespace Szafiarka.Forms.ItemForm
             fillForm();
         }
 
+        private void revertHistory_Click(object sender, EventArgs e)
+        {
+            Console.WriteLine("a");
+            var row = historyDataGridView.CurrentRow;
+            if (row != null)
+            {
+                var addItem = new AddItem(item);
+                var id = Int32.Parse(row.Cells[0].Value.ToString());
+                addItem.revertHistory(id);
+            }
+            fillForm();
+        }
+
         private void deleteImage_Click(object sender, EventArgs e)
         {
             oryginalImage = null;
