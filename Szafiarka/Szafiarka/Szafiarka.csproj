@@ -96,9 +96,6 @@
     <Compile Include="Classes\TabControls\OptionsTabControl\AboutProgramTabPage.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Classes\TabControls\OptionsTabControl\AppearanceTabPage.cs">
-      <SubType>Component</SubType>
-    </Compile>
     <Compile Include="Classes\TabControls\OptionsTabControl\ContactTabPage.cs">
       <SubType>Component</SubType>
     </Compile>
