@@ -18,7 +18,7 @@ namespace Szafiarka.Classes
             this.Location = new Point(0,0);//(50, 32);     //testowy rozmiar i lokalizacja
             this.Name = "OptionsTabControl";
             this.SizeMode = TabSizeMode.Fixed;
-            this.ItemSize = new Size((1000/3)-1, 35);
+            this.ItemSize = new Size((1000/2)-2, 35);
             InitializeTabControls();
             this.DrawMode = TabDrawMode.OwnerDrawFixed;
             this.DrawItem += new DrawItemEventHandler(this.OptionsTabControl_DrawItem);
@@ -47,7 +47,6 @@ namespace Szafiarka.Classes
         {
              tabPagesList = new List<OptionsTabPages> {
                 new AboutProgramTabPage(),
-                new AppearanceTabPage(),
                 new ContactTabPage()
             };
 
