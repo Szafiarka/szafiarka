@@ -111,7 +111,7 @@
     <Compile Include="Classes\TabControls\OptionsTabControl\OptionsTabPages.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Classes\ToolsButton.cs">
+    <Compile Include="Classes\OptionsButton.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Classes\Panels\MenuPanels\PanelMenu.cs">
@@ -125,12 +125,6 @@
     </Compile>
     <Compile Include="Classes\RetrievingAssemblyData.cs" />
     <Compile Include="Classes\Utils.cs" />
-    <Compile Include="Forms\HelpForm\HelpForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\HelpForm\HelpForm.Designer.cs">
-      <DependentUpon>HelpForm.cs</DependentUpon>
-    </Compile>
     <Compile Include="Forms\ItemForm\ItemForm.cs">
       <SubType>Form</SubType>
     </Compile>

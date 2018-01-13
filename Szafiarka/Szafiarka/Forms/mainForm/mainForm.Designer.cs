@@ -29,7 +29,7 @@ namespace Szafiarka
         private void InitializeComponent(RetrievingAssemblyData assemblyData)
         {
             this.pMenu = new PanelMenu();
-            this.bTools = new ToolsButton();
+            this.bTools = new OptionsButton();
             this.pMenu.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -94,7 +94,7 @@ namespace Szafiarka
         #endregion  
 
         private Classes.PanelMenu pMenu;
-        private Classes.ToolsButton bTools;
+        private Classes.OptionsButton bTools;
     }
 }
 
