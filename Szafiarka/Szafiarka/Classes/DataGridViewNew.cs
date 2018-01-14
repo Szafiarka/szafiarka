@@ -49,16 +49,26 @@ namespace Szafiarka.Classes
             RowTemplate.Height = 35;
             ColumnHeadersHeight = 35;
             MouseClick += dataGridView1_MouseClick;
-            menu.Items.Add("Podgląd");
-            menu.Items.Add("Usuń");
             menu.ItemClicked += new ToolStripItemClickedEventHandler(menu_Clicked);
         }
 
         private void dataGridView1_MouseClick(object sender, MouseEventArgs e)
         {
+
             if (e.Button == MouseButtons.Right &&
                 namesGridsEnableToShowItemForm.Contains(Name))
             {
+                menu.Items.Clear();
+                if (Name == DGVMainDataNames.items.ToString())
+                {
+                    menu.Items.Add("Podgląd");
+                    menu.Items.Add("Usuń");
+                }
+                else if (Name == DGVMainDataNames.bin.ToString())
+                {
+                    menu.Items.Add("Podgląd");
+                    menu.Items.Add("Przywróć");
+                }
                 menuClickedRow = HitTest(e.X, e.Y).RowIndex;
                 menu.Show(this, new Point(e.X, e.Y));
             }
@@ -177,6 +187,34 @@ namespace Szafiarka.Classes
                 if (itemForm != null)
                 {
                     itemForm.Show();
+                }
+            }
+            else if (clicked == "Usuń")
+            {
+                string messageBoxText = String.Format("Czy na pewno chcesz usunąć {0}?",
+                    Rows[menuClickedRow].Cells["name"].Value.ToString());
+                string caption = "Usuwanie";
+                MessageBoxButtons button = MessageBoxButtons.YesNo;
+                DialogResult res = MessageBox.Show(messageBoxText, caption, button);
+                if (res == DialogResult.Yes)
+                {
+                    var itemId = getItemIdFromRow(menuClickedRow);
+                    queries.changeItemDeletedById(itemId, true);
+                    Panels.refreshPanelStartGrid();
+                }
+            }
+            else if (clicked == "Przywróć")
+            {
+                string messageBoxText = String.Format("Czy na pewno chcesz przywrócić {0}?",
+                    Rows[menuClickedRow].Cells["name"].Value.ToString());
+                string caption = "Przywracanie";
+                MessageBoxButtons button = MessageBoxButtons.YesNo;
+                DialogResult res = MessageBox.Show(messageBoxText, caption, button);
+                if (res == DialogResult.Yes)
+                {
+                    var itemId = getItemIdFromRow(menuClickedRow);
+                    queries.changeItemDeletedById(itemId, false);
+                    Panels.refreshPanelBinGrid();
                 }
             }
         }

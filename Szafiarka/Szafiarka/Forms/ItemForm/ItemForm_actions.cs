@@ -58,7 +58,6 @@ namespace Szafiarka.Forms.ItemForm
 
         private void revertHistory_Click(object sender, EventArgs e)
         {
-            Console.WriteLine("a");
             var row = historyDataGridView.CurrentRow;
             if (row != null)
             {
@@ -173,6 +172,37 @@ namespace Szafiarka.Forms.ItemForm
                     }
                     break;
             }
+            try
+            {
+                int itemSize = 0;
+                try
+                {
+                    itemSize = queries.getItemById(item.id_item).size;
+                }
+                catch { }
+                var shelfCurrentSize = queries.getShelfOccupancyByShelfId((ComboboxesImproved.getComboboxByName(ComboboxesImproved.names.shelf).SelectedItem as Shelf).id_shelf);
+                var capacity = (ComboboxesImproved.getComboboxByName(ComboboxesImproved.names.shelf).SelectedItem as Shelf).capacity;
+                int size = 0;
+                try
+                {
+                    size = TrackbarImproved.getTrackbar().Value;
+                }
+                catch { }
+
+                if ((shelfCurrentSize + size - itemSize) > capacity)
+                {
+                    errorProviders[3].Icon = Properties.Resources.ERR;
+                    errorProviders[3].SetError(ComboboxesImproved.getComboboxByName(ComboboxesImproved.names.shelf), "Rozmiar rzeczy jest za duży");
+                    errors[3] = false;
+                }
+                else
+                {
+                    errorProviders[3].Icon = Properties.Resources.OK;
+                    errors[3] = true;
+                }
+            }
+            catch { }
+            
         }
 
         private void comboBoxSelectionChangeCommitted(object sender, EventArgs e)
@@ -182,18 +212,12 @@ namespace Szafiarka.Forms.ItemForm
             setComboboxesErrors(senderComboBox);
         }
 
-            private void combobox_Leave(object sender, EventArgs e)
-        {
-            ComboBox something = (ComboBox)sender;
-            setComboboxesErrors(something);
-        }
-
         private void setComboboxesErrors(ComboBox something)
         {
             switch (something.Name)
             {
                 case "room":
-                    if (something.SelectedItem == null)
+                    if (something.SelectedItem == null || something.SelectedItem.ToString() == Utils.GetEnumDescription(ComboboxNew.actions.add))
                     {
                         errorProviders[1].Icon = Properties.Resources.ERR;
                         errorProviders[1].SetError(ComboboxesImproved.getComboboxByName(ComboboxesImproved.names.room), "Nie wybrałeś pokoju");
@@ -207,38 +231,63 @@ namespace Szafiarka.Forms.ItemForm
                     }
                     break;
                 case "wardrobe":
-                    if (something.SelectedItem == null)
+                    if (something.SelectedItem == null || something.SelectedItem.ToString() == Utils.GetEnumDescription(ComboboxNew.actions.add))
                     {
                         errorProviders[2].Icon = Properties.Resources.ERR;
-                        errorProviders[2].SetError(ComboboxesImproved.getComboboxByName(ComboboxesImproved.names.wardrobe), "Nie wybrałeś pokoju");
+                        errorProviders[2].SetError(ComboboxesImproved.getComboboxByName(ComboboxesImproved.names.wardrobe), "Nie wybrałeś szafy");
                         errors[2] = false;
                     }
                     else
                     {
+                        
                         errorProviders[2].Icon = Properties.Resources.OK;
                         errorProviders[2].SetError(ComboboxesImproved.getComboboxByName(ComboboxesImproved.names.wardrobe), "OK");
                         errors[2] = true;
                     }
                     break;
                 case "shelf":
-                    if (something.SelectedItem == null)
+                    if (something.SelectedItem == null || something.SelectedItem.ToString() == Utils.GetEnumDescription(ComboboxNew.actions.add))
                     {
                         errorProviders[3].Icon = Properties.Resources.ERR;
-                        errorProviders[3].SetError(ComboboxesImproved.getComboboxByName(ComboboxesImproved.names.shelf), "Nie wybrałeś pokoju");
+                        errorProviders[3].SetError(ComboboxesImproved.getComboboxByName(ComboboxesImproved.names.shelf), "Nie wybrałeś półki");
                         errors[3] = false;
                     }
                     else
                     {
-                        errorProviders[3].Icon = Properties.Resources.OK;
-                        errorProviders[3].SetError(ComboboxesImproved.getComboboxByName(ComboboxesImproved.names.shelf), "OK");
-                        errors[3] = true;
+                        int itemSize = 0;
+                        try
+                        {
+                            itemSize = queries.getItemById(item.id_item).size;
+                        }
+                        catch { }
+                        var shelfCurrentSize = queries.getShelfOccupancyByShelfId((ComboboxesImproved.getComboboxByName(ComboboxesImproved.names.shelf).SelectedItem as Shelf).id_shelf);
+                        var capacity = (ComboboxesImproved.getComboboxByName(ComboboxesImproved.names.shelf).SelectedItem as Shelf).capacity;
+                        int size = 0;
+                        try
+                        {
+                            size = TrackbarImproved.getTrackbar().Value;
+                        }
+                        catch { }
+
+                        if ((shelfCurrentSize + size - itemSize) > capacity)
+                        {
+                            errorProviders[3].Icon = Properties.Resources.ERR;
+                            errorProviders[3].SetError(ComboboxesImproved.getComboboxByName(ComboboxesImproved.names.shelf), "Rozmiar rzeczy jest za duży");
+                            errors[3] = false;
+                        }
+                        else
+                        {
+                            errorProviders[3].Icon = Properties.Resources.OK;
+                            errorProviders[3].SetError(ComboboxesImproved.getComboboxByName(ComboboxesImproved.names.shelf), "OK");
+                            errors[3] = true;
+                        }
                     }
                     break;
                 case "status":
-                    if (something.SelectedItem == null)
+                    if (something.SelectedItem == null || something.SelectedItem.ToString() == Utils.GetEnumDescription(ComboboxNew.actions.add))
                     {
                         errorProviders[4].Icon = Properties.Resources.ERR;
-                        errorProviders[4].SetError(ComboboxesImproved.getComboboxByName(ComboboxesImproved.names.status), "Nie wybrałeś pokoju");
+                        errorProviders[4].SetError(ComboboxesImproved.getComboboxByName(ComboboxesImproved.names.status), "Nie wybrałeś statusu");
                         errors[4] = false;
                     }
                     else
@@ -249,10 +298,10 @@ namespace Szafiarka.Forms.ItemForm
                     }
                     break;
                 case "category":
-                    if (something.SelectedItem == null)
+                    if (something.SelectedItem == null || something.SelectedItem.ToString() == Utils.GetEnumDescription(ComboboxNew.actions.add))
                     {
                         errorProviders[5].Icon = Properties.Resources.ERR;
-                        errorProviders[5].SetError(ComboboxesImproved.getComboboxByName(ComboboxesImproved.names.category), "Nie wybrałeś pokoju");
+                        errorProviders[5].SetError(ComboboxesImproved.getComboboxByName(ComboboxesImproved.names.category), "Nie wybrałeś kategorii");
                         errors[5] = false;
                     }
                     else

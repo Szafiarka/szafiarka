@@ -14,20 +14,10 @@ namespace Szafiarka.Classes
     {
         private FlatButton searchItemName;
         private TextBox textBoxItemName;
-        private TextBox textBoxItemStatus;
         private Queries queries = new Queries();
         private DataGridViewNew DGVMainData;
-        private static int DGVHeight = 600;
-        private static int LocationHeightStart = 60;
+        private static int LocationHeightStart = 100;
         private Label labelSearchName;
-        private Label labelSearchStatus;
-        private Label labelSearchCategory;
-        private TextBox textBoxItemCategory;
-        private Label labelRoom;
-        private Label labelWardrobe;
-        private TextBox textBoxRoom;
-        private TextBox textBoxWardrobe;
-        private static int DGVMainWidth = 900;
 
 
         public PanelSearch()
@@ -47,17 +37,11 @@ namespace Szafiarka.Classes
 
         private void InitializeComponent()
         {
+            InitializeComboboxes();
+            InitializeLabels();
             this.searchItemName = new Szafiarka.Classes.FlatButton();
             this.textBoxItemName = new System.Windows.Forms.TextBox();
-            this.textBoxItemStatus = new System.Windows.Forms.TextBox();
             this.labelSearchName = new System.Windows.Forms.Label();
-            this.labelSearchStatus = new System.Windows.Forms.Label();
-            this.labelSearchCategory = new System.Windows.Forms.Label();
-            this.textBoxItemCategory = new System.Windows.Forms.TextBox();
-            this.labelRoom = new System.Windows.Forms.Label();
-            this.labelWardrobe = new System.Windows.Forms.Label();
-            this.textBoxRoom = new System.Windows.Forms.TextBox();
-            this.textBoxWardrobe = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // searchItemName
@@ -83,14 +67,6 @@ namespace Szafiarka.Classes
             this.textBoxItemName.Size = new System.Drawing.Size(650, 32);
             this.textBoxItemName.TabIndex = 0;
             // 
-            // textBoxItemStatus
-            // 
-            this.textBoxItemStatus.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.textBoxItemStatus.Location = new System.Drawing.Point(70, 35);
-            this.textBoxItemStatus.Name = "textBoxItemStatus";
-            this.textBoxItemStatus.Size = new System.Drawing.Size(100, 21);
-            this.textBoxItemStatus.TabIndex = 0;
-            // 
             // labelSearchName
             // 
             this.labelSearchName.AutoSize = true;
@@ -101,84 +77,12 @@ namespace Szafiarka.Classes
             this.labelSearchName.Size = new System.Drawing.Size(64, 18);
             this.labelSearchName.TabIndex = 0;
             this.labelSearchName.Text = "Nazwa:";
-            // 
-            // labelSearchStatus
-            // 
-            this.labelSearchStatus.AutoSize = true;
-            this.labelSearchStatus.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.labelSearchStatus.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.labelSearchStatus.Location = new System.Drawing.Point(0, 35);
-            this.labelSearchStatus.Name = "labelSearchStatus";
-            this.labelSearchStatus.Size = new System.Drawing.Size(54, 18);
-            this.labelSearchStatus.TabIndex = 0;
-            this.labelSearchStatus.Text = "Status:";
-            // 
-            // labelSearchCategory
-            // 
-            this.labelSearchCategory.AutoSize = true;
-            this.labelSearchCategory.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.labelSearchCategory.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.labelSearchCategory.Location = new System.Drawing.Point(185, 35);
-            this.labelSearchCategory.Name = "labelSearchCategory";
-            this.labelSearchCategory.Size = new System.Drawing.Size(75, 18);
-            this.labelSearchCategory.TabIndex = 0;
-            this.labelSearchCategory.Text = "Kategoria:";
-            // 
-            // textBoxItemCategory
-            // 
-            this.textBoxItemCategory.Location = new System.Drawing.Point(270, 35);
-            this.textBoxItemCategory.Name = "textBoxItemCategory";
-            this.textBoxItemCategory.Size = new System.Drawing.Size(100, 20);
-            this.textBoxItemCategory.TabIndex = 0;
-            // 
-            // labelRoom
-            // 
-            this.labelRoom.AutoSize = true;
-            this.labelRoom.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.labelRoom.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.labelRoom.Location = new System.Drawing.Point(385, 35);
-            this.labelRoom.Name = "labelRoom";
-            this.labelRoom.Size = new System.Drawing.Size(51, 18);
-            this.labelRoom.TabIndex = 0;
-            this.labelRoom.Text = "Pokój:";
-            // 
-            // labelWardrobe
-            // 
-            this.labelWardrobe.AutoSize = true;
-            this.labelWardrobe.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.labelWardrobe.ForeColor = System.Drawing.SystemColors.ControlLightLight;
-            this.labelWardrobe.Location = new System.Drawing.Point(560, 35);
-            this.labelWardrobe.Name = "labelWardrobe";
-            this.labelWardrobe.Size = new System.Drawing.Size(50, 18);
-            this.labelWardrobe.TabIndex = 0;
-            this.labelWardrobe.Text = "Szafa:";
-            // 
-            // textBoxRoom
-            // 
-            this.textBoxRoom.Location = new System.Drawing.Point(445, 35);
-            this.textBoxRoom.Name = "textBoxRoom";
-            this.textBoxRoom.Size = new System.Drawing.Size(100, 20);
-            this.textBoxRoom.TabIndex = 0;
-            // 
-            // textBoxWardrobe
-            // 
-            this.textBoxWardrobe.Location = new System.Drawing.Point(620, 35);
-            this.textBoxWardrobe.Name = "textBoxWardrobe";
-            this.textBoxWardrobe.Size = new System.Drawing.Size(100, 20);
-            this.textBoxWardrobe.TabIndex = 0;
+            
             // 
             // PanelSearch
             // 
             this.Controls.Add(this.textBoxItemName);
-            this.Controls.Add(this.textBoxItemStatus);
             this.Controls.Add(this.labelSearchName);
-            this.Controls.Add(this.labelSearchStatus);
-            this.Controls.Add(this.textBoxItemCategory);
-            this.Controls.Add(this.labelSearchCategory);
-            this.Controls.Add(this.labelRoom);
-            this.Controls.Add(this.textBoxRoom);
-            this.Controls.Add(this.labelWardrobe);
-            this.Controls.Add(this.textBoxWardrobe);
             this.Controls.Add(this.searchItemName);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -186,11 +90,51 @@ namespace Szafiarka.Classes
 
         }
 
+        private void InitializeComboboxes()
+        {
+            var k = 0;
+            var comboboxes = new ComboboxesImproved(false);
+            foreach (var item in comboboxes.getComboboxImprovedList())
+            {
+                item.Size = new System.Drawing.Size(100, 21);
+                item.Location = new Point(70 + 200 * k, 50);
+                Controls.Add(item);
+                k++;
+            }
+        }
+
+        private void InitializeLabels()
+        {
+            string[] labels = {
+                "Pokój",
+                "Szafa",
+                "Półka",
+                "Kategoria",
+                "Status"
+            };
+
+            var k = 0;
+            foreach (var item in labels)
+            {
+                var label = new Label()
+                {
+                    Text = item,
+                    Location = new Point(0 + 200 * k, 50),
+                    ForeColor = System.Drawing.SystemColors.ControlLightLight,
+                    Size = new System.Drawing.Size(75, 18),
+                    Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238))),
+
+            };
+                k++;
+                Controls.Add(label);
+            }
+        }
+
         private void InitalizeDataGrids()
         {
             DGVMainData = new DataGridViewNew();
             DGVMainData.Location = new Point(0, LocationHeightStart);
-            DGVMainData.Size = new Size(DGVMainWidth, DGVHeight);
+            DGVMainData.Size = new Size(Size.Width, Size.Height - LocationHeightStart);
             DGVMainData.Visible = true;
 
             Controls.Add(DGVMainData);
@@ -211,10 +155,30 @@ namespace Szafiarka.Classes
             };
             DGVMainData.AddColumns(columns);
             string name = textBoxItemName.Text;
-            string status = textBoxItemStatus.Text;
-            string category = textBoxItemCategory.Text;
-            string room = textBoxRoom.Text;
-            string wardrobe = textBoxWardrobe.Text;
+            string status = "";
+            string category = "";
+            string room = "";
+            string wardrobe = "";
+            try
+            {
+                status = ComboboxesImproved.getComboboxByName(ComboboxesImproved.names.status).SelectedItem.ToString();
+            }
+            catch { }
+            try
+            {
+                category = ComboboxesImproved.getComboboxByName(ComboboxesImproved.names.category).SelectedItem.ToString();
+            }
+            catch { }
+            try
+            {
+                room = ComboboxesImproved.getComboboxByName(ComboboxesImproved.names.room).SelectedItem.ToString();
+            }
+            catch { }
+            try
+            {
+                wardrobe = ComboboxesImproved.getComboboxByName(ComboboxesImproved.names.wardrobe).SelectedItem.ToString();
+            }
+            catch { }
             var query = queries.getGridViewItemByName(name, category, status, wardrobe, room);
 
             foreach (var item in query)

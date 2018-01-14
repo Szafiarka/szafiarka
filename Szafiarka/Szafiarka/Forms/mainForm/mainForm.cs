@@ -31,7 +31,8 @@ namespace Szafiarka
 
         public void SplashscreenStart()
         {
-            Application.Run(new Splashscreen());
+            var screen = new Splashscreen();
+            Application.Run(screen);
         }
 
         #region Menu Buttons

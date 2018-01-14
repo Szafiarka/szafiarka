@@ -15,6 +15,8 @@ namespace Szafiarka.Classes
 {
     class PanelStart : Panels, IPanels
     {
+        private List<ColoredProgressBar> progresBars = new List<ColoredProgressBar> { };
+        private List<Label> progresBarsLabels = new List<Label> { };
         private DataGridViewNew DGVLastItems;
         private DataGridViewNew DGVMainData;
         private static int DGVHeight = 600;
@@ -315,37 +317,67 @@ namespace Szafiarka.Classes
         #endregion
         private void IntializeProgressBars()
         {
+            for (int i = 0; i < 4; i++)
+            {
+                var label = new Label()
+                {
+                    Location = new Point(Width - 300, 400 + i * 60),
+                    Visible = false,
+                    Name = string.Format("progresbarLabel{0}", i),
+                    ForeColor = Color.White,
+                    Size = new Size(300, 20)
+                };
+
+                var progressBar = new ColoredProgressBar(new SolidBrush(Color.FromArgb(127, 195, 28)))
+                {
+                    Visible = false,
+                    Name = string.Format("progresbar{0}", i),
+                    Location = new Point(Width - 300, 425 + i * 60),
+                    Size = new Size(300, 20)
+                };
+
+                progresBars.Add(progressBar);
+                progresBarsLabels.Add(label);
+                Controls.Add(label);
+                Controls.Add(progressBar);
+            }
+            refreashProgressBar();
+        }
+
+        private void refreashProgressBar()
+        {
+            changeProgressBarsVisible();
             var query = queries.getWardrobesCapacity();
-            var space = 0;
+            var index = 0;
             foreach (var item in query.OrderByDescending(x => (x.capacity / x.capacity_wardrobe) * 100).Take(4))
             {
-                addProgressBar(item, space);
-                space++;
+                var progressBar = progresBars[index];
+                var label = progresBarsLabels[index];
+                progressBar.Visible = true;
+                label.Visible = true;
+
+                if (item.capacity > 0)
+                    progressBar.Value = (int)((item.capacity / item.capacity_wardrobe) * 100);
+                else
+                    progressBar.Value = 0;
+
+                label.Text = String.Format("{0} {1} - {2}%", item.wardrobe.Room.name, item.wardrobe.name, progressBar.Value);
+                index++;
             }
         }
 
-        private void addProgressBar(MapDB.ResulWardrobesOccupancy item, int space)
+        private void changeProgressBarsVisible()
         {
-            var label = new Label();;
-            var progressBar = new ColoredProgressBar(new SolidBrush(Color.FromArgb(127, 195, 28)));
-
-            label.Location = new Point(Width - 300, 400 + space * 60);
-            label.Text = String.Format("{0} {1}",item.wardrobe.Room.name, item.wardrobe.name);
-            label.ForeColor = Color.White;
-
-            progressBar.Location = new Point(Width - 300, 425 + space * 60);
-            progressBar.Size = new Size(300, 20);
-            if (item.capacity > 0 )
-                progressBar.Value = (int)((item.capacity / item.capacity_wardrobe) * 100);            
-            else
-                progressBar.Value = 0;
-
-            Controls.Add(label);
-            Controls.Add(progressBar);
+            for (int i = 0; i < 4; i++)
+            {
+                progresBars[i].Visible = false;
+                progresBarsLabels[i].Visible = false;
+            }
         }
 
         public void refreashGrid()
         {
+            refreashProgressBar();
             DTVLastItemsFillColumns();
             if (DGVMainData.Name == DataGridViewNew.DGVMainDataNames.items.ToString())
             {

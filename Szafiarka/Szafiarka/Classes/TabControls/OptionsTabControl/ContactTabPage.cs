@@ -119,7 +119,7 @@ namespace Szafiarka.Classes
                 textBoxList.Add(textBox);
                 Controls.Add(textBox);
                 textBox.BringToFront();
-                textBox.Leave += textBoxOut_Leave;
+                textBox.TextChanged += textBoxOut_Leave;
             }
             initializeErrorProviders((LABELNAMES.Length / 2)-2);
         }

@@ -131,6 +131,30 @@
     </Compile>
     <Compile Include="Classes\RetrievingAssemblyData.cs" />
     <Compile Include="Classes\Utils.cs" />
+    <Compile Include="Forms\AddAttribiutes\AddByName.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\AddAttribiutes\AddByName.Designer.cs">
+      <DependentUpon>AddByName.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\AddAttribiutes\AddCategory.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\AddAttribiutes\AddCategory.Designer.cs">
+      <DependentUpon>AddCategory.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\AddAttribiutes\AddShelf.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\AddAttribiutes\AddShelf.Designer.cs">
+      <DependentUpon>AddShelf.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\AddAttribiutes\Common.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\AddAttribiutes\Common.Designer.cs">
+      <DependentUpon>Common.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\HelpForm\HelpForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -177,6 +201,12 @@
     </Compile>
     <EmbeddedResource Include="Classes\TabControls\OptionsTabControl\ContactTabPage.resx">
       <DependentUpon>ContactTabPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\AddAttribiutes\AddByName.resx">
+      <DependentUpon>AddByName.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\AddAttribiutes\Common.resx">
+      <DependentUpon>Common.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

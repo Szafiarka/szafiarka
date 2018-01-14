@@ -34,7 +34,7 @@ namespace Szafiarka.Classes
             category,
             [Description("zmiana szafy")]
             wardrobe,
-            [Description("zmiana aktywności")]
+            [Description("zmiana stanu")]
             deleted,
             [Description("zmiana półki")]
             shelf,

@@ -23,6 +23,7 @@ namespace Szafiarka.Forms.ItemForm
                 trackbar = null;
             trackbar = new TrackbarNew()
             {
+                Maximum = 6,
                 Name = "size"
             };
         }
@@ -37,12 +38,39 @@ namespace Szafiarka.Forms.ItemForm
     {
         private enum description
         {
+            [Description("skarpetki, majtki, drobiazgi")]
+            var1,
+            [Description("koszulka, książka, obrazek")]
+            var2,
+            [Description("buty, proszek do prania")]
+            var3,
+            [Description("garnek, bluza, poduszka")]
+            var4,
+            [Description("odkurzacz, laptop, kurtka")]
+            var5,
+            [Description("walizka, kołdra")]
+            var6,
             [Description("Skarpetki, majtki, drobiazgi")]
-            var1
+            var7,
+            [Description("Skarpetki, majtki, drobiazgi")]
+            var8,
+            [Description("Skarpetki, majtki, drobiazgi")]
+            var9,
+            [Description("Skarpetki, majtki, drobiazgi")]
+            var10
         }
 
         private object[] names = {
             description.var1,
+            description.var2,
+            description.var3,
+            description.var4,
+            description.var5,
+            description.var6,
+            description.var7,
+            description.var8,
+            description.var9,
+            description.var10,
 
         };
 

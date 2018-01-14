@@ -85,7 +85,7 @@ namespace Szafiarka.Classes
             {
                 newItem.modify_date = DateTime.Now;
             }
-            if (!itemsSame())
+            if (!itemsSame(oldItem))
             {
                 DBconnection.DBCONNECTION.SubmitChanges();
                 Panels.refreshPanelStartGrid();
@@ -106,46 +106,79 @@ namespace Szafiarka.Classes
         public MapDB.Item revertHistory(int historyId)
         {
             var history = queries.getHistoryById(historyId);
+            if (!itemsSame(history))
+            {
+                newItem.deleted = history.deleted;
+                newItem.id_status = history.id_status;
+                newItem.id_shelf = history.id_shelf;
+                newItem.description = history.description;
+                newItem.id_category = history.id_category;
+                newItem.size = history.size;
+                newItem.name = history.name;
+                newItem.id_item = history.id_item;
+                newItem.image = history.image;
+                newItem.modify_date = DateTime.Now;
 
-            newItem.deleted = history.deleted;
-            newItem.id_status = history.id_status;
-            newItem.id_shelf = history.id_shelf;
-            newItem.description = history.description;
-            newItem.id_category = history.id_category;
-            newItem.size = history.size;
-            newItem.name = history.name;
-            newItem.id_item = history.id_item;
-            newItem.image = history.image;
-            newItem.modify_date = DateTime.Now;
+                DBconnection.DBCONNECTION.SubmitChanges();
 
-            DBconnection.DBCONNECTION.SubmitChanges();
+                var his = new HistoryLogic();
+                his.addItem(newItem);
+                his.save("przywrócenie historii");
+            }
 
-            var his = new HistoryLogic();
-            his.addItem(newItem);
-            his.save("przywrócenie historii");
 
             return newItem;
         }
 
-        private bool itemsSame()
+        private bool itemsSame(MapDB.Item item)
         {
-            if (newItem.name != oldItem.name)
+            if (item == null)
                 return false;
-            if (newItem.description != oldItem.description)
+
+            if (newItem.name != item.name)
                 return false;
-            if (newItem.image != oldItem.image)
+            if (newItem.description != item.description)
                 return false;
-            if (newItem.id_category != oldItem.id_category)
+            if (newItem.image != item.image)
                 return false;
-            if (newItem.id_shelf != oldItem.id_shelf)
+            if (newItem.id_category != item.id_category)
                 return false;
-            if (newItem.id_status != oldItem.id_status)
+            if (newItem.id_shelf != item.id_shelf)
                 return false;
-            if (newItem.id_category != oldItem.id_category)
+            if (newItem.id_status != item.id_status)
                 return false;
-            if (newItem.deleted != oldItem.deleted)
+            if (newItem.id_category != item.id_category)
                 return false;
-            if (newItem.size != oldItem.size)
+            if (newItem.deleted != item.deleted)
+                return false;
+            if (newItem.size != item.size)
+                return false;
+
+            return true;
+        }
+
+        private bool itemsSame(MapDB.History item)
+        {
+            if (item == null)
+                return false;
+
+            if (newItem.name != item.name)
+                return false;
+            if (newItem.description != item.description)
+                return false;
+            if (newItem.image != item.image)
+                return false;
+            if (newItem.id_category != item.id_category)
+                return false;
+            if (newItem.id_shelf != item.id_shelf)
+                return false;
+            if (newItem.id_status != item.id_status)
+                return false;
+            if (newItem.id_category != item.id_category)
+                return false;
+            if (newItem.deleted != item.deleted)
+                return false;
+            if (newItem.size != item.size)
                 return false;
 
             return true;

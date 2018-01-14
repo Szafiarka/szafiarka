@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Szafiarka.Classes.MapDB
 {
-    class Queries
+    public class Queries
     {
         private MapDBDataContext connection; 
         public Queries()
@@ -132,16 +132,37 @@ namespace Szafiarka.Classes.MapDB
         public void changeItemDeletedById(int id, bool deleted)
         {
             var item = connection.Item.Where(x => x.id_item == id).FirstOrDefault();
+            Item itemOld = (Item)item.Clone();
+
             item.deleted = deleted;
             item.modify_date = DateTime.Now;
             connection.SubmitChanges();
+
+            var hisotry = new HistoryLogic();
+            hisotry.addItem(item, itemOld);
+            hisotry.save();
         }
 
         public double getWardrobeOccupancyByWardrobeId(int id)
         {
-            return (from items in connection.Item
-                    where items.Shelf.id_wardrobe == id && items.deleted == false
-                    select items.size).Sum(x => x);
+            try
+            {
+                return (from items in connection.Item
+                        where items.Shelf.id_wardrobe == id && items.deleted == false
+                        select items.size).Sum(x => x);
+            }
+            catch { return 0; }
+        }
+
+        public double getShelfOccupancyByShelfId(int id)
+        {
+            try
+            {
+                return (from items in connection.Item
+                        where items.Shelf.id_shelf == id && items.deleted == false
+                        select items.size).Sum(x => x);
+            }
+            catch { return 0; }
         }
 
         public string getMostVategoryInWardrobeByWardrobeId(int id)
@@ -293,6 +314,55 @@ namespace Szafiarka.Classes.MapDB
             {
                 return null;
             }
+        }
+
+        public Room addRoom(string name)
+        {
+            Room room = new Room();
+            room.name = name;
+            DBconnection.DBCONNECTION.Room.InsertOnSubmit(room);
+            DBconnection.DBCONNECTION.SubmitChanges();
+            return room;
+        }
+
+        public Status addStatus(string name)
+        {
+            Status status = new Status();
+            status.name = name;
+            DBconnection.DBCONNECTION.Status.InsertOnSubmit(status);
+            DBconnection.DBCONNECTION.SubmitChanges();
+            return status;
+        }
+
+        public Category addCategory(string name, string description)
+        {
+            Category category = new Category();
+            category.name = name;
+            category.description = description;
+            DBconnection.DBCONNECTION.Category.InsertOnSubmit(category);
+            DBconnection.DBCONNECTION.SubmitChanges();
+            return category;
+        }
+
+        public Wardrobe addWardrobe(string name, int room_id)
+        {
+            Wardrobe wardrobe = new Wardrobe();
+            wardrobe.name = name;
+            wardrobe.id_room = room_id;
+            DBconnection.DBCONNECTION.Wardrobe.InsertOnSubmit(wardrobe);
+            DBconnection.DBCONNECTION.SubmitChanges();
+            return wardrobe;
+        }
+
+        public Shelf addShelf(int location, int capacity, int wardrobe_id)
+        {
+            Shelf shelf = new Shelf();
+            shelf.location = location - 1;
+            shelf.capacity = capacity;
+            shelf.id_wardrobe = wardrobe_id;
+            DBconnection.DBCONNECTION.Shelf.InsertOnSubmit(shelf);
+            DBconnection.DBCONNECTION.SubmitChanges();
+            return shelf;
         }
     }
 }

@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Szafiarka.Forms.AddAttribiutes;
 
 namespace Szafiarka.Classes
 {
@@ -147,7 +148,7 @@ namespace Szafiarka.Classes
     class ComboboxNew : ComboBox
     {
         private bool withAdd;
-        private enum actions
+        public enum actions
         {
             [Description("<Dodaj>")]
             add
@@ -169,6 +170,8 @@ namespace Szafiarka.Classes
 
         public void AddRange(object[] items)
         {
+            if (!withAdd)
+                Items.Add("");
             foreach (var item in items)
             {
                 Items.Add(item);
@@ -182,7 +185,23 @@ namespace Szafiarka.Classes
             if (SelectedItem != null 
                 && SelectedItem.ToString() == Utils.GetEnumDescription(actions.add))
             {
-                MessageBox.Show("Dodaj cos");
+                if (Name == ComboboxesImproved.names.room.ToString() ||
+                    Name == ComboboxesImproved.names.status.ToString() ||
+                    Name == ComboboxesImproved.names.wardrobe.ToString())
+                {
+                    var form = new AddByName(this);
+                    form.ShowDialog();
+                }
+                else if (Name == ComboboxesImproved.names.shelf.ToString())
+                {
+                    var form = new AddShelf(this);
+                    form.ShowDialog();
+                }
+                else if (Name == ComboboxesImproved.names.category.ToString())
+                {
+                    var form = new AddCategory(this);
+                    form.ShowDialog();
+                }
             }
         }
     }
