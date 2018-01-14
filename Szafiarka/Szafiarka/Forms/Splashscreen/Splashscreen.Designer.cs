@@ -32,7 +32,7 @@ namespace Szafiarka.Forms.Splashscreen
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Splashscreen));
-            this.SplashscreenProgressBar = new Classes.ColoredProgressBar(new SolidBrush(Color.FromArgb(127, 195, 28)), false);
+            this.SplashscreenProgressBar = new Classes.ColoredProgressBar(new SolidBrush(Color.FromArgb(1, 168, 204)));
             this.splashTimer = new System.Windows.Forms.Timer(this.components);
             this.SuspendLayout();
             // 
@@ -52,7 +52,7 @@ namespace Szafiarka.Forms.Splashscreen
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.SystemColors.ButtonShadow;
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
             this.BackgroundImage = System.Drawing.Image.FromFile(@"..\..\images\logo_white.png");
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.ClientSize = new System.Drawing.Size(649, 271);

@@ -73,6 +73,17 @@ namespace Szafiarka.Classes
             catch { }
         }
 
+        public static void refreshPanelBinGrid()
+        {
+            PanelBin panel = Panels.getPanelByName(Panels.PanelsName.PBIN) as PanelBin;
+            panel.refreashGrid();
+        }
+
+        public static void refreshPanelStartGrid()
+        {
+            PanelStart panel = Panels.getPanelByName(Panels.PanelsName.PSTART) as PanelStart;
+            panel.refreashGrid();
+        }
 
     }
 }

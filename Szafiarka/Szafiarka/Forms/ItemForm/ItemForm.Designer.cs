@@ -35,15 +35,17 @@ namespace Szafiarka.Forms.ItemForm
         /// </summary>
         private void InitializeComponent()
         {
+            initializeErrorProviders();
             InitializeLabels();
             InitializeComboboxes();
             InitializeTextBox();
+            InitializeButtons();
+            
+
+
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.flatButton1 = new Szafiarka.Classes.FlatButton();
-            this.flatButton2 = new Szafiarka.Classes.FlatButton();
-            this.flatButton3 = new Szafiarka.Classes.FlatButton();
-            this.flatButton4 = new Szafiarka.Classes.FlatButton();
-            this.flatButton5 = new Szafiarka.Classes.FlatButton();
+            this.historyDataGridView = new DataGridViewNew();
+            InitializeHistoryGrid();
 
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
@@ -55,78 +57,19 @@ namespace Szafiarka.Forms.ItemForm
             this.pictureBox1.Size = new System.Drawing.Size(759, 160);
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
-            // 
-            // flatButton1
-            // 
-            this.flatButton1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(1)))), ((int)(((byte)(168)))), ((int)(((byte)(204)))));
-            this.flatButton1.FlatAppearance.BorderSize = 0;
-            this.flatButton1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.flatButton1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.flatButton1.Location = new System.Drawing.Point(696, 149);
-            this.flatButton1.Name = "flatButton1";
-            this.flatButton1.Size = new System.Drawing.Size(75, 23);
-            this.flatButton1.TabIndex = 1;
-            this.flatButton1.Text = "flatButton1";
-            this.flatButton1.UseVisualStyleBackColor = false;
-            this.flatButton1.Click += new System.EventHandler(flatButton2_Click);
-            // 
-            // flatButton2
-            // 
-            this.flatButton2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(1)))), ((int)(((byte)(168)))), ((int)(((byte)(204)))));
-            this.flatButton2.FlatAppearance.BorderSize = 0;
-            this.flatButton2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.flatButton2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.flatButton2.Location = new System.Drawing.Point(697, 527);
-            this.flatButton2.Name = "flatButton2";
-            this.flatButton2.Size = new System.Drawing.Size(75, 23);
-            this.flatButton2.TabIndex = 2;
-            this.flatButton2.Text = "flatButton2";
-            this.flatButton2.UseVisualStyleBackColor = false;
-            // 
-            // flatButton3
-            // 
-            this.flatButton3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(1)))), ((int)(((byte)(168)))), ((int)(((byte)(204)))));
-            this.flatButton3.FlatAppearance.BorderSize = 0;
-            this.flatButton3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.flatButton3.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.flatButton3.Location = new System.Drawing.Point(616, 527);
-            this.flatButton3.Name = "flatButton3";
-            this.flatButton3.Size = new System.Drawing.Size(75, 23);
-            this.flatButton3.TabIndex = 3;
-            this.flatButton3.Text = "flatButton3";
-            this.flatButton3.UseVisualStyleBackColor = false;
-            // 
-            // flatButton4
-            // 
-            this.flatButton4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(1)))), ((int)(((byte)(168)))), ((int)(((byte)(204)))));
-            this.flatButton4.FlatAppearance.BorderSize = 0;
-            this.flatButton4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.flatButton4.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.flatButton4.Location = new System.Drawing.Point(535, 527);
-            this.flatButton4.Name = "flatButton4";
-            this.flatButton4.Size = new System.Drawing.Size(75, 23);
-            this.flatButton4.TabIndex = 4;
-            this.flatButton4.Text = "flatButton4";
-            this.flatButton4.UseVisualStyleBackColor = false;
-            // 
-            // flatButton5
-            // 
-            this.flatButton5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(1)))), ((int)(((byte)(168)))), ((int)(((byte)(204)))));
-            this.flatButton5.FlatAppearance.BorderSize = 0;
-            this.flatButton5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.flatButton5.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.flatButton5.Location = new System.Drawing.Point(454, 527);
-            this.flatButton5.Name = "flatButton5";
-            this.flatButton5.Size = new System.Drawing.Size(75, 23);
-            this.flatButton5.TabIndex = 5;
-            this.flatButton5.Text = "flatButton5";
-            this.flatButton5.UseVisualStyleBackColor = false;
+            pictureBox1.DoubleClick += new EventHandler(image_DoubleClick);
+            pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
 
-            var datagridview = new DataGridViewNew()
+            var checkbox = new CheckboxImproved()
             {
-                Location = new System.Drawing.Point(450, 225),
-                Size = new Size(200, 200)
+                Location = new System.Drawing.Point(13, 465),
             };
+
+            var _trackbar = new TrackbarImproved();
+            var trackbar = TrackbarImproved.getTrackbar();
+            trackbar.ValueChanged += trackbar_ValueChanged;
+            trackbar.Location = new System.Drawing.Point(13, 405);
+            setTrackbarErrors(trackbar);
             // 
             // ItemForm
             // 
@@ -134,13 +77,10 @@ namespace Szafiarka.Forms.ItemForm
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(64)))));
             this.ClientSize = new System.Drawing.Size(784, 562);
-            this.Controls.Add(this.flatButton5);
-            this.Controls.Add(this.flatButton4);
-            this.Controls.Add(this.flatButton3);
-            this.Controls.Add(this.flatButton2);
-            this.Controls.Add(this.flatButton1);
             this.Controls.Add(this.pictureBox1);
-            this.Controls.Add(datagridview);
+            this.Controls.Add(trackbar);
+            
+            this.Controls.Add(checkbox);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "ItemForm";
             this.Text = "ItemForm";
@@ -150,14 +90,42 @@ namespace Szafiarka.Forms.ItemForm
 
         }
 
+        private void InitializeHistoryGrid()
+        {
+            historyDataGridView.Location = new System.Drawing.Point(487, 225);
+            historyDataGridView.Size = new Size(287, 250);
+            historyDataGridView.ColumnHeadersHeight = 25;
+            historyDataGridView.RowTemplate.Height = 25;
+
+            fillHistoryGrid(historyDataGridView);
+
+            this.Controls.Add(historyDataGridView);
+        }
+
+        private void fillHistoryGrid(DataGridViewNew datagridview)
+        {
+            string[,] columns = {
+                { "id", "ID" },
+                { "action", "Akcja" },
+                { "days", "Dni temu" }
+            };
+            historyDataGridView.AddColumns(columns);
+            if (item != null)
+            {
+                var query = queries.getHistoryByItemId(item.id_item);
+                foreach (var item in query.OrderByDescending(x => x.creation_date))
+                {
+                    var calculatedDays = Utils.compareDateToNowAndGetDaysCount(item.creation_date);
+                    historyDataGridView.Rows.Add(item.id, item.action, calculatedDays);
+                }
+                historyDataGridView.changeIdColumnVisableToFalse();
+            }
+        }
+
         #endregion
 
         private System.Windows.Forms.PictureBox pictureBox1;
-        private Classes.FlatButton flatButton1;
-        private Classes.FlatButton flatButton2;
-        private Classes.FlatButton flatButton3;
-        private Classes.FlatButton flatButton4;
-        private Classes.FlatButton flatButton5;
+        private DataGridViewNew historyDataGridView;
 
         private void InitializeComboboxes()
         {
@@ -168,6 +136,8 @@ namespace Szafiarka.Forms.ItemForm
                 item.Location = new System.Drawing.Point(250, 225 + 60 * k);
                 Controls.Add(item);
                 k++;
+                item.SelectedIndexChanged += comboBoxSelectionChangeCommitted;
+                setComboboxesErrors(item);
             }
         }
 
@@ -176,22 +146,22 @@ namespace Szafiarka.Forms.ItemForm
             var labelIndex = 0;
             int coulmsCount = 3;
             int rowCounts = 4;
-            var labels = LabelsNames.getLabelsArray();
+            new LabelsImproved();
+            var labels = LabelsImproved.getList();
             for (int i = 1; i <= coulmsCount; i++)
             {
                 var k = 0;
                 for (int j = 1; j <= rowCounts + (i-1); j++)
                 {
-                    if (labelIndex == labels.Length)
+                    if (labelIndex == labels.Count())
                         break;
-                    var label = new LabelsNames()
-                    {
-                        Location = new System.Drawing.Point(13 + 237 * (i - 1), 200 + 60  * (j - 1) + k),
-                        Text = Utils.GetEnumDescription(labels[labelIndex] as Enum)
-                    };
-                    Controls.Add(label);
 
-                    if (labels[labelIndex] is LabelsNames.names.description)
+                    var label = labels[labelIndex];
+                    label.Location = new System.Drawing.Point(13 + 237 * (i - 1), 200 + 60 * (j - 1) + k);
+
+                    Controls.Add(label);
+                    
+                    if (labels[labelIndex].Name == LabelsImproved.names.description.ToString())
                         k = 60;
 
                     labelIndex++;
@@ -202,13 +172,72 @@ namespace Szafiarka.Forms.ItemForm
 
         private void InitializeTextBox()
         {
+            var textboxes = new TextboxesNames();
             var k = 0;
-            var textbox = new TextBox()
+            foreach (var item in textboxes.getList())
             {
-                Location = new System.Drawing.Point(13, 225 + 60 * k),
-                Width = 200
-            };
-            Controls.Add(textbox);
+                item.Location = new System.Drawing.Point(13, 225 + 60 * k);
+                item.Width = 200;
+                item.TextChanged += textBoxOut_TextChanged;
+                if (item.Name.ToUpper() == TextboxesNames.names.description.ToString().ToUpper())
+                {
+                    item.Height = 80;
+                }
+                k++;
+                Controls.Add(item);
+                setTextboxesErrors(item);
+            }
+        }
+
+        private void InitializeButtons()
+        {
+            var buttons = new ButtonsImproved();
+            var k = 0;
+
+            foreach (var item in ButtonsImproved.getList())
+            {
+                if (item.Name != ButtonsImproved.names.image.ToString()
+                    && item.Name != ButtonsImproved.names.image_delete.ToString())
+                {
+                    item.Location = new Point(13 + item.Width * k, 520);
+                    k++;
+                    selectAndAddEvent(item);
+                    Controls.Add(item);
+                }
+            }
+
+            var button = ButtonsImproved.getList().Find(x => x.Name == ButtonsImproved.names.image.ToString());
+            button.Location = new Point(583, 143);
+
+            selectAndAddEvent(button);
+            Controls.Add(button);
+
+            button = ButtonsImproved.getList().Find(x => x.Name == ButtonsImproved.names.image_delete.ToString());
+            button.Location = new Point(583, 113);
+            button.Enabled = false;
+
+            selectAndAddEvent(button);
+            Controls.Add(button);
+
+        }
+
+        private void initializeErrorProviders()
+        {
+            if (errorProviders != null)
+            {
+                errorProviders.Clear();
+            }
+            errorProviders = new List<ErrorProvider> { };
+            var n = 7;
+            errors = new bool[n];
+            ErrorProvider errorprovider;
+            for (int i = 0; i < n; i++)
+            {
+                errors[i] = false;
+                errorprovider = new ErrorProvider();
+                errorprovider.BlinkStyle = ErrorBlinkStyle.NeverBlink;
+                errorProviders.Add(errorprovider);
+            }
         }
     }
 }

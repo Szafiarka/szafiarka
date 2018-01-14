@@ -12,6 +12,13 @@ namespace Szafiarka.Classes
 {
     class DataGridViewNew : DataGridView
     {
+        private int menuClickedRow;
+        private ContextMenuStrip menu = new ContextMenuStrip();
+        private List<string> namesGridsEnableToShowItemForm = new List<string> {
+                DGVMainDataNames.items.ToString(),
+                DGVMainDataNames.lastItems.ToString(),
+                DGVMainDataNames.bin.ToString()
+            };
         public enum DGVMainDataNames
         {
             categories, items, nameCleared, bin, lastItems
@@ -42,29 +49,28 @@ namespace Szafiarka.Classes
             RowTemplate.Height = 35;
             ColumnHeadersHeight = 35;
             MouseClick += dataGridView1_MouseClick;
+            menu.ItemClicked += new ToolStripItemClickedEventHandler(menu_Clicked);
         }
 
         private void dataGridView1_MouseClick(object sender, MouseEventArgs e)
         {
-            if (e.Button == MouseButtons.Right && 
-                (Name == DGVMainDataNames.items.ToString()
-                || Name == DGVMainDataNames.bin.ToString()
-                || Name == DGVMainDataNames.lastItems.ToString()))
+
+            if (e.Button == MouseButtons.Right &&
+                namesGridsEnableToShowItemForm.Contains(Name))
             {
-                ContextMenu m = new ContextMenu();
-                m.MenuItems.Add(new MenuItem("Cut"));
-                m.MenuItems.Add(new MenuItem("Copy"));
-                m.MenuItems.Add(new MenuItem("Paste"));
-
-                int currentMouseOverRow = HitTest(e.X, e.Y).RowIndex;
-
-                if (currentMouseOverRow >= 0)
+                menu.Items.Clear();
+                if (Name == DGVMainDataNames.items.ToString())
                 {
-                    m.MenuItems.Add(new MenuItem(string.Format("Do something to row {0}", currentMouseOverRow.ToString())));
+                    menu.Items.Add("Podgląd");
+                    menu.Items.Add("Usuń");
                 }
-
-                m.Show(this, new Point(e.X, e.Y));
-
+                else if (Name == DGVMainDataNames.bin.ToString())
+                {
+                    menu.Items.Add("Podgląd");
+                    menu.Items.Add("Przywróć");
+                }
+                menuClickedRow = HitTest(e.X, e.Y).RowIndex;
+                menu.Show(this, new Point(e.X, e.Y));
             }
         }
 
@@ -101,9 +107,7 @@ namespace Szafiarka.Classes
             {
                 cell.ToolTipText = queries.getCategoryDescriptionById(Int32.Parse(row.Cells[0].Value.ToString()));
             }
-            else if (Name == DGVMainDataNames.items.ToString()
-                || Name == DGVMainDataNames.bin.ToString()
-                || Name == DGVMainDataNames.lastItems.ToString())
+            else if (namesGridsEnableToShowItemForm.Contains(Name))
             {
                 cell.ToolTipText = queries.getItemDescriptionById(Int32.Parse(row.Cells[0].Value.ToString()));
             }
@@ -113,20 +117,23 @@ namespace Szafiarka.Classes
         {
             if (checkIfGridEnableToShowItemForm(Name) && !checkIfDoubleClicedRowsIsHeader(e.RowIndex))
             {
-                var itemId = Int32.Parse(Rows[e.RowIndex].Cells[0].Value.ToString());
+                int itemId = getItemIdFromRow(e.RowIndex);
                 var itemForm = new ItemForm(itemId);
-                itemForm.Show();
+                if (itemForm != null)
+                {
+                    itemForm.Show();
+                }
+
             }
+        }
+
+        private int getItemIdFromRow(int id)
+        {
+            return Int32.Parse(Rows[id].Cells[0].Value.ToString());
         }
 
         private bool checkIfGridEnableToShowItemForm(string gridName)
         {
-            List<string> namesGridsEnableToShowItemForm = new List<string> {
-                DGVMainDataNames.items.ToString(),
-                DGVMainDataNames.lastItems.ToString(),
-                DGVMainDataNames.bin.ToString()
-            };
-
             return namesGridsEnableToShowItemForm.Contains(gridName);
         }
 
@@ -168,6 +175,48 @@ namespace Szafiarka.Classes
         public void setName(string newName)
         {
             Name = newName;
+        }
+
+        private void menu_Clicked(object sender, ToolStripItemClickedEventArgs e)
+        {
+            var clicked = e.ClickedItem.Text;
+            if (clicked == "Podgląd")
+            {
+                var itemId = getItemIdFromRow(menuClickedRow);
+                var itemForm = new ItemForm(itemId);
+                if (itemForm != null)
+                {
+                    itemForm.Show();
+                }
+            }
+            else if (clicked == "Usuń")
+            {
+                string messageBoxText = String.Format("Czy na pewno chcesz usunąć {0}?",
+                    Rows[menuClickedRow].Cells["name"].Value.ToString());
+                string caption = "Usuwanie";
+                MessageBoxButtons button = MessageBoxButtons.YesNo;
+                DialogResult res = MessageBox.Show(messageBoxText, caption, button);
+                if (res == DialogResult.Yes)
+                {
+                    var itemId = getItemIdFromRow(menuClickedRow);
+                    queries.changeItemDeletedById(itemId, true);
+                    Panels.refreshPanelStartGrid();
+                }
+            }
+            else if (clicked == "Przywróć")
+            {
+                string messageBoxText = String.Format("Czy na pewno chcesz przywrócić {0}?",
+                    Rows[menuClickedRow].Cells["name"].Value.ToString());
+                string caption = "Przywracanie";
+                MessageBoxButtons button = MessageBoxButtons.YesNo;
+                DialogResult res = MessageBox.Show(messageBoxText, caption, button);
+                if (res == DialogResult.Yes)
+                {
+                    var itemId = getItemIdFromRow(menuClickedRow);
+                    queries.changeItemDeletedById(itemId, false);
+                    Panels.refreshPanelBinGrid();
+                }
+            }
         }
     }
 }

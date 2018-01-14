@@ -1,16 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Szafiarka.Forms.AddAttribiutes;
 
 namespace Szafiarka.Classes
 {
     class ComboboxesImproved 
     {
         private bool withAdd;
-        private List<ComboboxNew> comboboxes;
+        private static List<ComboboxNew> comboboxes;
         public enum names
         {
             room,
@@ -39,10 +41,12 @@ namespace Szafiarka.Classes
 
         private void createList()
         {
-            if (comboboxes == null)
+            if (comboboxes != null)
             {
-                comboboxes = new List<ComboboxNew> { };
+                comboboxes.Clear();
             }
+
+            comboboxes = new List<ComboboxNew> { };
 
             foreach (var item in namesArray)
             {
@@ -134,11 +138,21 @@ namespace Szafiarka.Classes
             addRangeShelf();
         }
 
+        public static ComboboxNew getComboboxByName(Enum name)
+        {
+            return comboboxes.Find(x => x.Name.ToUpper() == name.ToString().ToUpper());
+        }
+
     }
 
     class ComboboxNew : ComboBox
     {
         private bool withAdd;
+        public enum actions
+        {
+            [Description("<Dodaj>")]
+            add
+        }
         public ComboboxNew(bool withAdd)
         {
             this.withAdd = withAdd;
@@ -156,19 +170,38 @@ namespace Szafiarka.Classes
 
         public void AddRange(object[] items)
         {
+            if (!withAdd)
+                Items.Add("");
             foreach (var item in items)
             {
                 Items.Add(item);
             }
             if (withAdd)
-                Items.Add("Dodaj");
+                Items.Add(Utils.GetEnumDescription(actions.add));
         }
 
         private void Add_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (SelectedItem.ToString() == "Dodaj")
+            if (SelectedItem != null 
+                && SelectedItem.ToString() == Utils.GetEnumDescription(actions.add))
             {
-                MessageBox.Show("Dodaj cos");
+                if (Name == ComboboxesImproved.names.room.ToString() ||
+                    Name == ComboboxesImproved.names.status.ToString() ||
+                    Name == ComboboxesImproved.names.wardrobe.ToString())
+                {
+                    var form = new AddByName(this);
+                    form.ShowDialog();
+                }
+                else if (Name == ComboboxesImproved.names.shelf.ToString())
+                {
+                    var form = new AddShelf(this);
+                    form.ShowDialog();
+                }
+                else if (Name == ComboboxesImproved.names.category.ToString())
+                {
+                    var form = new AddCategory(this);
+                    form.ShowDialog();
+                }
             }
         }
     }

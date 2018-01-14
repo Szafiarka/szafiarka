@@ -1,5 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Linq;
+using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -7,6 +10,14 @@ using System.Windows.Forms;
 
 namespace Szafiarka.Classes.MapDB
 {
+    public partial class Item : ICloneable
+    {
+        public object Clone()
+        {
+            return this.MemberwiseClone();
+        }
+    }
+
     public partial class Category
     {
         public override string ToString()
@@ -96,5 +107,11 @@ namespace Szafiarka.Classes.MapDB
         public virtual Wardrobe wardrobe { get; set; }
         public virtual double capacity_wardrobe { get; set; }
         public virtual double capacity { get; set; }
+    }
+
+    public class ResultItemHistory : ResultDataGrid
+    {
+        public virtual string action { get; set; }
+        public virtual DateTime creation_date { get; set; }
     }
 }
