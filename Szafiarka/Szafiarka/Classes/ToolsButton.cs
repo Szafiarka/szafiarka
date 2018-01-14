@@ -31,48 +31,18 @@ namespace Szafiarka.Classes
             UseVisualStyleBackColor = true;
             Text = "Narzędzia";
             Name = "bTools";
-            InitializeContextMenuStrip1();
+            //InitializeContextMenuStrip1();
             Click += new EventHandler(tools_Click);
         }
 
-        private void InitializeContextMenuStrip1()
-        {
-            contextMenuStrip1.Items.Clear();
-            foreach (ToolName item in Enum.GetValues(typeof(ToolName)))
-            {
-                contextMenuStrip1.Items.Add(Utils.GetEnumDescription(item));
-            }
-            contextMenuStrip1.ItemClicked += new ToolStripItemClickedEventHandler(
-                                                 contextMenuStrip1_ItemClicked);
-        }
 
         private void tools_Click(object sender, EventArgs e)
         {
-            if (!contextMenuStrip1Clicked)
-            {
-                contextMenuStrip1Clicked = true;
-                contextMenuStrip1.Show(this, new Point(0, this.Height));
-            }
-            else
-                contextMenuStrip1Clicked = false;
+            var optionForm = new OptionsForm();
+            optionForm.Show();
+            optionForm.Text = Utils.GetEnumDescription(ToolName.OPTIONS);
         }
-        private void contextMenuStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
-        {
-            contextMenuStrip1Clicked = false;
-
-            if (e.ClickedItem.Text == Utils.GetEnumDescription(ToolName.HELP))
-            {
-                var helpForm = new HelpForm();
-                helpForm.Show();
-                helpForm.Text = Utils.GetEnumDescription(ToolName.HELP);
-            }
-            if (e.ClickedItem.Text == Utils.GetEnumDescription(ToolName.OPTIONS))
-            {
-                var optionForm = new OptionsForm();
-                optionForm.Show();
-                optionForm.Text = Utils.GetEnumDescription(ToolName.OPTIONS);
-            }
-        }
+       
 
     }
 }
